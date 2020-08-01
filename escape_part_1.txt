@@ -1,0 +1,379 @@
+<Esc>%#A                 Enter PCL Mode (?value)
+<Esc>%#A (#=0)           Enter PCL Mode: Cursor=PCL
+<Esc>%#A (#=1)           Enter PCL Mode: Cursor=HP-GL/2
+<Esc>%#B                 Enter HP-GL/2 Mode (?value)
+<Esc>%#B (#=0)           Enter HP-GL/2 Mode: Pen=HP-GL/2
+<Esc>%#B (#=1)           Enter HP-GL/2 Mode: Pen=PCL
+<Esc>%#B (#=2)           Enter HP-GL/2 Mode: Pen=HP-GL/2; x/y=PCL
+<Esc>%#B (#=3)           Enter HP-GL/2 Mode: Pen=PCL; x/y=PCL
+<Esc>%#B (#=-1)          Enter HP-GL/2 Mode: Single Context
+<Esc>%#X (#=-12345)      Universal Exit Language (UEL)
+<Esc>&a#C                Cursor Position (columns): Horizontal
+<Esc>&a#G                Duplex Page Side Selection (?value)
+<Esc>&a#G (#=0)          Duplex Page Side Selection: Next Side
+<Esc>&a#G (#=1)          Duplex Page Side Selection: Front Side
+<Esc>&a#G (#=2)          Duplex Page Side Selection: Back Side
+<Esc>&a#H                Cursor Position (decipoints): Horizontal
+<Esc>&a#L                Left Margin (columns)
+<Esc>&a#M                Right Margin (columns)
+<Esc>&a#N                Negative Motion (?value)
+<Esc>&a#N (#=0)          Negative Motion: Present
+<Esc>&a#N (#=1)          Negative Motion: Not Present
+<Esc>&a#P                Print Direction (?value)
+<Esc>&a#P (#=0)          Print Direction: 0 degree rotation
+<Esc>&a#P (#=90)         Print Direction: 90 degree ccw rotation
+<Esc>&a#P (#=180)        Print Direction: 180 degree ccw rotation
+<Esc>&a#P (#=270)        Print Direction: 270 degree ccw rotation
+<Esc>&a#R                Cursor Position (rows): Vertical
+<Esc>&a#T            *   Set Horizontal Tab (column)
+<Esc>&a#U            *   Clear Horizontal Tab (column)
+<Esc>&a#V                Cursor Position (decipoints): Vertical
+<Esc>&a#W                Define Logical Page
+<Esc>&b#F                Finish Mode (?value)
+<Esc>&b#F (#=0)          Finish Mode: Matte
+<Esc>&b#F (#=1)          Finish Mode: Glossy
+<Esc>&b#M                Monochrome Print Mode (?value)
+<Esc>&b#M (#=0)          Monochrome Print Mode: Mixed Rendering
+<Esc>&b#M (#=1)          Monochrome Print Mode: Grey Equivalent
+<Esc>&b#T                Dry Timer (seconds)
+<Esc>&b#W                Configuration (I/O)
+<Esc>&c#T                Text Path Direction (?value)
+<Esc>&c#T (#=0)          Text Path Direction: Horizontal
+<Esc>&c#T (#=-1)         Text Path Direction: Vertical Rotated
+<Esc>&c#W                Cluster Printing
+<Esc>&d#@                Underline Disable
+<Esc>&d#D                Underline Enable (?value)
+<Esc>&d#D (#=0)          Underline Enable
+<Esc>&d#D (#=3)          Underline Enable: Floating
+<Esc>&f#F                Media Eject Length (decipoints)
+<Esc>&f#G                Page Width (decipoints)
+<Esc>&f#S                Cursor Position Stack (?value)
+<Esc>&f#S (#=0)          Cursor Position Stack: Push (Store)
+<Esc>&f#S (#=1)          Cursor Position Stack: Pop (Recall)
+<Esc>&f#X                Macro Control (?value)
+<Esc>&f#X (#=0)          Macro Control: Start Macro Definition
+<Esc>&f#X (#=1)          Macro Control: Stop Macro Definition
+<Esc>&f#X (#=2)          Macro Control: Execute Macro
+<Esc>&f#X (#=3)          Macro Control: Call Macro
+<Esc>&f#X (#=4)          Macro Control: Enable Macro For Overlay
+<Esc>&f#X (#=5)          Macro Control: Disable Overlay
+<Esc>&f#X (#=6)          Macro Control: Delete All Macros
+<Esc>&f#X (#=7)          Macro Control: Delete Temporary Macros
+<Esc>&f#X (#=8)          Macro Control: Delete Macro
+<Esc>&f#X (#=9)          Macro Control: Make Macro Temporary
+<Esc>&f#X (#=10)         Macro Control: Make Macro Permanent
+<Esc>&f#X (#=11)         Macro Control: Create Bitmap of Macro
+<Esc>&f#Y                Macro ID
+<Esc>&i#W                Underware Function Configuration
+<Esc>&k#E            *   Underline Enhancement (?value)
+<Esc>&k#E (#=0)      *   Underline Enhancement: Line-By-Line
+<Esc>&k#E (#=1)      *   UnderLine Enhancement: Modal
+<Esc>&k#F            *   Shift In/Out Control (?value)
+<Esc>&k#F (#=0)      *   Shift In/Out Control: Line-By-Line
+<Esc>&k#F (#=1)      *   Shift In/Out Control: Modal
+<Esc>&k#G                Line Termination (?value)
+<Esc>&k#G (#=0)          Line Termination: CR=CR, LF=LF, FF=FF
+<Esc>&k#G (#=1)          Line Termination: CR=CR+LF, LF=LF, FF=FF
+<Esc>&k#G (#=2)          Line Termination: CR=CR, LF=CR+LF, FF=CR+FF
+<Esc>&k#G (#=3)          Line Termination: CR=CR+LF, LF=CR+LF, FF=CR+FF
+<Esc>&k#H                Horizontal Motion Index (1/120 inches)
+<Esc>&k#I            *   Character Set Selection Control (?value)
+<Esc>&k#I (#=0)      *   Character Set Selection Control: SI/SO
+<Esc>&k#I (#=1)      *   Character Set Selection Control: bit 8
+<Esc>&k#S            *   Pitch Mode (?value)
+<Esc>&k#S (#=0)      *   Pitch Mode: Pica (10 cpi)
+<Esc>&k#S (#=1)      *   Pitch Mode: Double Wide (5 cpi)
+<Esc>&k#S (#=2)      *   Pitch Mode: Compressed (16.6 cpi)
+<Esc>&k#S (#=3)      *   Pitch Mode: Double Wide Comp. (8.3 cpi)
+<Esc>&k#S (#=4)      *   Pitch Mode: Elite (12 cpi)
+<Esc>&k#S (#=8)      *   Pitch Mode: Double Width/Height
+<Esc>&k#V            *   Head View Mode (?value)
+<Esc>&k#V (#=0)      *   Head View Mode: Enable
+<Esc>&k#V (#=1)      *   Head View Mode: Disable
+<Esc>&k#W            *   Print Mode (Text) (?value)
+<Esc>&k#W (#=0)      *   Print Mode (Text): Unidirectional (L->R)
+<Esc>&k#W (#=1)      *   Print Mode (Text): Bidirectional
+<Esc>&k#W (#=2)      *   Print Mode (Text): Unidirectional (R->L)
+<Esc>&k#W (#=3)      *   Print Mode (Text): High Intensity
+<Esc>&k#W (#=5)      *   Print Mode (Text): Text Scale Off
+<Esc>&k#W (#=6)      *   Print Mode (Text): Text Scale On
+<Esc>&k#W (#=7)      *   Print Mode (Text): Fast High Intensity
+<Esc>&l#A                Page Size (?value)
+<Esc>&l#A (#=1)          Page Size: Executive
+<Esc>&l#A (#=2)          Page Size: Letter
+<Esc>&l#A (#=3)          Page Size: Legal
+<Esc>&l#A (#=6)          Page Size: Ledger
+<Esc>&l#A (#=25)         Page Size: A5
+<Esc>&l#A (#=26)         Page Size: A4
+<Esc>&l#A (#=27)         Page Size: A3
+<Esc>&l#A (#=80)         Page Size: Monarch Envelope
+<Esc>&l#A (#=81)         Page Size: COM-10 Envelope
+<Esc>&l#A (#=90)         Page Size: DL Envelope
+<Esc>&l#A (#=91)         Page Size: C5 Envelope
+<Esc>&l#A (#=100)        Page Size: B5 Envelope
+<Esc>&l#A (#=101)        Page Size: Custom
+<Esc>&l#C                Vertical Motion Index (1/48 inches)
+<Esc>&l#D                Line Spacing (lines per inch)
+<Esc>&l#E                Top Margin (lines)
+<Esc>&l#F                Text Length (lines)
+<Esc>&l#G                Output Bin: Value is Printer Dependent
+<Esc>&l#G (#=0)          Output Bin: Automatic Selection
+<Esc>&l#H                Paper Source: Value is Printer Dependent
+<Esc>&l#H (#=0)          Paper Source: Unchanged (eject page)
+<Esc>&l#J            *   Auto Justification (?value)
+<Esc>&l#J (#=0)      *   Auto Justification: None
+<Esc>&l#J (#=1)      *   Auto Justification: Right Flush
+<Esc>&l#J (#=2)      *   Auto Justification: Centred
+<Esc>&l#J (#=3)      *   Auto Justification: Justified
+<Esc>&l#L                Perforation Skip (?value)
+<Esc>&l#L (#=0)          Perforation Skip: Disable
+<Esc>&l#L (#=1)          Perforation Skip: Enable
+<Esc>&l#M                Media Type (?value)
+<Esc>&l#M (#=0)          Media Type: Plain Paper
+<Esc>&l#M (#=1)          Media Type: Bond Paper
+<Esc>&l#M (#=2)          Media Type: Special Paper
+<Esc>&l#M (#=3)          Media Type: Glossy Film
+<Esc>&l#M (#=4)          Media Type: Transparency Film
+<Esc>&l#O                Orientation (?value)
+<Esc>&l#O (#=0)          Orientation: Portrait
+<Esc>&l#O (#=1)          Orientation: Landscape
+<Esc>&l#O (#=2)          Orientation: Reverse Portrait
+<Esc>&l#O (#=3)          Orientation: Reverse Landscape
+<Esc>&l#P                Page Length (lines)
+<Esc>&l#R            *   Clear Vertical Tab Absolute (line)
+<Esc>&l#S                Simplex/Duplex (?value)
+<Esc>&l#S (#=0)          Simplex/Duplex: Simplex
+<Esc>&l#S (#=1)          Simplex/Duplex: Duplex Long-Edge Bind
+<Esc>&l#S (#=2)          Simplex/Duplex: Duplex Short-Edge Bind
+<Esc>&l#T                Job Separation (?value)
+<Esc>&l#T (#=1)          Job Separation: On
+<Esc>&l#U                Left (Long-Edge) Offset (decipoints)
+<Esc>&l#V            *   Vertical Position Via VFC (channel)
+<Esc>&l#W            *   Define VFC Table
+<Esc>&l#X                Number of Copies
+<Esc>&l#Y            *   Set Vertical Tab Absolute (line)
+<Esc>&l#Z                Top (Short-Edge) Offset (decipoints)
+<Esc>&n#W                Alphanumeric ID
+<Esc>&p#C                Palette Control (?value)
+<Esc>&p#C (#=0)          Palette Control: Delete All in Store
+<Esc>&p#C (#=1)          Palette Control: Delete All in Stack
+<Esc>&p#C (#=2)          Palette Control: Delete Palette
+<Esc>&p#C (#=6)          Palette Control: Copy Palette
+<Esc>&p#I                Palette Control ID
+<Esc>&p#S                Select Palette
+<Esc>&p#W                Escapement Encapsulated Text
+<Esc>&p#X                Transparent Print
+<Esc>&r#F                Flush (?value)
+<Esc>&r#F (#=0)          Flush: All Complete Pages
+<Esc>&r#F (#=1)          Flush: All Pages
+<Esc>&s#C                End-of-Line Wrap (?value)
+<Esc>&s#C (#=0)          End-of-Line Wrap: Enable
+<Esc>&s#C (#=1)          End-of-Line Wrap: Disable
+<Esc>&s#I            *   Character Set Default Control (?value)
+<Esc>&s#I (#=0)      *   Character Set Default Control: Blank
+<Esc>&s#I (#=1)      *   Character Set Default Control: Ignore
+<Esc>&t#P                Text Parsing Method (?value)
+<Esc>&t#P (#=0)          Text Parsing Method: 1-byte
+<Esc>&t#P (#=1)          Text Parsing Method: 1-byte
+<Esc>&t#P (#=2)          Text Parsing Method: 2-byte
+<Esc>&t#P (#=21)         Text Parsing Method: 1|2-byte Asian 7bit
+<Esc>&t#P (#=31)         Text Parsing Method: 1|2-byte Shift-JIS
+<Esc>&t#P (#=38)         Text Parsing Method: 1|2-byte Asian 8bit
+<Esc>&t#P (#=83)         Text Parsing Method: Unicode
+<Esc>&t#P (#=1008)       Text Parsing Method: UTF-8
+<Esc>&u#D                Unit-of-Measure (PCL units per inch)
+<Esc>&v#S            *   Text Colour (?value)
+<Esc>&v#S (#=0)      *   Text Colour: Black
+<Esc>&v#S (#=1)      *   Text Colour: Red
+<Esc>&v#S (#=2)      *   Text Colour: Green
+<Esc>&v#S (#=3)      *   Text Colour: Yellow
+<Esc>&v#S (#=4)      *   Text Colour: Blue
+<Esc>&v#S (#=5)      *   Text Colour: Magenta
+<Esc>&v#S (#=6)      *   Text Colour: Cyan
+<Esc>&v#S (#=7)      *   Text Colour: White
+<Esc>(#@                 Primary Font: Select Default
+<Esc>(#A                 Primary Font: Symbol Set
+<Esc>(#B                 Primary Font: Symbol Set
+<Esc>(#C                 Primary Font: Symbol Set
+<Esc>(#D                 Primary Font: Symbol Set
+<Esc>(#E                 Primary Font: Symbol Set
+<Esc>(#F                 Primary Font: Symbol Set
+<Esc>(#G                 Primary Font: Symbol Set
+<Esc>(#H                 Primary Font: Symbol Set
+<Esc>(#I                 Primary Font: Symbol Set
+<Esc>(#J                 Primary Font: Symbol Set
+<Esc>(#K                 Primary Font: Symbol Set
+<Esc>(#L                 Primary Font: Symbol Set
+<Esc>(#M                 Primary Font: Symbol Set
+<Esc>(#N                 Primary Font: Symbol Set
+<Esc>(#O                 Primary Font: Symbol Set
+<Esc>(#P                 Primary Font: Symbol Set
+<Esc>(#Q                 Primary Font: Symbol Set
+<Esc>(#R                 Primary Font: Symbol Set
+<Esc>(#S                 Primary Font: Symbol Set
+<Esc>(#T                 Primary Font: Symbol Set
+<Esc>(#U                 Primary Font: Symbol Set
+<Esc>(#V                 Primary Font: Symbol Set
+<Esc>(#W                 Primary Font: Symbol Set
+<Esc>(#X                 Primary Font: Select by ID
+<Esc>(#Y                 Primary Font: Symbol Set
+<Esc>(#Z                 Primary Font: Symbol Set
+<Esc>(f#W                Define Symbol Set
+<Esc>(s#B                Primary Font: Stroke Weight (?value)
+<Esc>(s#B (#=0)          Primary Font: Stroke Weight: Medium
+<Esc>(s#B (#=1)          Primary Font: Stroke Weight: Semi Bold
+<Esc>(s#B (#=2)          Primary Font: Stroke Weight: Demi Bold
+<Esc>(s#B (#=3)          Primary Font: Stroke Weight: Bold
+<Esc>(s#B (#=4)          Primary Font: Stroke Weight: Extra Bold
+<Esc>(s#B (#=5)          Primary Font: Stroke Weight: Black
+<Esc>(s#B (#=6)          Primary Font: Stroke Weight: Extra Black
+<Esc>(s#B (#=7)          Primary Font: Stroke Weight: Ultra Black
+<Esc>(s#B (#=-7)         Primary Font: Stroke Weight: Ultra Thin
+<Esc>(s#B (#=-6)         Primary Font: Stroke Weight: Extra Thin
+<Esc>(s#B (#=-5)         Primary Font: Stroke Weight: Thin
+<Esc>(s#B (#=-4)         Primary Font: Stroke Weight: Extra Light
+<Esc>(s#B (#=-3)         Primary Font: Stroke Weight: Light
+<Esc>(s#B (#=-2)         Primary Font: Stroke Weight: Demi Light
+<Esc>(s#B (#=-1)         Primary Font: Stroke Weight: Semi Light
+<Esc>(s#H                Primary Font: Pitch (characters per inch)
+<Esc>(s#P                Primary Font: Spacing (?value)
+<Esc>(s#P (#=0)          Primary Font: Spacing: Fixed
+<Esc>(s#P (#=1)          Primary Font: Spacing: Proportional
+<Esc>(s#Q            *   Primary Font: Quality (?value)
+<Esc>(s#Q (#=0)      *   Primary Font: Quality: Data Processing
+<Esc>(s#Q (#=1)      *   Primary Font: Quality: Near Letter
+<Esc>(s#Q (#=2)      *   Primary Font: Quality: Letter
+<Esc>(s#S                Primary Font: Style
+<Esc>(s#T                Primary Font: Typeface
+<Esc>(s#U            *   Primary Font: Placement (?value)
+<Esc>(s#U (#=0)      *   Primary Font: Placement: Normal
+<Esc>(s#U (#=1)      *   Primary Font: Placement: Inferior
+<Esc>(s#U (#=-1)     *   Primary Font: Placement: Superior
+<Esc>(s#V                Primary Font: Height (points)
+<Esc>(s#W                Download Character
+<Esc>)#@                 Secondary Font: Select Default
+<Esc>)#A                 Secondary Font: Symbol Set
+<Esc>)#B                 Secondary Font: Symbol Set
+<Esc>)#C                 Secondary Font: Symbol Set
+<Esc>)#D                 Secondary Font: Symbol Set
+<Esc>)#E                 Secondary Font: Symbol Set
+<Esc>)#F                 Secondary Font: Symbol Set
+<Esc>)#G                 Secondary Font: Symbol Set
+<Esc>)#H                 Secondary Font: Symbol Set
+<Esc>)#I                 Secondary Font: Symbol Set
+<Esc>)#J                 Secondary Font: Symbol Set
+<Esc>)#K                 Secondary Font: Symbol Set
+<Esc>)#L                 Secondary Font: Symbol Set
+<Esc>)#M                 Secondary Font: Symbol Set
+<Esc>)#N                 Secondary Font: Symbol Set
+<Esc>)#O                 Secondary Font: Symbol Set
+<Esc>)#P                 Secondary Font: Symbol Set
+<Esc>)#Q                 Secondary Font: Symbol Set
+<Esc>)#R                 Secondary Font: Symbol Set
+<Esc>)#S                 Secondary Font: Symbol Set
+<Esc>)#T                 Secondary Font: Symbol Set
+<Esc>)#U                 Secondary Font: Symbol Set
+<Esc>)#V                 Secondary Font: Symbol Set
+<Esc>)#W                 Secondary Font: Symbol Set
+<Esc>)#X                 Secondary Font: Select by ID
+<Esc>)#Y                 Secondary Font: Symbol Set
+<Esc>)#Z                 Secondary Font: Symbol Set
+<Esc>)s#B                Secondary Font: Stroke Weight (?value)
+<Esc>)s#B (#=0)          Secondary Font: Stroke Weight: Medium
+<Esc>)s#B (#=1)          Secondary Font: Stroke Weight: Semi Bold
+<Esc>)s#B (#=2)          Secondary Font: Stroke Weight: Demi Bold
+<Esc>)s#B (#=3)          Secondary Font: Stroke Weight: Bold
+<Esc>)s#B (#=4)          Secondary Font: Stroke Weight: Extra Bold
+<Esc>)s#B (#=5)          Secondary Font: Stroke Weight: Black
+<Esc>)s#B (#=6)          Secondary Font: Stroke Weight: Extra Black
+<Esc>)s#B (#=7)          Secondary Font: Stroke Weight: Ultra Black
+<Esc>)s#B (#=-7)         Secondary Font: Stroke Weight: Ultra Thin
+<Esc>)s#B (#=-6)         Secondary Font: Stroke Weight: Extra Thin
+<Esc>)s#B (#=-5)         Secondary Font: Stroke Weight: Thin
+<Esc>)s#B (#=-4)         Secondary Font: Stroke Weight: Extra Light
+<Esc>)s#B (#=-3)         Secondary Font: Stroke Weight: Light
+<Esc>)s#B (#=-2)         Secondary Font: Stroke Weight: Demi Light
+<Esc>)s#B (#=-1)         Secondary Font: Stroke Weight: Semi Light
+<Esc>)s#H                Secondary Font: Font: Pitch (characters per inch)
+<Esc>)s#P                Secondary Font: Spacing (?value)
+<Esc>)s#P (#=0)          Secondary Font: Spacing: Fixed
+<Esc>)s#P (#=1)          Secondary Font: Spacing: Proportional
+<Esc>)s#Q            *   Secondary Font: Quality (?value)
+<Esc>)s#Q (#=0)      *   Secondary Font: Quality: Data Processing
+<Esc>)s#Q (#=1)      *   Secondary Font: Quality: Near Letter
+<Esc>)s#Q (#=2)      *   Secondary Font: Quality: Letter
+<Esc>)s#S                Secondary Font: Style
+<Esc>)s#T                Secondary Font: Typeface
+<Esc>)s#U            *   Secondary Font: Placement (?value)
+<Esc>)s#U (#=0)      *   Secondary Font: Placement: Normal
+<Esc>)s#U (#=1)      *   Secondary Font: Placement: Inferior
+<Esc>)s#U (#=-1)     *   Secondary Font: Placement: Superior
+<Esc>)s#V                Secondary Font: Height (points)
+<Esc>)s#W                Download Font Header
+<Esc>*b#B                Grey Balancing (?value)
+<Esc>*b#B (#=1)          Grey Balancing: Enable
+<Esc>*b#B (#=2)          Grey Balancing: Disable
+<Esc>*b#M                Set Compression Mode (?value)
+<Esc>*b#M (#=0)          Set Compression Mode: Unencoded
+<Esc>*b#M (#=1)          Set Compression Mode: Run-Length Encoded
+<Esc>*b#M (#=2)          Set Compression Mode: TIFF
+<Esc>*b#M (#=3)          Set Compression Mode: Delta Row
+<Esc>*b#M (#=5)          Set Compression Mode: Adaptive
+<Esc>*b#M (#=6)          Set Compression Mode: CCITT G3 1-D (MH)
+<Esc>*b#M (#=7)          Set Compression Mode: CCITT G3 2-D (MR)
+<Esc>*b#M (#=8)          Set Compression Mode: CCITT G4 2-D (MMR)
+<Esc>*b#M (#=9)          Set Compression Mode: Replaced Delta Row
+<Esc>*b#S                Seed Row Source (plane)
+<Esc>*b#V                Transfer Raster Data (Plane)
+<Esc>*b#W                Transfer Raster Data (Row/Block)
+<Esc>*b#X            *   Raster Line X Offset (pixels)
+<Esc>*b#Y                Y Offset (raster lines)
+<Esc>*c#A                Rectangle Size (PCL units): Horizontal
+<Esc>*c#B                Rectangle Size (PCL units): Vertical
+<Esc>*c#C            *   Large Character Placement (column)
+<Esc>*c#D                Assign Font ID Number
+<Esc>*c#E                Character Code
+<Esc>*c#F                Font Control (?value)
+<Esc>*c#F (#=0)          Font Control: Delete All Soft Fonts
+<Esc>*c#F (#=1)          Font Control: Delete All Temporary Fonts
+<Esc>*c#F (#=2)          Font Control: Delete Soft Font
+<Esc>*c#F (#=3)          Font Control: Delete Character Code
+<Esc>*c#F (#=4)          Font Control: Make Soft Font Temporary
+<Esc>*c#F (#=5)          Font Control: Make Soft Font Permanent
+<Esc>*c#F (#=6)          Font Control: Copy/Assign Font As Temp.
+<Esc>*c#G                Assign Pattern ID
+<Esc>*c#H                Rectangle Size (decipoints): Horizontal
+<Esc>*c#K                HP-GL/2 Plot Size (inches): Horizontal
+<Esc>*c#L                HP-GL/2 Plot Size (inches): Vertical
+<Esc>*c#M            *   Large Character Size (magnification)
+<Esc>*c#N            *   Large Character Tab
+<Esc>*c#P                Fill Rectangular Area (?value)
+<Esc>*c#P (#=0)          Fill Rectangular Area: Solid Area
+<Esc>*c#P (#=1)          Fill Rectangular Area: Solid White Areas
+<Esc>*c#P (#=2)          Fill Rectangular Area: Shading
+<Esc>*c#P (#=3)          Fill Rectangular Area: Cross-Hatch
+<Esc>*c#P (#=4)          Fill Rectangular Area: User Pattern
+<Esc>*c#P (#=5)          Fill Rectangular Area: Current Pattern
+<Esc>*c#Q                Pattern Control (?value)
+<Esc>*c#Q (#=0)          Pattern Control: Delete All Patterns
+<Esc>*c#Q (#=1)          Pattern Control: Delete Temporary Patterns
+<Esc>*c#Q (#=2)          Pattern Control: Delete Pattern
+<Esc>*c#Q (#=3)          Pattern Control: Reserved
+<Esc>*c#Q (#=4)          Pattern Control: Make Pattern Temporary
+<Esc>*c#Q (#=5)          Pattern Control: Make Pattern Permanent
+<Esc>*c#R                Assign Symbol Set ID
+<Esc>*c#S                Symbol Set Control (?value)
+<Esc>*c#S (#=0)          Symbol Set Control: Delete User-Defined
+<Esc>*c#S (#=1)          Symbol Set Control: Delete All Temporary
+<Esc>*c#S (#=2)          Symbol Set Control: Delete Symbol Set
+<Esc>*c#S (#=4)          Symbol Set Control: Make Temporary
+<Esc>*c#S (#=5)          Symbol Set Control: Make Permanent
+<Esc>*c#T                Set Picture Frame Anchor Point (?value)
+<Esc>*c#T (#=0)          Set Picture Frame Anchor Point
+<Esc>*c#V                Rectangle Size (decipoints): Vertical
+<Esc>*c#W                Download User-Defined Pattern
+<Esc>*c#X                Picture Frame Size (decipoints): Width
+<Esc>*c#Y                Picture Frame Size (decipoints): Height
+<Esc>*c#Z            *   Large Character Print Data
+<Esc>*g#W                Configure Raster Data
+<Esc>*i#W                Set Viewing Illuminant

@@ -1,0 +1,435 @@
+<Esc>*l#O                Logical Operation (ROP3) (?value)
+<Esc>*l#O (#=0)          Logical Operation (ROP3): 0: Black
+<Esc>*l#O (#=1)          Logical Operation (ROP3): 1: DTSoon
+<Esc>*l#O (#=2)          Logical Operation (ROP3): 2: DTSona
+<Esc>*l#O (#=3)          Logical Operation (ROP3): 3: TSon
+<Esc>*l#O (#=4)          Logical Operation (ROP3): 4: SDTona
+<Esc>*l#O (#=5)          Logical Operation (ROP3): 5: DTon
+<Esc>*l#O (#=6)          Logical Operation (ROP3): 6: TDSxnon
+<Esc>*l#O (#=7)          Logical Operation (ROP3): 7: TDSaon
+<Esc>*l#O (#=8)          Logical Operation (ROP3): 8: SDTnaa
+<Esc>*l#O (#=9)          Logical Operation (ROP3): 9: TDSxon
+<Esc>*l#O (#=10)         Logical Operation (ROP3): 10: Dtna
+<Esc>*l#O (#=11)         Logical Operation (ROP3): 11: TSDnaon
+<Esc>*l#O (#=12)         Logical Operation (ROP3): 12: STna
+<Esc>*l#O (#=13)         Logical Operation (ROP3): 13: TDSnaon
+<Esc>*l#O (#=14)         Logical Operation (ROP3): 14: TDSonon
+<Esc>*l#O (#=15)         Logical Operation (ROP3): 15: Tn
+<Esc>*l#O (#=16)         Logical Operation (ROP3): 16: TDSona
+<Esc>*l#O (#=17)         Logical Operation (ROP3): 17: DSon
+<Esc>*l#O (#=18)         Logical Operation (ROP3): 18: SDTxnon
+<Esc>*l#O (#=19)         Logical Operation (ROP3): 19: SDTaon
+<Esc>*l#O (#=20)         Logical Operation (ROP3): 20: DTSxnon
+<Esc>*l#O (#=21)         Logical Operation (ROP3): 21: DTSaon
+<Esc>*l#O (#=22)         Logical Operation (ROP3): 22: TSDTSanaxx
+<Esc>*l#O (#=23)         Logical Operation (ROP3): 23: SSTxDSxaxn
+<Esc>*l#O (#=24)         Logical Operation (ROP3): 24: STxTDxa
+<Esc>*l#O (#=25)         Logical Operation (ROP3): 25: SDTSanaxn
+<Esc>*l#O (#=26)         Logical Operation (ROP3): 26: TDSTaox
+<Esc>*l#O (#=27)         Logical Operation (ROP3): 27: SDTSxaxn
+<Esc>*l#O (#=28)         Logical Operation (ROP3): 28: TSDTaox
+<Esc>*l#O (#=29)         Logical Operation (ROP3): 29: DSTDxaxn
+<Esc>*l#O (#=30)         Logical Operation (ROP3): 30: TDSox
+<Esc>*l#O (#=31)         Logical Operation (ROP3): 31: TDSoan
+<Esc>*l#O (#=32)         Logical Operation (ROP3): 32: DTSnaa
+<Esc>*l#O (#=33)         Logical Operation (ROP3): 33: SDTxon
+<Esc>*l#O (#=34)         Logical Operation (ROP3): 34: DSna
+<Esc>*l#O (#=35)         Logical Operation (ROP3): 35: STDnaon
+<Esc>*l#O (#=36)         Logical Operation (ROP3): 36: STxDSxa
+<Esc>*l#O (#=37)         Logical Operation (ROP3): 37: TDSTanaxn
+<Esc>*l#O (#=38)         Logical Operation (ROP3): 38: SDTSaox
+<Esc>*l#O (#=39)         Logical Operation (ROP3): 39: SDTSxnox
+<Esc>*l#O (#=40)         Logical Operation (ROP3): 40: DTSxa
+<Esc>*l#O (#=41)         Logical Operation (ROP3): 41: TSDTSaoxxn
+<Esc>*l#O (#=42)         Logical Operation (ROP3): 42: DTSana
+<Esc>*l#O (#=43)         Logical Operation (ROP3): 43: SSTxTDxaxn
+<Esc>*l#O (#=44)         Logical Operation (ROP3): 44: STDSoax
+<Esc>*l#O (#=45)         Logical Operation (ROP3): 45: TSDnox
+<Esc>*l#O (#=46)         Logical Operation (ROP3): 46: TSDTxox
+<Esc>*l#O (#=47)         Logical Operation (ROP3): 47: TSDnoan
+<Esc>*l#O (#=48)         Logical Operation (ROP3): 48: TSna
+<Esc>*l#O (#=49)         Logical Operation (ROP3): 49: SDTnaon
+<Esc>*l#O (#=50)         Logical Operation (ROP3): 50: SDTSoox
+<Esc>*l#O (#=51)         Logical Operation (ROP3): 51: Sn
+<Esc>*l#O (#=52)         Logical Operation (ROP3): 52: STDSaox
+<Esc>*l#O (#=53)         Logical Operation (ROP3): 53: STDSxnox
+<Esc>*l#O (#=54)         Logical Operation (ROP3): 54: SDTox
+<Esc>*l#O (#=55)         Logical Operation (ROP3): 55: SDToan
+<Esc>*l#O (#=56)         Logical Operation (ROP3): 56: TSDToax
+<Esc>*l#O (#=57)         Logical Operation (ROP3): 57: STDnox
+<Esc>*l#O (#=58)         Logical Operation (ROP3): 58: STDSxox
+<Esc>*l#O (#=59)         Logical Operation (ROP3): 59: STDnoan
+<Esc>*l#O (#=60)         Logical Operation (ROP3): 60: TSx
+<Esc>*l#O (#=61)         Logical Operation (ROP3): 61: STDSonox
+<Esc>*l#O (#=62)         Logical Operation (ROP3): 62: STDSnaox
+<Esc>*l#O (#=63)         Logical Operation (ROP3): 63: TSan
+<Esc>*l#O (#=64)         Logical Operation (ROP3): 64: TSDnaa
+<Esc>*l#O (#=65)         Logical Operation (ROP3): 65: DTSxon
+<Esc>*l#O (#=66)         Logical Operation (ROP3): 66: SDxTDxa
+<Esc>*l#O (#=67)         Logical Operation (ROP3): 67: STDSanaxn
+<Esc>*l#O (#=68)         Logical Operation (ROP3): 68: SDna
+<Esc>*l#O (#=69)         Logical Operation (ROP3): 69: DTSnaon
+<Esc>*l#O (#=70)         Logical Operation (ROP3): 70: DSTDaox
+<Esc>*l#O (#=71)         Logical Operation (ROP3): 71: TSDTxaxn
+<Esc>*l#O (#=72)         Logical Operation (ROP3): 72: SDTxa
+<Esc>*l#O (#=73)         Logical Operation (ROP3): 73: TDSTDaoxxn
+<Esc>*l#O (#=74)         Logical Operation (ROP3): 74: DTSDoax
+<Esc>*l#O (#=75)         Logical Operation (ROP3): 75: TDSnox
+<Esc>*l#O (#=76)         Logical Operation (ROP3): 76: SDTana
+<Esc>*l#O (#=77)         Logical Operation (ROP3): 77: SSTxDSxoxn
+<Esc>*l#O (#=78)         Logical Operation (ROP3): 78: TDSTxox
+<Esc>*l#O (#=79)         Logical Operation (ROP3): 79: TDSnoan
+<Esc>*l#O (#=80)         Logical Operation (ROP3): 80: TDna
+<Esc>*l#O (#=81)         Logical Operation (ROP3): 81: DSTnaon
+<Esc>*l#O (#=82)         Logical Operation (ROP3): 82: DTSDaox
+<Esc>*l#O (#=83)         Logical Operation (ROP3): 83: STDSxaxn
+<Esc>*l#O (#=84)         Logical Operation (ROP3): 84: DTSonon
+<Esc>*l#O (#=85)         Logical Operation (ROP3): 85: Dn
+<Esc>*l#O (#=86)         Logical Operation (ROP3): 86: DTSox
+<Esc>*l#O (#=87)         Logical Operation (ROP3): 87: DTSoan
+<Esc>*l#O (#=88)         Logical Operation (ROP3): 88: TDSToax
+<Esc>*l#O (#=89)         Logical Operation (ROP3): 89: DTSnox
+<Esc>*l#O (#=90)         Logical Operation (ROP3): 90: DTx
+<Esc>*l#O (#=91)         Logical Operation (ROP3): 91: DTSDonox
+<Esc>*l#O (#=92)         Logical Operation (ROP3): 92: DTSDxox
+<Esc>*l#O (#=93)         Logical Operation (ROP3): 93: DTSnoan
+<Esc>*l#O (#=94)         Logical Operation (ROP3): 94: DTSDnaox
+<Esc>*l#O (#=95)         Logical Operation (ROP3): 95: DTan
+<Esc>*l#O (#=96)         Logical Operation (ROP3): 96: TDSxa
+<Esc>*l#O (#=97)         Logical Operation (ROP3): 97: DSTDSaoxxn
+<Esc>*l#O (#=98)         Logical Operation (ROP3): 98: DSTDoax
+<Esc>*l#O (#=99)         Logical Operation (ROP3): 99: SDTnox
+<Esc>*l#O (#=100)        Logical Operation (ROP3): 100: SDTSoax
+<Esc>*l#O (#=101)        Logical Operation (ROP3): 101: DSTnox
+<Esc>*l#O (#=102)        Logical Operation (ROP3): 102: DSx
+<Esc>*l#O (#=103)        Logical Operation (ROP3): 103: SDTSonox
+<Esc>*l#O (#=104)        Logical Operation (ROP3): 104: DSTDSonoxxn
+<Esc>*l#O (#=105)        Logical Operation (ROP3): 105: TDSxxn
+<Esc>*l#O (#=106)        Logical Operation (ROP3): 106: DTSax
+<Esc>*l#O (#=107)        Logical Operation (ROP3): 107: TSDTSoaxxn
+<Esc>*l#O (#=108)        Logical Operation (ROP3): 108: SDTax
+<Esc>*l#O (#=109)        Logical Operation (ROP3): 109: TDSTDoaxxn
+<Esc>*l#O (#=110)        Logical Operation (ROP3): 110: SDTSnoax
+<Esc>*l#O (#=111)        Logical Operation (ROP3): 111: TDSxnan
+<Esc>*l#O (#=112)        Logical Operation (ROP3): 112: TDSana
+<Esc>*l#O (#=113)        Logical Operation (ROP3): 113: SSDxTDxaxn
+<Esc>*l#O (#=114)        Logical Operation (ROP3): 114: SDTSxox
+<Esc>*l#O (#=115)        Logical Operation (ROP3): 115: SDTnoan
+<Esc>*l#O (#=116)        Logical Operation (ROP3): 116: DSTDxox
+<Esc>*l#O (#=117)        Logical Operation (ROP3): 117: DSTnoan
+<Esc>*l#O (#=118)        Logical Operation (ROP3): 118: SDTSnaox
+<Esc>*l#O (#=119)        Logical Operation (ROP3): 119: DSan
+<Esc>*l#O (#=120)        Logical Operation (ROP3): 120: TDSax
+<Esc>*l#O (#=121)        Logical Operation (ROP3): 121: DSTDSoaxxn
+<Esc>*l#O (#=122)        Logical Operation (ROP3): 122: DTSDnoax
+<Esc>*l#O (#=123)        Logical Operation (ROP3): 123: SDTxnan
+<Esc>*l#O (#=124)        Logical Operation (ROP3): 124: STDSnoax
+<Esc>*l#O (#=125)        Logical Operation (ROP3): 125: DTSxnan
+<Esc>*l#O (#=126)        Logical Operation (ROP3): 126: STxDSxo
+<Esc>*l#O (#=127)        Logical Operation (ROP3): 127: DTSaan
+<Esc>*l#O (#=128)        Logical Operation (ROP3): 128: DTSaa
+<Esc>*l#O (#=129)        Logical Operation (ROP3): 129: STxDSxon
+<Esc>*l#O (#=130)        Logical Operation (ROP3): 130: DTSxna
+<Esc>*l#O (#=131)        Logical Operation (ROP3): 131: STDSnoaxn
+<Esc>*l#O (#=132)        Logical Operation (ROP3): 132: SDTxna
+<Esc>*l#O (#=133)        Logical Operation (ROP3): 133: TDSTnoaxn
+<Esc>*l#O (#=134)        Logical Operation (ROP3): 134: DSTDSoaxx
+<Esc>*l#O (#=135)        Logical Operation (ROP3): 135: TDSaxn
+<Esc>*l#O (#=136)        Logical Operation (ROP3): 136: DSa
+<Esc>*l#O (#=137)        Logical Operation (ROP3): 137: SDTSnaoxn
+<Esc>*l#O (#=138)        Logical Operation (ROP3): 138: DSTnoa
+<Esc>*l#O (#=139)        Logical Operation (ROP3): 139: DSTDxoxn
+<Esc>*l#O (#=140)        Logical Operation (ROP3): 140: SDTnoa
+<Esc>*l#O (#=141)        Logical Operation (ROP3): 141: SDTSxoxn
+<Esc>*l#O (#=142)        Logical Operation (ROP3): 142: SSDxTDxax
+<Esc>*l#O (#=143)        Logical Operation (ROP3): 143: TDSanan
+<Esc>*l#O (#=144)        Logical Operation (ROP3): 144: TDSxna
+<Esc>*l#O (#=145)        Logical Operation (ROP3): 145: SDTSnoaxn
+<Esc>*l#O (#=146)        Logical Operation (ROP3): 146: DTSDToaxx
+<Esc>*l#O (#=147)        Logical Operation (ROP3): 147: STDaxn
+<Esc>*l#O (#=148)        Logical Operation (ROP3): 148: TSDTSoaxx
+<Esc>*l#O (#=149)        Logical Operation (ROP3): 149: DTSaxn
+<Esc>*l#O (#=150)        Logical Operation (ROP3): 150: DTSxx
+<Esc>*l#O (#=151)        Logical Operation (ROP3): 151: TSDTSonoxx
+<Esc>*l#O (#=152)        Logical Operation (ROP3): 152: SDTSonoxn
+<Esc>*l#O (#=153)        Logical Operation (ROP3): 153: DSxn
+<Esc>*l#O (#=154)        Logical Operation (ROP3): 154: DTSoaxn
+<Esc>*l#O (#=155)        Logical Operation (ROP3): 155: SDTSoaxn
+<Esc>*l#O (#=156)        Logical Operation (ROP3): 156: STDnax
+<Esc>*l#O (#=157)        Logical Operation (ROP3): 157: DSTDoaxn
+<Esc>*l#O (#=158)        Logical Operation (ROP3): 158: DSTDSaoxx
+<Esc>*l#O (#=159)        Logical Operation (ROP3): 159: TDSxan
+<Esc>*l#O (#=160)        Logical Operation (ROP3): 160: DTa
+<Esc>*l#O (#=161)        Logical Operation (ROP3): 161: TDSTnaoxn
+<Esc>*l#O (#=162)        Logical Operation (ROP3): 162: DTSnoa
+<Esc>*l#O (#=163)        Logical Operation (ROP3): 163: DTSDxoxn
+<Esc>*l#O (#=164)        Logical Operation (ROP3): 164: TDSTonoxn
+<Esc>*l#O (#=165)        Logical Operation (ROP3): 165: TDxn
+<Esc>*l#O (#=166)        Logical Operation (ROP3): 166: DSTnax
+<Esc>*l#O (#=167)        Logical Operation (ROP3): 167: TDSToaxn
+<Esc>*l#O (#=168)        Logical Operation (ROP3): 168: DTSoa
+<Esc>*l#O (#=169)        Logical Operation (ROP3): 169: DTSoxn
+<Esc>*l#O (#=170)        Logical Operation (ROP3): 170: D
+<Esc>*l#O (#=171)        Logical Operation (ROP3): 171: DTSono
+<Esc>*l#O (#=172)        Logical Operation (ROP3): 172: STDSxax
+<Esc>*l#O (#=173)        Logical Operation (ROP3): 173: DTSDaoxn
+<Esc>*l#O (#=174)        Logical Operation (ROP3): 174: DSTnao
+<Esc>*l#O (#=175)        Logical Operation (ROP3): 175: DTno
+<Esc>*l#O (#=176)        Logical Operation (ROP3): 176: TDSnoa
+<Esc>*l#O (#=177)        Logical Operation (ROP3): 177: TDSTxoxn
+<Esc>*l#O (#=178)        Logical Operation (ROP3): 178: SSTxDSxox
+<Esc>*l#O (#=179)        Logical Operation (ROP3): 179: SDTanan
+<Esc>*l#O (#=180)        Logical Operation (ROP3): 180: TSDnax
+<Esc>*l#O (#=181)        Logical Operation (ROP3): 181: DTSDoaxn
+<Esc>*l#O (#=182)        Logical Operation (ROP3): 182: DTSDTaoxx
+<Esc>*l#O (#=183)        Logical Operation (ROP3): 183: SDTxan
+<Esc>*l#O (#=184)        Logical Operation (ROP3): 184: TSDTxax
+<Esc>*l#O (#=185)        Logical Operation (ROP3): 185: DSTDaoxn
+<Esc>*l#O (#=186)        Logical Operation (ROP3): 186: DTSnao
+<Esc>*l#O (#=187)        Logical Operation (ROP3): 187: DSno
+<Esc>*l#O (#=188)        Logical Operation (ROP3): 188: STDSanax
+<Esc>*l#O (#=189)        Logical Operation (ROP3): 189: SDxTDxan
+<Esc>*l#O (#=190)        Logical Operation (ROP3): 190: DTSxo
+<Esc>*l#O (#=191)        Logical Operation (ROP3): 191: DTSano
+<Esc>*l#O (#=192)        Logical Operation (ROP3): 192: TSa
+<Esc>*l#O (#=193)        Logical Operation (ROP3): 193: STDSnaoxn
+<Esc>*l#O (#=194)        Logical Operation (ROP3): 194: STDSonoxn
+<Esc>*l#O (#=195)        Logical Operation (ROP3): 195: TSxn
+<Esc>*l#O (#=196)        Logical Operation (ROP3): 196: STDnoa
+<Esc>*l#O (#=197)        Logical Operation (ROP3): 197: STDSxoxn
+<Esc>*l#O (#=198)        Logical Operation (ROP3): 198: SDTnax
+<Esc>*l#O (#=199)        Logical Operation (ROP3): 199: TSDToaxn
+<Esc>*l#O (#=200)        Logical Operation (ROP3): 200: SDToa
+<Esc>*l#O (#=201)        Logical Operation (ROP3): 201: STDoxn
+<Esc>*l#O (#=202)        Logical Operation (ROP3): 202: DTSDxax
+<Esc>*l#O (#=203)        Logical Operation (ROP3): 203: STDSaoxn
+<Esc>*l#O (#=204)        Logical Operation (ROP3): 204: S
+<Esc>*l#O (#=205)        Logical Operation (ROP3): 205: SDTono
+<Esc>*l#O (#=206)        Logical Operation (ROP3): 206: SDTnao
+<Esc>*l#O (#=207)        Logical Operation (ROP3): 207: STno
+<Esc>*l#O (#=208)        Logical Operation (ROP3): 208: TSDnoa
+<Esc>*l#O (#=209)        Logical Operation (ROP3): 209: TSDTxoxn
+<Esc>*l#O (#=210)        Logical Operation (ROP3): 210: TDSnax
+<Esc>*l#O (#=211)        Logical Operation (ROP3): 211: STDSoaxn
+<Esc>*l#O (#=212)        Logical Operation (ROP3): 212: SSTxTDxax
+<Esc>*l#O (#=213)        Logical Operation (ROP3): 213: DTSanan
+<Esc>*l#O (#=214)        Logical Operation (ROP3): 214: TSDTSaoxx
+<Esc>*l#O (#=215)        Logical Operation (ROP3): 215: DTSxan
+<Esc>*l#O (#=216)        Logical Operation (ROP3): 216: TDSTxax
+<Esc>*l#O (#=217)        Logical Operation (ROP3): 217: SDTSaoxn
+<Esc>*l#O (#=218)        Logical Operation (ROP3): 218: DTSDanax
+<Esc>*l#O (#=219)        Logical Operation (ROP3): 219: STxDSxan
+<Esc>*l#O (#=220)        Logical Operation (ROP3): 220: STDnao
+<Esc>*l#O (#=221)        Logical Operation (ROP3): 221: SDno
+<Esc>*l#O (#=222)        Logical Operation (ROP3): 222: SDTxo
+<Esc>*l#O (#=223)        Logical Operation (ROP3): 223: SDTano
+<Esc>*l#O (#=224)        Logical Operation (ROP3): 224: TDSoa
+<Esc>*l#O (#=225)        Logical Operation (ROP3): 225: TDSoxn
+<Esc>*l#O (#=226)        Logical Operation (ROP3): 226: DSTDxax
+<Esc>*l#O (#=227)        Logical Operation (ROP3): 227: TSDTaoxn
+<Esc>*l#O (#=228)        Logical Operation (ROP3): 228: SDTSxax
+<Esc>*l#O (#=229)        Logical Operation (ROP3): 229: TDSTaoxn
+<Esc>*l#O (#=230)        Logical Operation (ROP3): 230: SDTSanax
+<Esc>*l#O (#=231)        Logical Operation (ROP3): 231: STxTDxan
+<Esc>*l#O (#=232)        Logical Operation (ROP3): 232: SSTxDSxax
+<Esc>*l#O (#=233)        Logical Operation (ROP3): 233: DSTDSanaxxn
+<Esc>*l#O (#=234)        Logical Operation (ROP3): 234: DTSao
+<Esc>*l#O (#=235)        Logical Operation (ROP3): 235: DTSxno
+<Esc>*l#O (#=236)        Logical Operation (ROP3): 236: SDTao
+<Esc>*l#O (#=237)        Logical Operation (ROP3): 237: SDTxno
+<Esc>*l#O (#=238)        Logical Operation (ROP3): 238: DSo
+<Esc>*l#O (#=239)        Logical Operation (ROP3): 239: SDTnoo
+<Esc>*l#O (#=240)        Logical Operation (ROP3): 240: T
+<Esc>*l#O (#=241)        Logical Operation (ROP3): 241: TDSono
+<Esc>*l#O (#=242)        Logical Operation (ROP3): 242: TDSnao
+<Esc>*l#O (#=243)        Logical Operation (ROP3): 243: TSno
+<Esc>*l#O (#=244)        Logical Operation (ROP3): 244: TSDnao
+<Esc>*l#O (#=245)        Logical Operation (ROP3): 245: TDno
+<Esc>*l#O (#=246)        Logical Operation (ROP3): 246: TDSxo
+<Esc>*l#O (#=247)        Logical Operation (ROP3): 247: TDSano
+<Esc>*l#O (#=248)        Logical Operation (ROP3): 248: TDSao
+<Esc>*l#O (#=249)        Logical Operation (ROP3): 249: TDSxno
+<Esc>*l#O (#=250)        Logical Operation (ROP3): 250: DTo
+<Esc>*l#O (#=251)        Logical Operation (ROP3): 251: DTSnoo
+<Esc>*l#O (#=252)        Logical Operation (ROP3): 252: TSo
+<Esc>*l#O (#=253)        Logical Operation (ROP3): 253: TSDnoo
+<Esc>*l#O (#=254)        Logical Operation (ROP3): 254: DTSoo
+<Esc>*l#O (#=255)        Logical Operation (ROP3): 255: White
+<Esc>*l#P                Clip Mask (?value)
+<Esc>*l#P (#=0)          Clip Mask: Turn Off / Delete
+<Esc>*l#P (#=1)          Clip Mask: Start Define
+<Esc>*l#P (#=2)          Clip Mask: End Define (Inclusive Clip)
+<Esc>*l#P (#=3)          Clip Mask: End Define (Exclusive Clip)
+<Esc>*l#R                Pixel Placement (?value)
+<Esc>*l#R (#=0)          Pixel Placement: Grid Intersection
+<Esc>*l#R (#=1)          Pixel Placement: Grid Centred
+<Esc>*l#W                Colour Lookup Tables
+<Esc>*m#W                Download Dither Matrix
+<Esc>*o#D                Colour Raster Depletion (?value)
+<Esc>*o#D (#=1)          Colour Raster Depletion: None
+<Esc>*o#D (#=2)          Colour Raster Depletion: 25%
+<Esc>*o#D (#=3)          Colour Raster Depletion: 50%
+<Esc>*o#D (#=4)          Colour Raster Depletion: 25% compensated
+<Esc>*o#D (#=5)          Colour Raster Depletion: 50% compensated
+<Esc>*o#M                Print Quality (?value)
+<Esc>*o#M (#=0)          Print Quality: Normal
+<Esc>*o#M (#=1)          Print Quality: Presentation
+<Esc>*o#M (#=-1)         Print Quality: Draft
+<Esc>*o#Q                Mechanical Print Quality (?value)
+<Esc>*o#Q (#=0)          Mechanical Print Quality: Normal
+<Esc>*o#Q (#=1)          Mechanical Print Quality: Presentation
+<Esc>*o#Q (#=-1)         Mechanical Print Quality: EconoFast
+<Esc>*o#W                Driver Configuration
+<Esc>*p#N            *   Print Mode (Graphics) (?value)
+<Esc>*p#N (#=0)      *   Print Mode (Graphics): Default
+<Esc>*p#N (#=1)      *   Print Mode (Graphics): Bidirectional
+<Esc>*p#N (#=2)      *   Print Mode (Graphics): Left-To-Right
+<Esc>*p#N (#=3)      *   Print Mode (Graphics): Right-To-Left
+<Esc>*p#N (#=4)      *   Print Mode (Graphics): Conditional
+<Esc>*p#P                Palette Stack (?value)
+<Esc>*p#P (#=0)          Palette Stack: Push (Store)
+<Esc>*p#P (#=1)          Palette Stack: Pop (Recall)
+<Esc>*p#R                Set Pattern Reference Point (?value)
+<Esc>*p#R (#=0)          Set Pattern Reference Point: Logical
+<Esc>*p#R (#=1)          Set Pattern Reference Point: Physical
+<Esc>*p#X                Cursor Position (PCL units): Horizontal
+<Esc>*p#Y                Cursor Position (PCL units): Vertical
+<Esc>*r#A                Start Raster Graphics (?value)
+<Esc>*r#A (#=0)          Start Raster Graphics: Left Margin at 0
+<Esc>*r#A (#=1)          Start Raster Graphics: Left Margin at X
+<Esc>*r#A (#=2)          Start Raster Graphics: Scale Mode
+<Esc>*r#A (#=3)          Start Raster Graphics: Scale Mode at CAP
+<Esc>*r#B            *   End Raster Graphics (PCL4)
+<Esc>*r#C                End Raster Graphics
+<Esc>*r#F                Raster Graphics Presentation (?value)
+<Esc>*r#F (#=0)          Raster Graphics Presentation: Logical
+<Esc>*r#F (#=3)          Raster Graphics Presentation: Physical
+<Esc>*r#L            *   Raster Resolution: Horizontal (dots per inch)
+<Esc>*r#Q            *   Raster Graphics Quality (?value)
+<Esc>*r#Q (#=0)      *   Raster Graphics Quality: User-Selected
+<Esc>*r#Q (#=1)      *   Raster Graphics Quality: Draft
+<Esc>*r#Q (#=2)      *   Raster Graphics Quality: High
+<Esc>*r#S                Raster Width (pixels): Source
+<Esc>*r#T                Raster Height (raster rows): Source
+<Esc>*r#U                Simple Colour (?value)
+<Esc>*r#U (#=1)          Simple Colour: 1-Plane K Palette
+<Esc>*r#U (#=3)          Simple Colour: 3-Plane RGB Palette
+<Esc>*r#U (#=-4)         Simple Colour: 4-Plane KCMY Palette
+<Esc>*r#U (#=-3)         Simple Colour: 3-Plane CMY Palette
+<Esc>*r#V            *   Raster Resolution: Vertical (dots per inch)
+<Esc>*s#I                Status Readback Entity (?value)
+<Esc>*s#I (#=0)          Status Readback Entity: Font
+<Esc>*s#I (#=1)          Status Readback Entity: Macro
+<Esc>*s#I (#=2)          Status Readback Entity: User Pattern
+<Esc>*s#I (#=3)          Status Readback Entity: Symbol Set
+<Esc>*s#I (#=4)          Status Readback Entity: Font Extended
+<Esc>*s#M                Status Readback Free Space (?value)
+<Esc>*s#M (#=1)          Status Readback Free Space
+<Esc>*s#T                Status Readback Loc. Type (?value)
+<Esc>*s#T (#=0)          Status Readback Loc. Type: Invalid
+<Esc>*s#T (#=1)          Status Readback Loc. Type: Current
+<Esc>*s#T (#=2)          Status Readback Loc. Type: All
+<Esc>*s#T (#=3)          Status Readback Loc. Type: Internal
+<Esc>*s#T (#=4)          Status Readback Loc. Type: Download
+<Esc>*s#T (#=5)          Status Readback Loc. Type: Cartridge
+<Esc>*s#T (#=7)          Status Readback Loc. Type: SIMMs
+<Esc>*s#U                Status Readback Loc. Unit (?value)
+<Esc>*s#U (#=0)          Status Readback Loc. Unit: All
+<Esc>*s#U (#=1)          Status Readback Loc. Unit: Temp./Hi-Priority
+<Esc>*s#U (#=2)          Status Readback Loc. Unit: Perm./Lo-Priority
+<Esc>*s#U (#=3)          Status Readback Loc. Unit: Entity 3
+<Esc>*s#U (#=4)          Status Readback Loc. Unit: Entity 4
+<Esc>*s#X                Echo
+<Esc>*s#^            *   Return Model Number
+<Esc>*t#F            *   QMS Magnum-5 Interpreter (?value)
+<Esc>*t#F (#=0)      *   QMS Magnum-5 Interpreter: Disable
+<Esc>*t#F (#=1)      *   QMS Magnum-5 Interpreter: Enable
+<Esc>*t#G            *   GPIS Data Binding (?value)
+<Esc>*t#G (#=0)      *   GPIS Data Binding: Exit Vector Graphics
+<Esc>*t#G (#=1)      *   GPIS Data Binding: 16-bit binary
+<Esc>*t#G (#=2)      *   GPIS Data Binding: 8-bit binary
+<Esc>*t#G (#=3)      *   GPIS Data Binding: Character-Encoded
+<Esc>*t#H                Raster Width (decipoints): Destination
+<Esc>*t#I                Gamma Correction
+<Esc>*t#J                Render Algorithm (?value)
+<Esc>*t#J (#=0)          Render Algorithm: Continuous Tone
+<Esc>*t#J (#=1)          Render Algorithm: Snap To Primaries
+<Esc>*t#J (#=2)          Render Algorithm: Snap B/W; Colour>Black
+<Esc>*t#J (#=3)          Render Algorithm: Device Best Dither
+<Esc>*t#J (#=4)          Render Algorithm: Error Diffusion
+<Esc>*t#J (#=5)          Render Algorithm: Mono Best Dither
+<Esc>*t#J (#=6)          Render Algorithm: Mono Error Diffusion
+<Esc>*t#J (#=7)          Render Algorithm: Cluster Ordered Dither
+<Esc>*t#J (#=8)          Render Algorithm: Mono Cluster Ordered
+<Esc>*t#J (#=9)          Render Algorithm: User-Defined Dither
+<Esc>*t#J (#=10)         Render Algorithm: Mono User-Def. Dither
+<Esc>*t#J (#=11)         Render Algorithm: Ordered Dither
+<Esc>*t#J (#=12)         Render Algorithm: Mono Ordered Dither
+<Esc>*t#J (#=13)         Render Algorithm: Noise Ordered Dither
+<Esc>*t#J (#=14)         Render Algorithm: Mono Noise Ordered
+<Esc>*t#J (#=15)         Render Algorithm: Continuous Tone Smooth
+<Esc>*t#J (#=16)         Render Algorithm: Mono Cont. Tone Detail
+<Esc>*t#J (#=17)         Render Algorithm: Mono Cont. Tone Smooth
+<Esc>*t#J (#=18)         Render Algorithm: Continuous Tone Basic
+<Esc>*t#J (#=19)         Render Algorithm: Mono Cont. Tone Basic
+<Esc>*t#K                Scale Algorithm (?value)
+<Esc>*t#K (#=0)          Scale Algorithm: Source/Light Background
+<Esc>*t#K (#=1)          Scale Algorithm: Source/Dark Background
+<Esc>*t#M            *   Vector Graphics Operating Mode (?value)
+<Esc>*t#M (#=0)      *   Vector Graphics Operating Mode: Plotter
+<Esc>*t#M (#=1)      *   Vector Graphics Operating Mode: Printer
+<Esc>*t#N            *   Vector Graphics Mapping Mode (?value)
+<Esc>*t#N (#=0)      *   Vector Graphics Mapping Mode: Default
+<Esc>*t#N (#=1)      *   Vector Graphics Mapping Mode: Normal
+<Esc>*t#N (#=2)      *   Vector Graphics Mapping Mode: Distorted
+<Esc>*t#P            *   Vector Graphics Print Control (?value)
+<Esc>*t#P (#=0)      *   Vector Graphics Print Control: Retain
+<Esc>*t#P (#=1)      *   Vector Graphics Print Control: Clear
+<Esc>*t#R                Raster Graphics Resolution (dots per inch)
+<Esc>*t#V                Raster Height (decipoints): Destination
+<Esc>*t#W            *   GPIS Data Transfer
+<Esc>*v#A                Colour Component 1
+<Esc>*v#B                Colour Component 2
+<Esc>*v#C                Colour Component 3
+<Esc>*v#I                Assign Colour Index
+<Esc>*v#N                Source Transparency Mode (?value)
+<Esc>*v#N (#=0)          Source Transparency Mode: Transparent
+<Esc>*v#N (#=1)          Source Transparency Mode: Opaque
+<Esc>*v#O                Pattern Transparency Mode (?value)
+<Esc>*v#O (#=0)          Pattern Transparency Mode: Transparent
+<Esc>*v#O (#=1)          Pattern Transparency Mode: Opaque
+<Esc>*v#S                Foreground Colour
+<Esc>*v#T                Select Current Pattern (?value)
+<Esc>*v#T (#=0)          Select Current Pattern: Solid Black
+<Esc>*v#T (#=1)          Select Current Pattern: Solid White
+<Esc>*v#T (#=2)          Select Current Pattern: Shading
+<Esc>*v#T (#=3)          Select Current Pattern: Cross-Hatch
+<Esc>*v#T (#=4)          Select Current Pattern: User-Defined
+<Esc>*v#W                Configure Image Data
+<Esc>*z#C            *   Bar Code Label Placement (column)
+<Esc>*z#H            *   Bar Code Label Height (1/10 inches)
+<Esc>*z#Q            *   Bar Code Header Control (?value)
+<Esc>*z#Q (#=0)      *   Bar Code Header Control: Disable Print
+<Esc>*z#Q (#=1)      *   Bar Code Header Control: Print Above
+<Esc>*z#Q (#=2)      *   Bar Code Header Control: Print Below
+<Esc>*z#R            *   Bar Code Wide Bar Width (dots)
+<Esc>*z#S            *   Bar Code Narrow Bar Width (dots)
+<Esc>*z#T            *   Bar Code Wide Space Width (dots)
+<Esc>*z#U            *   Bar Code Narrow Space Width (dots)
+<Esc>*z#V            *   Bar Code Selection (?value)
+<Esc>*z#V (#=0)      *   Bar Code Selection: Code 3 of 9
+<Esc>*z#V (#=1)      *   Bar Code Selection: Industrial 2 of 5
+<Esc>*z#V (#=2)      *   Bar Code Selection: Matrix 2 of 5
+<Esc>*z#V (#=3)      *   Bar Code Selection: User-Defined
+<Esc>*z#V (#=4)      *   Bar Code Selection: 2 of 5 Interleaved
+<Esc>*z#V (#=5)      *   Bar Code Selection: Codabar
+<Esc>*z#V (#=6)      *   Bar Code Selection: MSI/Plessey
+<Esc>*z#V (#=8)      *   Bar Code Selection: UPC A
+<Esc>*z#V (#=9)      *   Bar Code Selection: UPC E
+<Esc>*z#V (#=10)     *   Bar Code Selection: EAN 8
+<Esc>*z#V (#=11)     *   Bar Code Selection: EAN 13
+<Esc>*z#V (#=12)     *   Bar Code Selection: Code 128
+<Esc>*z#V (#=13)     *   Bar Code Selection: Code 93
+<Esc>*z#V (#=14)     *   Bar Code Selection: Extended Code 3 of 9
+<Esc>*z#X            *   Bar Code Label X Offset (dots)
+<Esc>*z#Z            *   Bar Code Label
