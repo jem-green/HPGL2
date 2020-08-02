@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class LineAttributes : Instruction
+    internal class LineAttributes : Instruction
     {
         // LA kind,value[,kind,value[, kind, value]][;]
         // LA [;]

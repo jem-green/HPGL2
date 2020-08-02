@@ -4,7 +4,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class PenWidth : Instruction
+    internal class PenWidth : Instruction
     {
         // PW width[,pen][;]
         // PW [;]

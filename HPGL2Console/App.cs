@@ -56,19 +56,22 @@ namespace HPGL2Console
             try
             {
                 RegistryKey key = Registry.LocalMachine;
-                key = key.OpenSubKey("software\\green\\clean\\");
-                if (key.GetValue("path", "").ToString().Length > 0)
+                key = key.OpenSubKey("software\\green\\hpgl2\\");
+                if (key != null)
                 {
-                    HPGL2Path.Value = (string)key.GetValue("path", HPGL2Path);
-                    HPGL2Path.Source = Parameter.SourceType.Registry;
-                    _logger.LogDebug("Use registry value Path=" + HPGL2Path);
-                }
+                    if (key.GetValue("path", "").ToString().Length > 0)
+                    {
+                        HPGL2Path.Value = (string)key.GetValue("path", HPGL2Path);
+                        HPGL2Path.Source = Parameter.SourceType.Registry;
+                        _logger.LogDebug("Use registry value Path=" + HPGL2Path);
+                    }
 
-                if (key.GetValue("name", "").ToString().Length > 0)
-                {
-                    HPGL2Name.Value = (string)key.GetValue("name", HPGL2Name);
-                    HPGL2Name.Source = Parameter.SourceType.Registry;
-                    _logger.LogDebug("Use registry value Name=" + HPGL2Name);
+                    if (key.GetValue("name", "").ToString().Length > 0)
+                    {
+                        HPGL2Name.Value = (string)key.GetValue("name", HPGL2Name);
+                        HPGL2Name.Source = Parameter.SourceType.Registry;
+                        _logger.LogDebug("Use registry value Name=" + HPGL2Name);
+                    }
                 }
             }
             catch (NullReferenceException)
@@ -112,7 +115,7 @@ namespace HPGL2Console
                     }
                 }
             }
-            _logger.LogInformation("Use cleanName=" + HPGL2Name.Value + " cleanPath=" + HPGL2Path.Value);
+            _logger.LogInformation("Use HPGL2Name=" + HPGL2Name.Value + " HPGL2Path=" + HPGL2Path.Value);
 
             // Read in configuration
 
@@ -130,7 +133,8 @@ namespace HPGL2Console
             items = args.Length;
             if (items == 1)
             {
-                filenamePath = args[0].Trim('"');
+                int index = 0;
+                filenamePath = args[index].Trim('"');
                 pos = filenamePath.LastIndexOf('.');
                 if (pos > 0)
                 {
@@ -209,8 +213,9 @@ namespace HPGL2Console
 
             // Read the plot data and create the CNC file
 
-            _hpgl2.Run(filePath, filename);
+            _hpgl2.Read(filePath.Value, filename.Value);
 
+            _hpgl2.Process();
 
             _logger.LogDebug("Out Run()");
         }

@@ -4,7 +4,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class PolylineEncoded : Instruction
+    internal class PolylineEncoded : Instruction
     {
         // PE [flag[value]]x1,y1..[flag[value]]xn,yn;
 

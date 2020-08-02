@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace HPGL2Library
 {
-    public class PlotAbsolute : Instruction
+    internal class PlotAbsolute : Instruction
     {
         // PU x1, y1[ ,x1, y1][;]
         // PU[;]

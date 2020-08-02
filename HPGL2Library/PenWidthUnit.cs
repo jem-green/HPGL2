@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class PenWidthUnit : Instruction
+    internal class PenWidthUnit : Instruction
     {
         // BP Kind, Value
         WidthUnit _widthUnit = 0;   // Default to metric

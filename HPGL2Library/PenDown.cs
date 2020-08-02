@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace HPGL2Library
 {
-    public class PenDown : Instruction
+    internal class PenDown : Instruction
     {
         // PD x1, y1[ ,x1, y1][;]
         // PD[;]

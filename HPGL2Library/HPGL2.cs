@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security;
 using System.Text;
 
@@ -9,11 +10,17 @@ namespace HPGL2Library
     public class HPGL2
     {
         private ILogger _logger;
+
+        // Data
+
+        private string _filename = "";
+        private string _path = "";
+
+        // File
+
         private char _look;
         private int _count = 0;
         private string _data = "";
-        private string _filename = "";
-        private string _path = "";
 
         // consider the page size, pens, linetypes
 
@@ -114,7 +121,6 @@ namespace HPGL2Library
             }
         }
 
-
         public char Char
         {
             get
@@ -127,46 +133,47 @@ namespace HPGL2Library
 
         #region Methods
 
-        public string Read(DirectoryInfo path)
+        public void Read()
         {
-            log.Debug("In Convert()");
-
-            string content = "";
-
-            foreach (string file in _files)
-            {
-                log.Debug("file=" + file);
-                string filenamePath = path.ToString() + Path.DirectorySeparatorChar + file + ".html";
-                if (File.Exists(filenamePath) == true)
-                {
-                    try
-                    {
-                        log.Debug(file + " added");
-                        StreamReader sr = new StreamReader(filenamePath);
-                        content = content + CleanLibrary.Parser.SGMLToXHTML(sr);
-                    }
-                    catch (XmlException e)
-                    {
-                        log.Error(e.ToString());
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("Coulnd not add file " + file);
-                    }
-                }
-            }
-
-            log.Debug("Out Convert()");
-
-            return (content);
-
+            Read(_path, _filename);
         }
 
-        public void Run(String[] args)
+        /// <summary>
+        /// Read in the plot file
+        /// </summary>
+        public void Read(string path, string filename)
         {
-            // Read in specific configuration
+            _logger.LogDebug("In Read()");
 
-            _logger.LogDebug("In Run()");
+            string filenamePath = path.ToString() + Path.DirectorySeparatorChar + filename + ".plt";
+
+            if (File.Exists(filenamePath) == true)
+            {
+                try
+                {
+                    _logger.LogDebug(filename + " added");
+                    FileStream fs = new FileStream(filenamePath, FileMode.Open);
+                    using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
+                    {
+                        _data = sr.ReadToEnd();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Coulnd not add file " + filename);
+                }
+            }
+            _logger.LogDebug("Out Convert()");
+        }
+
+        /// <summary>
+        /// Process the plot file
+        /// </summary>
+        public void Process()
+        {
+            // Read in plot data
+
+            _logger.LogDebug("In Process()");
 
             BeginPlot beginPlot;
             Initialise initialise;
@@ -396,15 +403,16 @@ namespace HPGL2Library
                             break;
                         }
                 }
+                
             } while (_count < _data.Length);
 
-            _logger.LogDebug("Out Main()");
+            _logger.LogDebug("Out Process()");
         }
 
         #endregion
         #region Private
 
-        public int getInt()
+        internal int getInt()
         {
             int data = 0;
             string value = "";
@@ -423,7 +431,7 @@ namespace HPGL2Library
             return (data);
         }
 
-        public double getDouble()
+        internal double getDouble()
         {
             double data = 0;
             string value = "";
@@ -442,7 +450,7 @@ namespace HPGL2Library
             return (data);
         }
 
-        public void getChar()
+        internal void getChar()
         {
             if (_count <= _data.Length)
             {
@@ -454,8 +462,7 @@ namespace HPGL2Library
                 _look = (char)0;
             }
         }
-
-        public bool Match(char x)
+        internal bool Match(char x)
         {
             if (_look == x)
             {

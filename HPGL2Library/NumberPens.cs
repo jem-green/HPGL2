@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class NumberPens : Instruction
+    internal class NumberPens : Instruction
     {
         // NP mode
         int _pens = 2; // number of pens n = x^2 so 2 4 8 16 32 64

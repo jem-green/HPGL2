@@ -4,7 +4,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class SelectPen : Instruction
+    internal class SelectPen : Instruction
     {
         // SP pen[;]
         // SP [;]

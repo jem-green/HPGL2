@@ -4,7 +4,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class PlotSize : Instruction
+    internal class PlotSize : Instruction
     {
         // PS length[,width][;]
         // pS [;]

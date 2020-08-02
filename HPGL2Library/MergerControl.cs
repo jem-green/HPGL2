@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class MergeControl : Instruction
+    internal class MergeControl : Instruction
     {
         // MC mode[, opcode][;]
         // MC [;]

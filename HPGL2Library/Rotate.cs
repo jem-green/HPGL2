@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class Rotate : Instruction
+    internal class Rotate : Instruction
     {
         // NP mode
         int _angle = 2;

@@ -5,7 +5,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class UserDefinedLinetype : Instruction
+    internal class UserDefinedLinetype : Instruction
     {
         // UL index[,gapl...gapm][;]
         // UL;

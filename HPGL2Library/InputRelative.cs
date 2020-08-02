@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class InputRelative : Instruction
+    internal class InputRelative : Instruction
     {
         // IR;
         // IR x1, y1[ ,x2, y2]

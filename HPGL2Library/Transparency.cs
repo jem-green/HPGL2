@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    public class Transparency : Instruction
+    internal class Transparency : Instruction
     {
         // IN mode
         TransparencyMode _mode = TransparencyMode.On; //false - default, true - All

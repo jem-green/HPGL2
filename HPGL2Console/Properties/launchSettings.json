@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HPGL2Console": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\SOURCE\\GIT\\.net core\\HPGL2\\HPGL2Console\\test-Model.plt\""
+    }
+  }
+}
