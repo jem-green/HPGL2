@@ -317,7 +317,7 @@ namespace HPGL2Library
                             plotAbsolute.Read();
                             break;
                         }
-                    case "PD":
+                    case "PD": // Pen Down
                         {
                             penDown = new PenDown(this);
                             penDown.Read();
@@ -342,7 +342,7 @@ namespace HPGL2Library
                             plotSize.Read();
                             break;
                         }
-                    case "PU":
+                    case "PU":  // Pen Up
                         {
                             penUp = new PenUp(this);
                             penUp.Read();
@@ -361,7 +361,7 @@ namespace HPGL2Library
                             qualityLevel.Level = getInt();
                             break;
                         }
-                    case "RO":
+                    case "RO":  // Rotate
                         {
                             rotate = new Rotate(this);
                             rotate.Read();
@@ -391,7 +391,7 @@ namespace HPGL2Library
                             userDefinedLinetype.Read();
                             break;
                         }
-                    case "WU":
+                    case "WU": // Pen Width Unit
                         {
                             widthUnit = new PenWidthUnit(this);
                             widthUnit.Read();
@@ -410,7 +410,7 @@ namespace HPGL2Library
         }
 
         #endregion
-        #region Private
+        #region Internal
 
         internal int getInt()
         {
