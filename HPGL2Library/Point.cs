@@ -1,23 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 
 namespace HPGL2Library
 {
-    public struct Coord
+    /// <summary>
+    /// Points are in the user defined coordinate system
+    /// and adjusted with scaling and input parameters, and
+    /// need converting to plotter units and then eventually
+    /// into metic units
+    /// </summary>
+
+    public struct Point
     {
+        int _x;
+        int _y;
 
-        double _x;
-        double _y;
-
-        public Coord(double x, double y)
+        public Point(int x, int y)
         {
             _x = x;
             _y = y;
         }
 
-        public double X
+        public int X
         {
             get
             {
@@ -29,7 +32,7 @@ namespace HPGL2Library
             }
         }
 
-        public double Y
+        public int Y
         {
             get
             {
@@ -51,12 +54,12 @@ namespace HPGL2Library
             throw new NotImplementedException();
         }
 
-        public static bool operator ==(Coord left, Coord right)
+        public static bool operator ==(Point left, Point right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(Coord left, Coord right)
+        public static bool operator !=(Point left, Point right)
         {
             return !(left == right);
         }

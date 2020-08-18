@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Security;
+using Microsoft.Extensions.Logging;
 
 namespace HPGL2Library
 {
     internal class LineAttributes : Instruction
     {
-        // LA kind,value[,kind,value[, kind, value]][;]
+        // LA kind,value[,kind,value[,kind,value]][;]
         // LA [;]
 
         AttributeType _lineAttribute = AttributeType.None;
@@ -43,11 +44,9 @@ namespace HPGL2Library
         public LineAttributes(HPGL2 hpgl2)
         {
             _hpgl2 = hpgl2;
-        }
-
-        public LineAttributes(AttributeType mode)
-        {
-            _mode = mode;
+            _name = "LineAttributes ";
+            _instruction = "LA";
+            _hpgl2.Logger.LogInformation(_name);
         }
 
         public AttributeType Attribute
@@ -140,6 +139,10 @@ namespace HPGL2Library
                 {
                     throw new Exception("Bad sytax");
                 }
+            }
+            if (_hpgl2.Match(';') == true)
+            {
+                _hpgl2.getChar();   // Consume the terminator if it exists
             }
             return (read);
         }

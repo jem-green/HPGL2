@@ -11,30 +11,34 @@ namespace HPGL2Library
         // PU x1, y1[ ,x1, y1][;]
         // PU[;]
 
-        List<CoOrd> _coOrds;
+        List<Point> _coOrds;
 
         public PenUp(HPGL2 hpgl2)
         {
-            _coOrds = new List<CoOrd>();
+
+            _coOrds = new List<Point>();
             _hpgl2 = hpgl2;
+            _name = "PenUp ";
+            _instruction = "PU";
+            _hpgl2.Logger.LogInformation(_name);
         }
 
-        public void Add(CoOrd coOrd)
+        public void Add(Point coOrd)
         {
             _coOrds.Add(coOrd);
         }
 
         public void Add(int x, int y)
         {
-            _coOrds.Add(new CoOrd(x,y));
+            _coOrds.Add(new Point(x,y));
         }
 
         public override int Read()
         {
             int read = 0;
             _hpgl2.Pen.Status = Pen.PenStatus.Up;
-            _hpgl2.Logger.LogDebug("PU Pen=up");
-            CoOrd coOrd = new CoOrd();
+            _hpgl2.Logger.LogDebug(_name + "Pen=" + _hpgl2.Pen.Status.ToString());
+            Point coOrd = new Point();
             if (!_hpgl2.Match(';') == true)
             {
                 if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))
@@ -48,7 +52,8 @@ namespace HPGL2Library
                             _hpgl2.getChar();
                             coOrd.Y = _hpgl2.getInt();
                             // update the current position for the next line segment
-                            _hpgl2.Logger.LogDebug("PU " + coOrd.ToString());
+                            _hpgl2.Logger.LogDebug(_name + "X=" + coOrd.X + " Y=" + coOrd.Y);
+                            _hpgl2.Logger.LogInformation(_instruction + coOrd.ToString() + ";");
                             _hpgl2.Current = coOrd;
                         }
                         else

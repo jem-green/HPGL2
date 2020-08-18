@@ -11,22 +11,22 @@ namespace HPGL2Library
         // PD x1, y1[ ,x1, y1][;]
         // PD[;]
 
-        List<CoOrd> _coOrds;
+        List<Point> _coOrds;
 
         public PenDown(HPGL2 hpgl2)
         {
-            _coOrds = new List<CoOrd>();
+            _coOrds = new List<Point>();
             _hpgl2 = hpgl2;
         }
 
-        public void Add(CoOrd coOrd)
+        public void Add(Point coOrd)
         {
             _coOrds.Add(coOrd);
         }
 
         public void Add(int x, int y)
         {
-            _coOrds.Add(new CoOrd(x,y));
+            _coOrds.Add(new Point(x,y));
         }
 
         public override int Read()
@@ -34,7 +34,7 @@ namespace HPGL2Library
             int read = 0;
             _hpgl2.Pen.Status = Pen.PenStatus.Down;
             _hpgl2.Logger.LogDebug("PD " + _hpgl2.Pen.ToString());
-            CoOrd coOrd = new CoOrd();
+            Point coOrd = new Point();
             if (!_hpgl2.Match(';') == true)
             {
                 if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))

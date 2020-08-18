@@ -24,12 +24,12 @@ namespace HPGL2Library
 
         // consider the page size, pens, linetypes
 
-        Page _page = new Page();
-        List<UserDefinedLinetype> _linetypes;       // List of line type **check if there are standard ones**
-        List<PenWidth> _penWidths;                  // **not sure if this is independent of a pen**
-        CoOrd _current = new CoOrd(0, 0);           // Assume that this defauts to zero **check**
+        Page _page;
+        List<UserDefinedLinetype> _lineTypes;       // List of line type **check if there are standard ones**
+        Dictionary<int,Pen> _pens;               // List of pens
+        Point _current = new Point(0, 0);           // Assume that this defauts to zero **check**
         List<Line> _lines = new List<Line>();       // Initialise here
-        Pen _pen = new Pen();                       // Pen status, assuming that there is only one pen
+        Pen _currentPen;                            // Pen status, assuming that there is only one pen
 
         public HPGL2(ILogger logger)
         {
@@ -42,26 +42,10 @@ namespace HPGL2Library
             {
                 throw new ArgumentNullException(nameof(logger));
             }
-        }
-
-        public HPGL2(string filename, string path)
-        {
-            _filename = filename;
-            _path = path;
-        }
-
-        public HPGL2(string filename, string path, ILogger<HPGL2> logger)
-        {
-            _filename = filename;
-            _path = path;
-            if (logger != null)
-            {
-                _logger = logger;
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(logger));
-            }
+            _lineTypes = new List<UserDefinedLinetype>();
+            _pens = new Dictionary<int, Pen>();
+            _page = new Page(this);
+            _currentPen = new Pen(this);
         }
 
         #region Properties
@@ -85,11 +69,23 @@ namespace HPGL2Library
         {
             get
             {
-                return (_pen);
+                return (_currentPen);
             }
             set
             {
-                _pen = value;
+                _currentPen = value;
+            }
+        }
+
+        public Dictionary<int,Pen> Pens
+        {
+            get
+            {
+                return (_pens);
+            }
+            set
+            {
+                _pens = value;
             }
         }
 
@@ -109,7 +105,7 @@ namespace HPGL2Library
             }
         }
 
-        public CoOrd Current
+        public Point Current
         {
             get
             {
@@ -141,8 +137,9 @@ namespace HPGL2Library
         /// <summary>
         /// Read in the plot file
         /// </summary>
-        public void Read(string path, string filename)
+        public bool Read(string path, string filename)
         {
+            bool read = false;
             _logger.LogDebug("In Read()");
 
             string filenamePath = path.ToString() + Path.DirectorySeparatorChar + filename + ".plt";
@@ -157,13 +154,16 @@ namespace HPGL2Library
                     {
                         _data = sr.ReadToEnd();
                     }
+                    read = true;
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError("Coulnd not add file " + filename);
+                    _logger.LogDebug("Coulnd not add file " + filename);
+                    _logger.LogError("Exception:" + ex.ToString());
                 }
             }
             _logger.LogDebug("Out Convert()");
+            return (read);
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace HPGL2Library
                     }
                 }
 
-                _logger.LogDebug(instruction);
+                _logger.LogDebug(instruction + "->");
 
                 switch (instruction)
                 {
@@ -353,7 +353,6 @@ namespace HPGL2Library
                             penWidth = new PenWidth(this);
                             penWidth.Read();
                             break;
-
                         }
                     case "QL": // Quality Level
                         {

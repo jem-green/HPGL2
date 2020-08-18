@@ -119,11 +119,11 @@ namespace HPGL2Console
 
             // Read in configuration
 
-            Serialise serialise = new Serialise(HPGL2Name.Value, HPGL2Path.Value,_logger);
+            Serialise serialise = new Serialise(HPGL2Name.Value, HPGL2Path.Value, _logger);
             _hpgl2 = serialise.FromXML();
             if (_hpgl2 != null)
             {
-                
+
             }
 
             // Read in the plot specific parameters
@@ -213,10 +213,10 @@ namespace HPGL2Console
 
             // Read the plot data and create the CNC file
 
-            _hpgl2.Read(filePath.Value, filename.Value);
-
-            _hpgl2.Process();
-
+            if (_hpgl2.Read(filePath.Value, filename.Value) == true)
+            {
+                _hpgl2.Process();
+            }
             _logger.LogDebug("Out Run()");
         }
         #endregion

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using HPGL2Library;
+using LoggerLibrary;
 
 namespace HPGL2Console
 {

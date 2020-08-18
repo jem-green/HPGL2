@@ -5,7 +5,16 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPGL2Console", "HPGL2Console\HPGL2Console.csproj", "{8FA270FB-7CFB-4904-8ADA-89A4C86C847B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPGL2Library", "HPGL2Library\HPGL2Library.csproj", "{4D1736A2-AC95-428E-A54E-4B9D04ACACC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPGL2Library", "HPGL2Library\HPGL2Library.csproj", "{4D1736A2-AC95-428E-A54E-4B9D04ACACC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdParty", "ThirdParty", "{97047BE1-9351-47AE-897A-7924E2619B83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logger", "Logger", "{83639403-2A14-4022-8DD8-BDABB74AEA83}"
+	ProjectSection(SolutionItems) = preProject
+		ThirdParty\Logger\LoggerLibrary.deps.json = ThirdParty\Logger\LoggerLibrary.deps.json
+		ThirdParty\Logger\LoggerLibrary.dll = ThirdParty\Logger\LoggerLibrary.dll
+		ThirdParty\Logger\LoggerLibrary.pdb = ThirdParty\Logger\LoggerLibrary.pdb
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +33,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{83639403-2A14-4022-8DD8-BDABB74AEA83} = {97047BE1-9351-47AE-897A-7924E2619B83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9BF0F8F-1807-4FA0-9550-6F2B89262FA6}

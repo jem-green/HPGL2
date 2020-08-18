@@ -5,7 +5,9 @@ namespace HPGL2Library
 {
     internal class Transparency : Instruction
     {
-        // IN mode
+        // TR mode[;]
+        // TR[;]
+
         TransparencyMode _mode = TransparencyMode.On; //false - default, true - All
         public enum TransparencyMode : int
         {

@@ -9,7 +9,9 @@ namespace HPGL2Library
     {
         #region Variables
 
+        int _id = 0;
         PenStatus _status = PenStatus.Up;
+        PenWidth _penWidth;
 
         public enum PenStatus : int
         {
@@ -21,17 +23,25 @@ namespace HPGL2Library
         #endregion
         #region Constructor
 
-        public Pen()
+        public Pen(HPGL2 hpgl2)
         {
-        }
-
-        public Pen(PenStatus status)
-        {
-            _status = status;
+            _penWidth = new PenWidth(hpgl2);
         }
 
         #endregion
         #region Properties
+
+        public int Id
+        {
+            get
+            {
+                return (_id);
+            }
+            set
+            {
+                _id = value;
+            }
+        }
 
         public PenStatus Status
         {
@@ -45,12 +55,23 @@ namespace HPGL2Library
             }
         }
 
+        public PenWidth PenWidth
+        {
+            get
+            {
+                return (_penWidth);
+            }
+            set
+            {
+                _penWidth = value;
+            }
+        }
+
         #endregion
 
         public override string ToString()
         {
             return (_status.ToString());
         }
-
     }
 }

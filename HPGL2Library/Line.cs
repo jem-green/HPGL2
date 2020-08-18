@@ -4,15 +4,19 @@ using System.Text;
 
 namespace HPGL2Library
 {
+    /// <summary>
+    /// Lines are in user units and need converting
+    /// to plotter units and then eventually into metic units
+    /// </summary>
     public class Line
     {
-        CoOrd _start;
-        CoOrd _end;
+        Point _start;
+        Point _end;
 
         public Line()
         { }
 
-        public Line(CoOrd start, CoOrd end)
+        public Line(Point start, Point end)
         {
             _start = start;
             _end = end;       
@@ -20,11 +24,11 @@ namespace HPGL2Library
 
         public Line(int x1, int y1, int x2, int y2)
         {
-            _start = new CoOrd(x1, y1);
-            _end = new CoOrd(x2, y2);
+            _start = new Point(x1, y1);
+            _end = new Point(x2, y2);
         }
 
-        public CoOrd Start
+        public Point Start
         {
             get
             {
@@ -36,7 +40,7 @@ namespace HPGL2Library
             }
         }
 
-        public CoOrd End
+        public Point End
         {
             get
             {

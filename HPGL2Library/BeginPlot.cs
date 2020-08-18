@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Security;
 
 namespace HPGL2Library
 {
     public class BeginPlot : Instruction
     {
-        // BP kind,value
+        // BP kind,value[,kind,value][;]
+        // BP [;]
 
         #region Variable
 
@@ -29,6 +31,8 @@ namespace HPGL2Library
         public BeginPlot(HPGL2 hpgl2)
         {
             _hpgl2 = hpgl2;
+            base._name = "BeginPlot";
+            _hpgl2.Logger.LogInformation(base._name);
         }
 
         public BeginPlot(int kind, object value)
@@ -69,19 +73,30 @@ namespace HPGL2Library
         public override int Read()
         {
             int read = 0;
-            _kind = (BeginPlot.kindType)_hpgl2.getInt();
-            if (_hpgl2.Match(','))
+            if (_hpgl2.Char != ';')
             {
-                _hpgl2.getChar();
-                switch (_kind)
+                _kind = (BeginPlot.kindType)_hpgl2.getInt();
+                if (_hpgl2.Match(','))
                 {
-                    case BeginPlot.kindType.Autorotation:
-                        {
-                            int autoRotate = _hpgl2.getInt();  // Ignore
-                            read = 1;
-                            break;
-                        }
+                    _hpgl2.getChar();
+                    switch (_kind)
+                    {
+                        case BeginPlot.kindType.Autorotation:
+                            {
+                                int autoRotate = _hpgl2.getInt();  // Ignore
+                                read = 1;
+                                break;
+                            }
+                    }
                 }
+                else
+                {
+                    read = 1;
+                }
+            }
+            if (_hpgl2.Match(';') == true)
+            {
+                _hpgl2.getChar();   // Consume the terminator if it exists
             }
             return (read);
         }

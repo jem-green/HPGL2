@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Security;
 
 namespace HPGL2Library
@@ -19,11 +20,9 @@ namespace HPGL2Library
         public EnableCutter(HPGL2 hpgl2)
         {
             _hpgl2 = hpgl2;
-        }
-
-        public EnableCutter(CutterMode mode)
-        {
-            _mode = mode;
+            _name = "EnableCutter ";
+            _instruction = "EC";
+            _hpgl2.Logger.LogInformation(_name);
         }
 
         public CutterMode Mode
@@ -46,9 +45,15 @@ namespace HPGL2Library
                 if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))
                 {
                     // any value turns the cutter off
+                    _hpgl2.Logger.LogDebug(_name + _mode.ToString());
                     _mode = CutterMode.off;
                     _hpgl2.getChar();
                 }
+            }
+            _hpgl2.Logger.LogInformation(_instruction + (int)_mode + ";");
+            if (_hpgl2.Match(';') == true)
+            {
+                _hpgl2.getChar();   // Consume the terminator if it exists
             }
             return (read);
         }

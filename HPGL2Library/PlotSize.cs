@@ -4,7 +4,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    internal class PlotSize : Instruction
+    public class PlotSize : Instruction
     {
         // PS length[,width][;]
         // pS [;]
@@ -22,12 +22,9 @@ namespace HPGL2Library
         public PlotSize(HPGL2 hpgl2)
         {
             _hpgl2 = hpgl2;
-        }
-
-        public PlotSize(int length, int width)
-        {
-            _length = length;
-            _width = width;
+            _name = "PlotSize ";
+            _instruction = "PS";
+            _hpgl2.Logger.LogInformation(_name);
         }
 
         public int Length
@@ -64,7 +61,31 @@ namespace HPGL2Library
                     _hpgl2.getChar();
                     _width = _hpgl2.getInt();
                 }
-                _hpgl2.Logger.LogDebug("PS length=" + _length + " width=" + _width);
+                _hpgl2.Logger.LogDebug(_name + "length=" + _length + " width=" + _width);
+                _hpgl2.Logger.LogInformation(_instruction + _length + "," + _width + ";");
+
+                _hpgl2.Page.Size = this;
+
+                // Should this override the physical page
+                // Need to convert the plotter size to physical size
+
+                _hpgl2.Page.Left = 0;
+                _hpgl2.Page.Bottom = 0;
+                _hpgl2.Page.Length = (int)(_length * _hpgl2.Page.Units);
+                _hpgl2.Page.Width = (int)(_width * _hpgl2.Page.Units);
+
+                // Set P1 amd P2 to the plot size in plotter units
+
+                Point p1 = new Point(0, 0);
+                Point p2 = new Point(_width, _length);
+                _hpgl2.Page.Input.P1 = p1;
+                _hpgl2.Page.Input.P2 = p2;
+                _hpgl2.Logger.LogDebug(_name + "P1=" + p1 + " P2=" + p2);
+
+                // Defautl cursor to P1
+
+                _hpgl2.Current = p1;
+
             }
             if (_hpgl2.Match(';') == true)
             {

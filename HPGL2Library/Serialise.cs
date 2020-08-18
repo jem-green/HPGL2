@@ -22,7 +22,7 @@ namespace HPGL2Library
          *     <left>0</left>
          *     <bottom>0</bottom>
          *     <width>40</width>
-         *     <height>40</height>
+         *     <length>40</length>
          *   </page>
          * </hpgl2>
          * 
@@ -85,6 +85,7 @@ namespace HPGL2Library
             _logger.LogDebug("In FromXML()");
 			HPGL2 hpgl2 = null;
             Page page = null;
+            Pen pen = null;
 
             try
             {
@@ -150,7 +151,38 @@ namespace HPGL2Library
                                                 {
                                                     stack.Push(current);
                                                     current = element;
-                                                    page = new Page();
+                                                    page = new Page(hpgl2);
+
+                                                    
+
+                                                  break;
+                                                }
+                                            case "pen":
+                                                {
+                                                    stack.Push(current);
+                                                    current = element;
+                                                    pen = new Pen(hpgl2);
+
+                                                    if (xmlReader.HasAttributes == true)
+                                                    {
+                                                        while (xmlReader.MoveToNextAttribute())
+                                                        {
+                                                            text = xmlReader.Value.ToLower();
+                                                            switch (xmlReader.Name.ToLower())
+                                                            {
+                                                                case "id":
+                                                                    {
+                                                                        try
+                                                                        {
+                                                                            pen.Id = Convert.ToInt32(text);
+                                                                        }
+                                                                        catch { }
+                                                                        break;
+                                                                    }
+                                                            }
+                                                        }
+                                                    }
+
                                                     break;
                                                 }
                                             #endregion
@@ -181,6 +213,11 @@ namespace HPGL2Library
                                                     hpgl2.Page = page;
                                                     break;
                                                 }
+                                            case "pen":
+                                                {
+                                                    hpgl2.Pens.Add(pen.Id,pen);
+                                                    break;
+                                                }
                                         }
                                         current = stack.Pop();
                                         break;
@@ -198,15 +235,6 @@ namespace HPGL2Library
 
                                         switch (current)
                                         {
-                                            case "left":
-                                                {
-                                                    try
-                                                    {
-                                                        page.Left = Convert.ToInt32(text);
-                                                    }
-                                                    catch { }
-                                                    break;
-                                                }
                                             case "bottom":
                                                 {
                                                     try
@@ -216,25 +244,53 @@ namespace HPGL2Library
                                                     catch { }
                                                     break;
                                                 }
+                                            case "id":
+                                                {
+                                                    try
+                                                    {
+                                                        pen.Id = Convert.ToInt32(text);
+                                                    }
+                                                    catch { }
+                                                    break;
+                                                }
+                                            case "left":
+                                                {
+                                                    try
+                                                    {
+                                                        page.Left = Convert.ToInt32(text);
+                                                    }
+                                                    catch { }
+                                                    break;
+                                                }
+                                            case "length":
+                                                {
+                                                    try
+                                                    {
+                                                        page.Length = Convert.ToInt32(text);
+                                                    }
+                                                    catch { }
+                                                    break;
+                                                }
                                             case "width":
                                                 {
-                                                    try
+                                                    if (stack.Peek() == "page")
                                                     {
-                                                        page.Width = Convert.ToInt32(text);
+                                                        try
+                                                        {
+                                                            page.Width = Convert.ToInt32(text);
+                                                        }
+                                                        catch { }
                                                     }
-                                                    catch { }
+                                                    else if (stack.Peek() == "pen")
+                                                    {
+                                                        try
+                                                        {
+                                                            pen.PenWidth.Width = Convert.ToInt32(text);
+                                                        }
+                                                        catch { }
+                                                    }
                                                     break;
                                                 }
-                                            case "height":
-                                                {
-                                                    try
-                                                    {
-                                                        page.Height = Convert.ToInt32(text);
-                                                    }
-                                                    catch { }
-                                                    break;
-                                                }
-
                                         }
                                         break;
                                     }

@@ -31,6 +31,9 @@ namespace HPGL2Library
         public PolylineEncoded(HPGL2 hpgl2)
         {
             _hpgl2 = hpgl2;
+            _name = "PolylineEncoded ";
+            _instruction = "PE";
+            _hpgl2.Logger.LogInformation(_name);
         }
 
         public object Value
@@ -50,8 +53,8 @@ namespace HPGL2Library
             int read = 0;
             // PE [[flag][,value]][,cord]...[[flag][,value]][,cord][;]
             // PE[;]
-            bool penUp = false;  // Start with pen down
-            bool exit = false;       // Exit flag
+            bool penUp = false;     // Start with pen down
+            bool exit = false;      // Exit flag
 
             do
             {
@@ -60,7 +63,8 @@ namespace HPGL2Library
                     case ':': // Select pen
                         {
                             _hpgl2.getChar();
-                            _hpgl2.Logger.LogDebug("PE Select Pen");
+                            _hpgl2.Logger.LogDebug(_name + "Select Pen");
+                            _hpgl2.Logger.LogInformation(_instruction + ":");
                             break;
                         }
                     case '<': // Pen up
@@ -68,22 +72,31 @@ namespace HPGL2Library
                             penUp = true;
                             _hpgl2.getChar();
                             _hpgl2.Pen.Status = Pen.PenStatus.Up;
-                            _hpgl2.Logger.LogDebug("PE Pen " + _hpgl2.Pen.ToString());
+                            _hpgl2.Logger.LogDebug(_name + "Pen=" + _hpgl2.Pen);
+                            _hpgl2.Logger.LogInformation(_instruction + "<");
                             break;
                         }
                     case '=': // Plot absolute
                         {
-                            penUp = false;
                             _hpgl2.getChar();
-                            CoOrd coOrd = new CoOrd();
+                            Point coOrd = new Point();
                             coOrd.X = FromBase64();
                             coOrd.Y = FromBase64();
-                            // create a line and add it to the list
-                            Line line = new Line(_hpgl2.Current, coOrd);
-                            _hpgl2.Logger.LogDebug("PE Line " + _hpgl2.Current.ToString() + " to " + coOrd.ToString());
-                            _hpgl2.Lines.Add(line);
+                            if (penUp == true)
+                            {
+                                _hpgl2.Logger.LogDebug(_name + "Move from=" + _hpgl2.Current + " to=" + coOrd);
+                            }
+                            else
+                            {
+                                // create a line and add it to the list
+                                Line line = new Line(_hpgl2.Current, coOrd);
+                                _hpgl2.Logger.LogDebug(_name + "Line from=" + _hpgl2.Current + " to=" + coOrd);                         
+                                _hpgl2.Lines.Add(line);
+                            }
+                            _hpgl2.Logger.LogInformation(_instruction + "=" + coOrd);
                             // update the current position for the next line segment
                             _hpgl2.Current = coOrd;
+                            penUp = false;
                             break;
                         }
                     case ';':

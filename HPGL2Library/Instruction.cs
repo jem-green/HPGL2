@@ -8,6 +8,9 @@ namespace HPGL2Library
     {
         #region Variables
         private protected HPGL2 _hpgl2;
+        private protected string _name = "";
+        private protected string _instruction = "";
+
         #endregion
         #region Methods
         public abstract int Read();
