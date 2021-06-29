@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HPGL2Terminal": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\SOURCE\\GIT\\cs.net\\HPGL2\\HPGL2Terminal\\test3-Model.plt\""
+    }
+  }
+}

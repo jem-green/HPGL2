@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPGL2Console", "HPGL2Console\HPGL2Console.csproj", "{8FA270FB-7CFB-4904-8ADA-89A4C86C847B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPGL2Terminal", "HPGL2Terminal\HPGL2Terminal.csproj", "{8FA270FB-7CFB-4904-8ADA-89A4C86C847B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPGL2Library", "HPGL2Library\HPGL2Library.csproj", "{4D1736A2-AC95-428E-A54E-4B9D04ACACC3}"
 EndProject
@@ -15,6 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logger", "Logger", "{836394
 		ThirdParty\Logger\LoggerLibrary.dll = ThirdParty\Logger\LoggerLibrary.dll
 		ThirdParty\Logger\LoggerLibrary.pdb = ThirdParty\Logger\LoggerLibrary.pdb
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TracerLibrary", "TracerLibrary", "{C7079C6B-7EF0-445E-A229-3CCE88FCDA8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netcoreapp3.1", "netcoreapp3.1", "{10322D0C-B92C-4F1F-B03C-6428CADCCDC8}"
+	ProjectSection(SolutionItems) = preProject
+		ThirdParty\TracerLibrary\netcoreapp3.1\TracerLibrary.dll = ThirdParty\TracerLibrary\netcoreapp3.1\TracerLibrary.dll
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPGL2Console", "HPGL2Console\HPGL2Console.csproj", "{AADCFB8F-8972-403A-8612-1CD3C2E58D5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,12 +39,18 @@ Global
 		{4D1736A2-AC95-428E-A54E-4B9D04ACACC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D1736A2-AC95-428E-A54E-4B9D04ACACC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D1736A2-AC95-428E-A54E-4B9D04ACACC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AADCFB8F-8972-403A-8612-1CD3C2E58D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AADCFB8F-8972-403A-8612-1CD3C2E58D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AADCFB8F-8972-403A-8612-1CD3C2E58D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AADCFB8F-8972-403A-8612-1CD3C2E58D5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{83639403-2A14-4022-8DD8-BDABB74AEA83} = {97047BE1-9351-47AE-897A-7924E2619B83}
+		{C7079C6B-7EF0-445E-A229-3CCE88FCDA8C} = {97047BE1-9351-47AE-897A-7924E2619B83}
+		{10322D0C-B92C-4F1F-B03C-6428CADCCDC8} = {C7079C6B-7EF0-445E-A229-3CCE88FCDA8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9BF0F8F-1807-4FA0-9550-6F2B89262FA6}

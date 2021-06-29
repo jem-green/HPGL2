@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -11,12 +12,12 @@ namespace HPGL2Library
 
         int _angle = 0;
 
-        public Rotate(HPGL2 hpgl2)
+        public Rotate(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "Rotate ";
             _instruction = "RO";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         //public RotateCoordinateSystem(int angle)
@@ -46,8 +47,8 @@ namespace HPGL2Library
                 int angle = _hpgl2.getInt();
                 // Consider if this needs rounding to nearest 90 degrees
                 _angle = (int)(90 * Math.Round((double)angle / 90));
-                _hpgl2.Logger.LogDebug(_name + "angle=" + _angle);
-                _hpgl2.Logger.LogInformation(_instruction + _angle + ";");
+                TraceInternal.TraceVerbose(_name + "angle=" + _angle);
+                Trace.TraceInformation(_instruction + _angle + ";");
                 Point p1 = _hpgl2.Page.Input.P1;
                 Point p2 = _hpgl2.Page.Input.P2;
                 Point pt = new Point();
@@ -57,7 +58,7 @@ namespace HPGL2Library
                 //{
                 //    case 0:
                 //        {
-                //            _hpgl2.Logger.LogDebug(_name + "P1=" + p1 + " P2=" + p2);
+                //            TraceInternal.TraceVerbose(_name + "P1=" + p1 + " P2=" + p2);
                 //            break;
                 //        }
                 //    case 90:
@@ -67,7 +68,7 @@ namespace HPGL2Library
                 //            pt.Y = p2.X;
                 //            p2.Y = p1.Y + pt.X;
                 //            p2.X = p2.X - p2.Y;
-                //            _hpgl2.Logger.LogDebug(_name + "P1=" + p1 + " P2=" + p2);
+                //            TraceInternal.TraceVerbose(_name + "P1=" + p1 + " P2=" + p2);
                 //            break;
                 //        }
                 //    case 180:
@@ -75,7 +76,7 @@ namespace HPGL2Library
                 //            pt = p1;
                 //            p1 = p2;
                 //            p2 = pt;
-                //            _hpgl2.Logger.LogDebug(_name + "P1=" + p1 + " P2=" + p2);
+                //            TraceInternal.TraceVerbose(_name + "P1=" + p1 + " P2=" + p2);
                 //            break;
                 //        }
                 //    case 270:
@@ -84,7 +85,7 @@ namespace HPGL2Library
                 //            p1.Y = p2.Y;
                 //            p2.X = p1.X + p2.Y;
                 //            p2.Y = p2.Y - p2.X;
-                //            _hpgl2.Logger.LogDebug(_name + "P1=" + p1 + " P2=" + p2);
+                //            TraceInternal.TraceVerbose(_name + "P1=" + p1 + " P2=" + p2);
                 //            break;
                 //        }
                 //}
@@ -92,7 +93,7 @@ namespace HPGL2Library
             }
             if (_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();   // Consume the terminator if it exists
+                _hpgl2.GetChar();   // Consume the terminator if it exists
             }
             return (read);
         }

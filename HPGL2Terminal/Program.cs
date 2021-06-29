@@ -5,9 +5,8 @@ using System.Configuration;
 using HPGL2Library;
 using System.Diagnostics;
 using TracerLibrary;
-using Microsoft.Win32;
 
-namespace HPGL2Console
+namespace HPGL2Terminal
 {
     class Program
     {
@@ -29,85 +28,75 @@ namespace HPGL2Console
             Parameter HPGL2Path = new Parameter("");
             Parameter HPGL2Name = new Parameter("hpgl2.xml");
 
-            // Required for the plot
-
-            Parameter filename = new Parameter("");
-            Parameter filePath = new Parameter("");
-            Parameter outName = new Parameter("");
-
             HPGL2Path.Value = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            int pos = HPGL2Path.Value.LastIndexOf('\\');
+            int pos = HPGL2Path.Value.ToString().LastIndexOf(Path.DirectorySeparatorChar);
             if (pos > 0)
             {
-                HPGL2Path.Value = HPGL2Path.Value.Substring(0, pos);
+                HPGL2Path.Value = HPGL2Path.Value.ToString().Substring(0, pos);
+                HPGL2Path.Source = Parameter.SourceType.App;
             }
-            HPGL2Path.Source = Parameter.SourceType.App;
+			
+			Parameter logPath = new Parameter("");
+            Parameter logName = new Parameter("hpgl2terminal");
 
-            filePath.Value = Environment.CurrentDirectory;
-            filePath.Source = Parameter.SourceType.App;
-
-            try
+            logPath.Value = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            pos = logPath.Value.ToString().LastIndexOf(Path.DirectorySeparatorChar);
+            if (pos > 0)
             {
-                RegistryKey key = Registry.LocalMachine;
-                key = key.OpenSubKey("software\\green\\hpgl2\\");
-                if (key != null)
-                {
-                    if (key.GetValue("path", "").ToString().Length > 0)
-                    {
-                        HPGL2Path.Value = (string)key.GetValue("path", HPGL2Path);
-                        HPGL2Path.Source = Parameter.SourceType.Registry;            
-                        TraceInternal.TraceVerbose("Use registry value Path=" + HPGL2Path);
-                    }
-
-                    if (key.GetValue("name", "").ToString().Length > 0)
-                    {
-                        HPGL2Name.Value = (string)key.GetValue("name", HPGL2Name);
-                        HPGL2Name.Source = Parameter.SourceType.Registry;
-                        TraceInternal.TraceVerbose("Use registry value Name=" + HPGL2Name);
-                    }
-                }
-            }
-            catch (NullReferenceException)
-            {
-               Trace.TraceWarning("Registry error use default values; Name=" + HPGL2Name.Value + " Path=" + HPGL2Path.Value);
-            }
-            catch (Exception e)
-            {
-                Trace.TraceError(e.ToString());
+                logPath.Value = logPath.Value.ToString().Substring(0, pos);
+                logPath.Source = Parameter.SourceType.App;
             }
 
-            // Check if the config file has been paased in and overwrite the registry
+            // Configure tracer options
+
+            string filenamePath = logPath.Value.ToString() + Path.DirectorySeparatorChar + logName.Value.ToString() + ".log";
+            FileStreamWithRolling dailyRolling = new FileStreamWithRolling(filenamePath, new TimeSpan(1, 0, 0, 0), FileMode.Append);
+            TextWriterTraceListenerWithTime listener = new TextWriterTraceListenerWithTime(dailyRolling);
+            Trace.AutoFlush = true;
+            TraceFilter fileTraceFilter = new System.Diagnostics.EventTypeFilter(SourceLevels.Verbose);
+            listener.Filter = fileTraceFilter;
+            Trace.Listeners.Add(listener);
+
+            ConsoleTraceListener console = new ConsoleTraceListener();
+            TraceFilter consoleTraceFilter = new System.Diagnostics.EventTypeFilter(SourceLevels.Verbose);
+            console.Filter = consoleTraceFilter;
+            Trace.Listeners.Add(console);
+
+            // Check if the config file has been paased in and overwrite the defaults
 
             int items = args.Length;
             for (int item = 0; item < items; item++)
             {
+                string lookup = args[item];
+                if (lookup.Length > 1)
                 {
-                    switch (args[item])
-                    {
-
-                        case "/N":
-                        case "--name":
-                            {
-                                HPGL2Name.Value = args[item + 1];
-                                HPGL2Name.Value = HPGL2Name.Value.TrimStart('"');
-                                HPGL2Name.Value = HPGL2Name.Value.TrimEnd('"');
-                                HPGL2Name.Source = Parameter.SourceType.Command;
-                                TraceInternal.TraceVerbose("Use command value Name=" + HPGL2Name);
-                                break;
-                            }
-                        case "/P":
-                        case "--path":
-                            {
-                                HPGL2Path.Value = args[item + 1];
-                                HPGL2Path.Value = HPGL2Path.Value.TrimStart('"');
-                                HPGL2Path.Value = HPGL2Path.Value.TrimEnd('"');
-                                HPGL2Path.Source = Parameter.SourceType.Command;
-                                TraceInternal.TraceVerbose("Use command value Path=" + HPGL2Path);
-                                break;
-                            }
-                    }
+                    lookup = lookup.ToLower();
+                }
+                switch (lookup)
+                {
+                    case "/N":
+                    case "--name":
+                        {
+                            HPGL2Name.Value = args[item + 1];
+                            HPGL2Name.Value = HPGL2Name.Value.TrimStart('"');
+                            HPGL2Name.Value = HPGL2Name.Value.TrimEnd('"');
+                            HPGL2Name.Source = Parameter.SourceType.Command;
+                            TraceInternal.TraceVerbose("Use command value Name=" + HPGL2Name);
+                            break;
+                        }
+                    case "/P":
+                    case "--path":
+                        {
+                            HPGL2Path.Value = args[item + 1];
+                            HPGL2Path.Value = HPGL2Path.Value.TrimStart('"');
+                            HPGL2Path.Value = HPGL2Path.Value.TrimEnd('"');
+                            HPGL2Path.Source = Parameter.SourceType.Command;
+                            TraceInternal.TraceVerbose("Use command value Path=" + HPGL2Path);
+                            break;
+                        }
                 }
             }
+
             Trace.TraceInformation("Use HPGL2Name=" + HPGL2Name.Value);
             Trace.TraceInformation("Use HPGL2Path=" + HPGL2Path.Value);
 
@@ -122,7 +111,13 @@ namespace HPGL2Console
 
             // Read in the plot specific parameters
 
-            string filenamePath;
+            Parameter filename = new Parameter("");
+            Parameter filePath = new Parameter("");
+            Parameter outName = new Parameter("");
+
+            filePath.Value = Environment.CurrentDirectory;
+            filePath.Source = Parameter.SourceType.App;
+
             string extension;
             items = args.Length;
             if (items == 1)
@@ -213,9 +208,6 @@ namespace HPGL2Console
             {
                 _hpgl2.Process();
             }
-            ManualResetEvent manualResetEvent = new ManualResetEvent(false);
-
-            manualResetEvent.WaitOne();
 
             Debug.WriteLine("Out Main()");
         }

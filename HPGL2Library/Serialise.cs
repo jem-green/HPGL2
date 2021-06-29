@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Xml;
-using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -28,21 +28,15 @@ namespace HPGL2Library
          * 
          */
 
-        #region Variables
+        #region Fields
 
-        ILogger _logger;
         string _filename = "";
         string _path = "";
 
         #endregion
         #region Constructor
-        public Serialise(ILogger logger)
+        public Serialise(string filename, string path)
         {
-            _logger = logger;
-        }
-        public Serialise(string filename, string path, ILogger logger)
-        {
-            _logger = logger;
             this._filename = filename;
             this._path = path;
         }
@@ -75,15 +69,15 @@ namespace HPGL2Library
         #endregion
         #region Methods
 
-        public HPGL2 FromXML()
+        public HPGL2Document FromXML()
         {
             return(FromXML(_filename, _path));
         }
 
-        public HPGL2 FromXML(string filename, string path)
+        public HPGL2Document FromXML(string filename, string path)
         {
-            _logger.LogDebug("In FromXML()");
-			HPGL2 hpgl2 = null;
+            Debug.WriteLine("In FromXML()");
+			HPGL2Document hpgl2 = null;
             Page page = null;
             Pen pen = null;
 
@@ -130,12 +124,12 @@ namespace HPGL2Library
 
                                         if (!xmlReader.IsEmptyElement)
                                         {
-                                            _logger.LogInformation(Level(level) + "<" + element + ">");
+                                            Trace.TraceInformation(Level(level) + "<" + element + ">");
                                             level = level + 1;
                                         }
                                         else
                                         {
-                                            _logger.LogInformation(Level(level) + "<" + element + "/>");
+                                            Trace.TraceInformation(Level(level) + "<" + element + "/>");
                                         }
                                         switch (element)
                                         {
@@ -144,7 +138,7 @@ namespace HPGL2Library
                                                 {
                                                     stack.Push(current);
                                                     current = element;
-													hpgl2 = new HPGL2(_logger);
+													hpgl2 = new HPGL2Document();
                                                     break;
                                                 }
                                             case "page":
@@ -201,7 +195,7 @@ namespace HPGL2Library
                                     {
                                         element = xmlReader.LocalName;
                                         level = level - 1;
-                                        _logger.LogInformation(Level(level) + "</" + element + ">");
+                                        Trace.TraceInformation(Level(level) + "</" + element + ">");
                                         switch (element)
                                         {
                                             case "hpgl2":
@@ -231,7 +225,7 @@ namespace HPGL2Library
                                         text = text.Replace("\t", "");
                                         text = text.Replace("\n", "");
                                         text = text.Trim();
-                                        _logger.LogInformation(Level(level) + text);
+                                        Trace.TraceInformation(Level(level) + text);
 
                                         switch (current)
                                         {
@@ -308,7 +302,7 @@ namespace HPGL2Library
                                 case XmlNodeType.Attribute:
                                     break;
                                 default:
-                                    _logger.LogInformation(xmlReader.NodeType.ToString());
+                                    Trace.TraceInformation(xmlReader.NodeType.ToString());
                                     break;
 
                             }
@@ -319,26 +313,26 @@ namespace HPGL2Library
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogWarning("XML Error " + ex.Message);
+                        Trace.TraceWarning("XML Error " + ex.Message);
                     }
                     fs.Close();
                     fs.Dispose();   // Force the dispose as it was getting left open
                 }
                 catch (FileNotFoundException ex)
                 {
-                    _logger.LogWarning("File Error " + ex.Message);
+                    Trace.TraceWarning("File Error " + ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning("File Error " + ex.Message);
+                    Trace.TraceWarning("File Error " + ex.Message);
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError("Other Error " + e.Message);
+                Trace.TraceError("Other Error " + e.Message);
             }
 
-            _logger.LogDebug("Out FromXML()");
+            Debug.WriteLine("Out FromXML()");
             return (hpgl2);
         }
         #endregion

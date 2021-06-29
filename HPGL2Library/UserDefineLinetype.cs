@@ -17,7 +17,7 @@ namespace HPGL2Library
         List<double> _pattern = new List<double>();
         int parts = 0;
 
-        public UserDefinedLinetype(HPGL2 hpgl2)
+        public UserDefinedLinetype(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
         }
@@ -58,7 +58,7 @@ namespace HPGL2Library
                     {
                         if (_hpgl2.Match(','))
                         {
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             _pattern.Add(_hpgl2.getDouble());
                         }
 
@@ -67,7 +67,7 @@ namespace HPGL2Library
             }
             else
             {
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
             }
             return (read);
         }

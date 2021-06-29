@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -11,12 +12,12 @@ namespace HPGL2Library
 
         int _pen = 0;
 
-        public SelectPen(HPGL2 hpgl2)
+        public SelectPen(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "SelectPen ";
             _instruction = "SP";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         public int Pen
@@ -39,8 +40,8 @@ namespace HPGL2Library
                 if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))
                 {
                     _pen = _hpgl2.getInt();
-                    _hpgl2.Logger.LogDebug(_name + "Pen=" + _pen);
-                    _hpgl2.Logger.LogInformation(_instruction + _pen + ";");
+                    TraceInternal.TraceVerbose(_name + "Pen=" + _pen);
+                    Trace.TraceInformation(_instruction + _pen + ";");
 
                     // Select the pen or could just set and index.
 
@@ -51,13 +52,13 @@ namespace HPGL2Library
 
                     if (_hpgl2.Match(';') == true)
                     {
-                        _hpgl2.getChar();   // Consume the terminator if it exists
+                        _hpgl2.GetChar();   // Consume the terminator if it exists
                     }
                 }
             }
             else
             {
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
             }
             return (read);
         }

@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -13,12 +14,12 @@ namespace HPGL2Library
         int _pen = 0;
 
 
-        public PenWidth(HPGL2 hpgl2)
+        public PenWidth(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "PenWidth ";
             _instruction = "PW";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         public double Width
@@ -56,14 +57,14 @@ namespace HPGL2Library
                 {
                     do
                     {
-                        _hpgl2.getChar();
+                        _hpgl2.GetChar();
                         _width = _hpgl2.getDouble();
                         if (_hpgl2.Match(','))
                         {
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             _pen = _hpgl2.getInt();
-                            _hpgl2.Logger.LogDebug(_name + "Pen=" + _pen + "Width=" + _width);
-                            _hpgl2.Logger.LogDebug(_instruction + _pen + "," + _width + ";");
+                            TraceInternal.TraceVerbose(_name + "Pen=" + _pen + "Width=" + _width);
+                            TraceInternal.TraceVerbose(_instruction + _pen + "," + _width + ";");
                             if ((_pen >= 0) && (_pen <= _hpgl2.Pens.Count))
                             {
                                 _hpgl2.Pens[_pen].PenWidth.Width = _width;
@@ -74,8 +75,8 @@ namespace HPGL2Library
                             // not sure if it apples the pen width to all pens of just the
                             // current pen. Says both pens **can a plotter only have two** pens?
                             // if that is the case then need to iterate through the pens.
-                            _hpgl2.Logger.LogDebug(_name + "Width=" + _width);
-                            _hpgl2.Logger.LogDebug(_instruction + _width + ";");
+                            TraceInternal.TraceVerbose(_name + "Width=" + _width);
+                            TraceInternal.TraceVerbose(_instruction + _width + ";");
                             _hpgl2.Pen.PenWidth.Width = _width;
                         }
                     } while (((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9')) || (_hpgl2.Char == ','));

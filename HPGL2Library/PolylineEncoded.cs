@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -24,28 +25,12 @@ namespace HPGL2Library
          * 
          */
 
-
-        object _value = 0;
-        string _name = "";
-
-        public PolylineEncoded(HPGL2 hpgl2)
+        public PolylineEncoded(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "PolylineEncoded ";
             _instruction = "PE";
-            _hpgl2.Logger.LogInformation(_name);
-        }
-
-        public object Value
-        {
-            get
-            {
-                return (_value);
-            }
-            set
-            {
-                _value = value;
-            }
+            Trace.TraceInformation(_name);
         }
 
         public override int Read()
@@ -62,38 +47,38 @@ namespace HPGL2Library
                 {
                     case ':': // Select pen
                         {
-                            _hpgl2.getChar();
-                            _hpgl2.Logger.LogDebug(_name + "Select Pen");
-                            _hpgl2.Logger.LogInformation(_instruction + ":");
+                            _hpgl2.GetChar();
+                            TraceInternal.TraceVerbose(_name + "Select Pen");
+                            Trace.TraceInformation(_instruction + ":");
                             break;
                         }
                     case '<': // Pen up
                         {
                             penUp = true;
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             _hpgl2.Pen.Status = Pen.PenStatus.Up;
-                            _hpgl2.Logger.LogDebug(_name + "Pen=" + _hpgl2.Pen);
-                            _hpgl2.Logger.LogInformation(_instruction + "<");
+                            TraceInternal.TraceVerbose(_name + "Pen=" + _hpgl2.Pen);
+                            Trace.TraceInformation(_instruction + "<");
                             break;
                         }
                     case '=': // Plot absolute
                         {
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             Point coOrd = new Point();
                             coOrd.X = FromBase64();
                             coOrd.Y = FromBase64();
                             if (penUp == true)
                             {
-                                _hpgl2.Logger.LogDebug(_name + "Move from=" + _hpgl2.Current + " to=" + coOrd);
+                                TraceInternal.TraceVerbose(_name + "Move from=" + _hpgl2.Current + " to=" + coOrd);
                             }
                             else
                             {
                                 // create a line and add it to the list
                                 Line line = new Line(_hpgl2.Current, coOrd);
-                                _hpgl2.Logger.LogDebug(_name + "Line from=" + _hpgl2.Current + " to=" + coOrd);                         
+                                TraceInternal.TraceVerbose(_name + "Line from=" + _hpgl2.Current + " to=" + coOrd);                         
                                 _hpgl2.Lines.Add(line);
                             }
-                            _hpgl2.Logger.LogInformation(_instruction + "=" + coOrd);
+                            Trace.TraceInformation(_instruction + "=" + coOrd);
                             // update the current position for the next line segment
                             _hpgl2.Current = coOrd;
                             penUp = false;
@@ -118,7 +103,7 @@ namespace HPGL2Library
             do
             {
                 int digit = (int)_hpgl2.Char;
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
                 if (digit > 190) // terminating digit
                 {
                     digit = digit - 191;

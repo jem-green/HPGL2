@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Security;
-using Microsoft.Extensions.Logging;
+using TracerLibrary;
 
 namespace HPGL2Library
 {
@@ -14,14 +15,14 @@ namespace HPGL2Library
         private Point _p1;
         private Point _p2;
 
-        public Input(HPGL2 hpgl2)
+        public Input(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _p1 = new Point();
             _p1 = new Point();
-            _name = "Input ";
+            base._name = "Input ";
             _instruction = "IP";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         public Point P1
@@ -104,24 +105,24 @@ namespace HPGL2Library
                 _p1.X = _hpgl2.getInt();
                 if (_hpgl2.Match(','))
                 {
-                    _hpgl2.getChar();
+                    _hpgl2.GetChar();
                     _p1.Y = _hpgl2.getInt();
-                    _hpgl2.Logger.LogDebug(_name + "P1 X1=" + _p1.X + " Y1=" + _p1.Y);
+                    TraceInternal.TraceVerbose(_name + "P1 X1=" + _p1.X + " Y1=" + _p1.Y);
                     _hpgl2.Page.Input.P1 = _p1;
                     read = 1;
                     if (!_hpgl2.Match(';') == true)
                     {
                         if (_hpgl2.Match(',') == true)
                         {
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             _p2.X = _hpgl2.getInt();
                             if (_hpgl2.Match(','))
                             {
-                                _hpgl2.getChar();
+                                _hpgl2.GetChar();
                                 _p2.Y = _hpgl2.getInt();
                                 read = 1;
-                                _hpgl2.Logger.LogDebug(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
-                                _hpgl2.Logger.LogInformation(_instruction + _p1 + "," + _p2);
+                                TraceInternal.TraceVerbose(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
+                                Trace.TraceInformation(_instruction + _p1 + "," + _p2);
                                 _hpgl2.Page.Input.P2 = _p2;
                             }
                             else
@@ -134,7 +135,7 @@ namespace HPGL2Library
                     }
                     else
                     {
-                        _hpgl2.Logger.LogInformation(_instruction + _p1);
+                        Trace.TraceInformation(_instruction + _p1);
                     }
                 }
                 else
@@ -146,7 +147,7 @@ namespace HPGL2Library
             }
             if (_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();   // Consume the terminator if it exists
+                _hpgl2.GetChar();   // Consume the terminator if it exists
             }
             return (read);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Security;
-using Microsoft.Extensions.Logging;
+using TracerLibrary;
 
 namespace HPGL2Library
 {
@@ -19,14 +20,14 @@ namespace HPGL2Library
         private Point _p1;
         private Point _p2;
 
-        public InputRelative(HPGL2 hpgl2)
+        public InputRelative(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _p1 = new Point();
             _p1 = new Point();
             _name = "InputRelative ";
             _instruction = "IR";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         public Point P1
@@ -121,34 +122,34 @@ namespace HPGL2Library
             int read = 0;
             if (!_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
                 _x1 = _hpgl2.getInt();
                 if (_hpgl2.Match(','))
                 {
-                    _hpgl2.getChar();
+                    _hpgl2.GetChar();
                     _y1 = _hpgl2.getInt();
-                    _hpgl2.Logger.LogDebug(_name + "X1%=" + _x1 + " Y1%=" + _y1);
+                    TraceInternal.TraceVerbose(_name + "X1%=" + _x1 + " Y1%=" + _y1);
                     // Need to calcualte P1 from the scaling %
                     _p1.X = pageLeft + pageWidth * _x1 / 100;
                     _p1.Y = pageBottom + pageLength * _y1 / 100;
-                    _hpgl2.Logger.LogDebug(_name + "P1 X1=" + _p1.X + " Y1=" + _p1.Y);
+                    TraceInternal.TraceVerbose(_name + "P1 X1=" + _p1.X + " Y1=" + _p1.Y);
                     
 
                     if (_hpgl2.Match(','))
                     {
-                        _hpgl2.getChar();
+                        _hpgl2.GetChar();
                         _x2 = _hpgl2.getInt();
                         if (_hpgl2.Match(','))
                         {
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             _y2 = _hpgl2.getInt();
-                            _hpgl2.Logger.LogDebug(_name + "X2=" + _x2 + " Y2=" + _y2);
+                            TraceInternal.TraceVerbose(_name + "X2=" + _x2 + " Y2=" + _y2);
 
                             // Need to calcualte P1 from the scaling %
                             _p2.X = pageLeft + pageWidth * _x2 / 100;
                             _p2.Y = pageBottom + pageLength * _y2 / 100;
-                            _hpgl2.Logger.LogDebug(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
-                            _hpgl2.Logger.LogInformation(_instruction + _x1 + "," + _y1 + "," + _x2 + "," + _y2 + ";");
+                            TraceInternal.TraceVerbose(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
+                            Trace.TraceInformation(_instruction + _x1 + "," + _y1 + "," + _x2 + "," + _y2 + ";");
                         }
                         else
                         {
@@ -166,12 +167,12 @@ namespace HPGL2Library
                         int length = _hpgl2.Page.Input.P2.Y - _hpgl2.Page.Input.P1.Y;
                         _p2.X = _p1.X + width;
                         _p2.Y = _p1.Y + length;
-                        _hpgl2.Logger.LogDebug(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
-                        _hpgl2.Logger.LogInformation(_instruction + _x1 + "," + _y1 + ";");
+                        TraceInternal.TraceVerbose(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
+                        Trace.TraceInformation(_instruction + _x1 + "," + _y1 + ";");
                     }
                     _hpgl2.Page.Input.P1 = _p1;
                     _hpgl2.Page.Input.P2 = _p2;
-                    _hpgl2.Logger.LogDebug(_name + _p1 + "," + _p2);
+                    TraceInternal.TraceVerbose(_name + _p1 + "," + _p2);
                 }
                 else
                 {
@@ -182,7 +183,7 @@ namespace HPGL2Library
             }
             else
             {
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
             }
             return (read);
         }

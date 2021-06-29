@@ -16,7 +16,7 @@ namespace HPGL2Library
             Any = 2,
         }
 
-        public AdvanceFullPage(HPGL2 hpgl2)
+        public AdvanceFullPage(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
         }
@@ -48,13 +48,13 @@ namespace HPGL2Library
                     _advance = (AdvanceType)_hpgl2.getInt();
                     if (_hpgl2.Match(';') == true)
                     {
-                        _hpgl2.getChar();   // Consume the terminator if it exists
+                        _hpgl2.GetChar();   // Consume the terminator if it exists
                     }
                 }
             }
             else
             {
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
             }
             return (read);
         }

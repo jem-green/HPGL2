@@ -1,11 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
     public class Initialise : Instruction
     {
+        #region Fields
+
         // Initialise the plot
         // IN mode[;]
         // IN [;]
@@ -18,18 +21,24 @@ namespace HPGL2Library
             All = 1
         }
 
-        public Initialise(HPGL2 hpgl2)
+        #endregion
+        #region Constructors
+
+        public Initialise(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "Initialise ";
             _instruction = "IN";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         //public Initialise(InitialiseMode mode)
         //{
         //    _mode = mode;
         //}
+
+        #endregion
+        #region Proprties
 
         public InitialiseMode Mode
         {
@@ -51,7 +60,7 @@ namespace HPGL2Library
                 if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))
                 {
                     _mode = (Initialise.InitialiseMode)_hpgl2.getInt();
-                    _hpgl2.Logger.LogDebug(_name + "Mode="+_mode.ToString());
+                    TraceInternal.TraceVerbose(_name + "Mode="+_mode.ToString());
                 }
             }
 
@@ -67,12 +76,14 @@ namespace HPGL2Library
             _hpgl2.Page.Input.P1 = new Point(_hpgl2.Page.Width, _hpgl2.Page.Length);
             //_hpgl2.Pen. **PenWidth units**
 
-            _hpgl2.Logger.LogInformation(_instruction + (int)_mode + ";");
+            Trace.TraceInformation(_instruction + (int)_mode + ";");
             if (_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();   // Consume the terminator if it exists
+                _hpgl2.GetChar();   // Consume the terminator if it exists
             }
             return (read);
         }
+
+        #endregion
     }
 }

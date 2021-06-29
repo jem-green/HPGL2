@@ -1,5 +1,7 @@
-﻿using System;
+﻿using TracerLibrary;
+using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -18,9 +20,12 @@ namespace HPGL2Library
             Off = 2,
         }
 
-        public MergeControl(HPGL2 hpgl2)
+        public MergeControl(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
+            _name = "MergeControl ";
+            _instruction = "MC";
+            Trace.TraceInformation(_name);
         }
 
         public MergeControl(mergeType merge, int opcode)
@@ -58,7 +63,7 @@ namespace HPGL2Library
             _merge = (MergeControl.mergeType)_hpgl2.getInt();
             if (_hpgl2.Match(',') == true)
             {
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
                 _opcode = _hpgl2.getInt();
             }
             return (read);

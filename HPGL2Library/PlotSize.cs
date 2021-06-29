@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -19,12 +20,12 @@ namespace HPGL2Library
         int _width = 0;
 
 
-        public PlotSize(HPGL2 hpgl2)
+        public PlotSize(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "PlotSize ";
             _instruction = "PS";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         public int Length
@@ -58,11 +59,11 @@ namespace HPGL2Library
                 _length = _hpgl2.getInt();
                 if (_hpgl2.Match(','))
                 {
-                    _hpgl2.getChar();
+                    _hpgl2.GetChar();
                     _width = _hpgl2.getInt();
                 }
-                _hpgl2.Logger.LogDebug(_name + "length=" + _length + " width=" + _width);
-                _hpgl2.Logger.LogInformation(_instruction + _length + "," + _width + ";");
+                TraceInternal.TraceVerbose(_name + "length=" + _length + " width=" + _width);
+                Trace.TraceInformation(_instruction + _length + "," + _width + ";");
 
                 _hpgl2.Page.Size = this;
 
@@ -80,7 +81,7 @@ namespace HPGL2Library
                 Point p2 = new Point(_width, _length);
                 _hpgl2.Page.Input.P1 = p1;
                 _hpgl2.Page.Input.P2 = p2;
-                _hpgl2.Logger.LogDebug(_name + "P1=" + p1 + " P2=" + p2);
+                TraceInternal.TraceVerbose(_name + "P1=" + p1 + " P2=" + p2);
 
                 // Defautl cursor to P1
 
@@ -89,7 +90,7 @@ namespace HPGL2Library
             }
             if (_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();   // Consume the terminator if it exists
+                _hpgl2.GetChar();   // Consume the terminator if it exists
             }
             return (read);
         }

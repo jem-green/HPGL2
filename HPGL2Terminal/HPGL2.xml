@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hpgl2>
+  <configuration>
+    <units>mm</units>
+  </configuration>
+  <pens>
+    <pen id="0">
+      <id>0</id>
+      <width>0.1</width>
+    </pen>
+    <pen id="1">
+      <id>1</id>
+      <width>0.1</width>
+    </pen>
+  </pens>
+  <page>
+    <left>0</left>
+    <bottom>0</bottom>
+    <width>40</width>
+    <length>40</length>
+  </page>
+</hpgl2>

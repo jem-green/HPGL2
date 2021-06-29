@@ -14,7 +14,7 @@ namespace HPGL2Library
     [ProviderAlias("File")]
     public class FileLoggerProvider : BatchingLoggerProvider
     {
-        #region Variables
+        #region Fields
 
         private readonly string _path;
         private readonly string _fileName;

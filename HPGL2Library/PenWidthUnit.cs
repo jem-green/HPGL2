@@ -1,5 +1,7 @@
-﻿using System;
+﻿using TracerLibrary;
+using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -15,9 +17,12 @@ namespace HPGL2Library
             Relative = 1,
         }
 
-        public PenWidthUnit(HPGL2 hpgl2)
+        public PenWidthUnit(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
+            base._name = "PenWidthUnit";
+            _instruction = "PW";
+            Trace.TraceInformation(base._name);
         }
 
         public PenWidthUnit(int widthUnit)

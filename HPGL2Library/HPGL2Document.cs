@@ -1,15 +1,16 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Security;
 using System.Text;
+using TracerLibrary;
 
 namespace HPGL2Library
 {
-    public class HPGL2
+    public class HPGL2Document
     {
-        private ILogger _logger;
+        #region Fields
 
         // Data
 
@@ -20,34 +21,32 @@ namespace HPGL2Library
 
         private char _look;
         private int _count = 0;
-        private string _data = "";
+        private byte[] _data = new byte[1024 * 8];
 
         // consider the page size, pens, linetypes
 
-        Page _page;
+        Page _page;                                 // Page dimensions
         List<UserDefinedLinetype> _lineTypes;       // List of line type **check if there are standard ones**
-        Dictionary<int,Pen> _pens;               // List of pens
+        Dictionary<int,Pen> _pens;                  // List of pens
         Point _current = new Point(0, 0);           // Assume that this defauts to zero **check**
         List<Line> _lines = new List<Line>();       // Initialise here
         Pen _currentPen;                            // Pen status, assuming that there is only one pen
 
-        public HPGL2(ILogger logger)
+        // Storage
+
+        List<object> _instructions = new List<object>();
+
+        #endregion
+        #region Constructors
+
+        public HPGL2Document()
         {
-            //_logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            if (logger != null)
-            {
-                _logger = logger;
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(logger));
-            }
             _lineTypes = new List<UserDefinedLinetype>();
             _pens = new Dictionary<int, Pen>();
             _page = new Page(this);
             _currentPen = new Pen(this);
         }
-
+        #endregion
         #region Properties
 
         /// <summary>
@@ -97,14 +96,6 @@ namespace HPGL2Library
             }
         }
 
-        public ILogger Logger
-        {
-            get
-            {
-                return (_logger);
-            }
-        }
-
         public Point Current
         {
             get
@@ -126,7 +117,6 @@ namespace HPGL2Library
         }
 
         #endregion
-
         #region Methods
 
         public void Read()
@@ -140,7 +130,7 @@ namespace HPGL2Library
         public bool Read(string path, string filename)
         {
             bool read = false;
-            _logger.LogDebug("In Read()");
+            Debug.WriteLine("In Read()");
 
             string filenamePath = path.ToString() + Path.DirectorySeparatorChar + filename + ".plt";
 
@@ -148,21 +138,27 @@ namespace HPGL2Library
             {
                 try
                 {
-                    _logger.LogDebug(filename + " added");
+                    TraceInternal.TraceVerbose(filename + " added");
                     FileStream fs = new FileStream(filenamePath, FileMode.Open);
-                    using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
+                    fs.Seek(0, SeekOrigin.Begin);
+                    _data = new byte[fs.Length];
+
+                    // Read and verify the data.
+                    for (int i = 0; i < fs.Length; i++)
                     {
-                        _data = sr.ReadToEnd();
+                        _data[i] = (byte)fs.ReadByte();
                     }
                     read = true;
+                    fs.Close();
+                    fs.Dispose();
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogDebug("Coulnd not add file " + filename);
-                    _logger.LogError("Exception:" + ex.ToString());
+                    TraceInternal.TraceVerbose("Could not add file " + filename);
+                    Trace.TraceError("Exception:" + ex.ToString());
                 }
             }
-            _logger.LogDebug("Out Convert()");
+            Debug.WriteLine("Out Read()");
             return (read);
         }
 
@@ -173,7 +169,7 @@ namespace HPGL2Library
         {
             // Read in plot data
 
-            _logger.LogDebug("In Process()");
+            Debug.WriteLine("In Process()");
 
             BeginPlot beginPlot;
             Initialise initialise;
@@ -197,8 +193,7 @@ namespace HPGL2Library
             PenWidth penWidth;
             PolylineEncoded polylineEncoded;
 
-            List<object> instructions = new List<object>();
-            getChar();
+            GetChar();
             do
             {
                 string instruction = "";
@@ -206,25 +201,25 @@ namespace HPGL2Library
                 if ((_look >= 'A') && (_look <= 'Z'))
                 {
                     instruction = _look.ToString();
-                    getChar();
+                    GetChar();
                     if ((_look >= 'A') && (_look <= 'Z'))
                     {
                         instruction = instruction + _look.ToString();
-                        getChar();
+                        GetChar();
                     }
                 }
                 else if (_look == '')
                 {
                     // Escape codes
-                    getChar();
+                    GetChar();
                     if (((_look >= 'A') && (_look <= 'Z')) || (_look == '%'))
                     {
                         instruction = _look.ToString();
-                        getChar();
+                        GetChar();
                     }
                 }
 
-                _logger.LogDebug(instruction + "->");
+                TraceInternal.TraceVerbose(instruction + "->");
 
                 switch (instruction)
                 {
@@ -248,8 +243,8 @@ namespace HPGL2Library
                                 case '0':
                                 case '1':
                                     {
-                                        getChar();
-                                        getChar();
+                                        GetChar();
+                                        GetChar();
                                         break;
                                     }
                             }
@@ -267,72 +262,84 @@ namespace HPGL2Library
                         {
                             beginPlot = new BeginPlot(this);
                             beginPlot.Read();
+                            _instructions.Add(beginPlot);
                             break;
                         }
                     case "EC": // Enable cutter
                         {
                             enableCutter = new EnableCutter(this);
                             enableCutter.Read();
+                            _instructions.Add(enableCutter);
                             break;
                         }
                     case "IN": // Initialise
                         {
                             initialise = new Initialise(this);
                             initialise.Read();
+                            _instructions.Add(initialise);
                             break;
                         }
                     case "IP": // Input P1 and P2
                         {
                             input = new Input(this);
                             input.Read();
+                            _instructions.Add(input);
                             break;
                         }
                     case "IR": // Input relative P1 and P2
                         {
                             inputRelative = new InputRelative(this);
                             inputRelative.Read();
+                            _instructions.Add(inputRelative);
                             break;
                         }
                     case "LA": // Line Attributes
                         {
                             lineAttributes = new LineAttributes(this);
                             lineAttributes.Read();
+                            _instructions.Add(lineAttributes);
                             break;
                         }
                     case "MC": // Merge control
                         {
                             mergeControl = new MergeControl(this);
                             mergeControl.Read();
+                            _instructions.Add(mergeControl);
                             break;
                         }
                     case "NP": // Number of Pens
                         {
                             numberPens = new NumberPens(this);
                             numberPens.Read();
+                            _instructions.Add(numberPens);
                             break;
                         }
                     case "PA": // Plot Absolute
                         {
                             plotAbsolute = new PlotAbsolute(this);
                             plotAbsolute.Read();
+                            _instructions.Add(plotAbsolute);
                             break;
                         }
                     case "PD": // Pen Down
                         {
                             penDown = new PenDown(this);
                             penDown.Read();
+                            _instructions.Add(penDown);
                             break;
                         }
                     case "PE": // Polyline Encoded
                         {
                             polylineEncoded = new PolylineEncoded(this);
                             polylineEncoded.Read();
+                            _instructions.Add(polylineEncoded);
                             break;
                         }
                     case "PG": // Advance Full Page
                         {
                             polylineEncoded = new PolylineEncoded(this);
                             polylineEncoded.Read();
+                            _instructions.Add(polylineEncoded);
                             break;
                         }
 
@@ -340,72 +347,81 @@ namespace HPGL2Library
                         {
                             plotSize = new PlotSize(this);
                             plotSize.Read();
+                            _instructions.Add(plotSize);
                             break;
                         }
                     case "PU":  // Pen Up
                         {
                             penUp = new PenUp(this);
                             penUp.Read();
+                            _instructions.Add(penUp);
                             break;
                         }
                     case "PW":  // Pen Width
                         {
                             penWidth = new PenWidth(this);
                             penWidth.Read();
+                            _instructions.Add(penWidth);
                             break;
                         }
                     case "QL": // Quality Level
                         {
                             qualityLevel = new QualityLevel();
                             qualityLevel.Level = getInt();
+                            _instructions.Add(qualityLevel);
                             break;
                         }
                     case "RO":  // Rotate
                         {
                             rotate = new Rotate(this);
                             rotate.Read();
+                            _instructions.Add(rotate);
                             break;
                         }
                     case "SC":  // Scale
                         {
                             scale = new Scale(this);
                             scale.Read();
+                            _instructions.Add(scale);
                             break;
                         }
                     case "SP":  // Selection Pen
                         {
                             selectPen = new SelectPen(this);
                             selectPen.Read();
+                            _instructions.Add(selectPen);
                             break;
                         }
                     case "TR":  // Transparency Mode
                         {
                             transparency = new Transparency(this);
                             transparency.Read();
+                            _instructions.Add(transparency);
                             break;
                         }
                     case "UL":  // User-Defined Linetype
                         {
                             userDefinedLinetype = new UserDefinedLinetype(this);
                             userDefinedLinetype.Read();
+                            _instructions.Add(userDefinedLinetype);
                             break;
                         }
                     case "WU": // Pen Width Unit
                         {
                             widthUnit = new PenWidthUnit(this);
                             widthUnit.Read();
+                            _instructions.Add(widthUnit);
                             break;
                         }
                     default:
                         {
                             throw new Exception("Unknown instruction " + instruction);
-                            break;
                         }
                 }
                 
             } while (_count < _data.Length);
 
-            _logger.LogDebug("Out Process()");
+            Debug.WriteLine("Out Process()");
         }
 
         #endregion
@@ -420,7 +436,7 @@ namespace HPGL2Library
                 if (((_look >= '0') && (_look <= '9')) || (_look == '-'))
                 {
                     value = value + _look.ToString();
-                    getChar();
+                    GetChar();
                 }
             } while (((_look >= '0') && (_look <= '9')) || (_look == '-'));
             if (value.Length > 0)
@@ -439,7 +455,7 @@ namespace HPGL2Library
                 if (((_look >= '0') && (_look <= '9')) || (_look == '.') || (_look == '-'))
                 {
                     value = value + _look.ToString();
-                    getChar();
+                    GetChar();
                 }
             } while (((_look >= '0') && (_look <= '9')) || (_look == '.') || (_look == '-'));
             if (value.Length > 0)
@@ -449,10 +465,11 @@ namespace HPGL2Library
             return (data);
         }
 
-        internal void getChar()
+        internal void GetChar()
         {
             if (_count <= _data.Length)
             {
+
                 _look = Convert.ToChar(_data[_count]);
                 _count++;
             }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -7,9 +7,9 @@ using System.Text;
 
 namespace HPGL2Library
 {
-    public class Page
+    public class Page : Instruction
     {
-        #region Variables
+        #region Fields
 
         /*
          * Need to consider some concepts
@@ -46,11 +46,14 @@ namespace HPGL2Library
         #endregion
         #region Constructor
 
-        public Page(HPGL2 hpgl2)
+        public Page(HPGL2Document hpgl2)
         {
-            _input = new Input(hpgl2);
-            _rotate = new Rotate(hpgl2);
-            _scale = new Scale(hpgl2);
+            _hpgl2 = hpgl2;
+            _input = new Input(_hpgl2);
+            _rotate = new Rotate(_hpgl2);
+            _scale = new Scale(_hpgl2);
+            _name = "Page ";
+            _instruction = "";
         }
 
         public Page(int left, int bottom, int width, int length)
@@ -245,6 +248,12 @@ namespace HPGL2Library
             }
 
             return (plotterUnits);
+        }
+
+        public override int Read()
+        {
+            int read = 0;
+            return (read);
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace HPGL2Library
             On = 1
         }
 
-        public Transparency(HPGL2 hpgl2)
+        public Transparency(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
         }

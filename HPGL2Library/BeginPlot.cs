@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -9,14 +10,13 @@ namespace HPGL2Library
         // BP kind,value[,kind,value][;]
         // BP [;]
 
-        #region Variable
+        #region Fields
 
         // BP Kind, Value
-        kindType _kind = 0;
+        KindType _kind = 0;
         object _value = 0;
-        string _name = "";
 
-        public enum kindType : int
+        public enum KindType : int
         {
             None = -1,
             PictureName = 1,
@@ -28,22 +28,23 @@ namespace HPGL2Library
 
         #endregion
         #region Constructors
-        public BeginPlot(HPGL2 hpgl2)
+        public BeginPlot(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             base._name = "BeginPlot";
-            _hpgl2.Logger.LogInformation(base._name);
+            _instruction = "BP";
+            Trace.TraceInformation(base._name);
         }
 
         public BeginPlot(int kind, object value)
         {
-            _kind = (kindType)kind;
+            _kind = (KindType)kind;
             _value = value;
         }
         #endregion
         #region Properties
 
-        public kindType Kind
+        public KindType Kind
         {
             get
             {
@@ -75,13 +76,13 @@ namespace HPGL2Library
             int read = 0;
             if (_hpgl2.Char != ';')
             {
-                _kind = (BeginPlot.kindType)_hpgl2.getInt();
+                _kind = (BeginPlot.KindType)_hpgl2.getInt();
                 if (_hpgl2.Match(','))
                 {
-                    _hpgl2.getChar();
+                    _hpgl2.GetChar();
                     switch (_kind)
                     {
-                        case BeginPlot.kindType.Autorotation:
+                        case BeginPlot.KindType.Autorotation:
                             {
                                 int autoRotate = _hpgl2.getInt();  // Ignore
                                 read = 1;
@@ -96,7 +97,7 @@ namespace HPGL2Library
             }
             if (_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();   // Consume the terminator if it exists
+                _hpgl2.GetChar();   // Consume the terminator if it exists
             }
             return (read);
         }

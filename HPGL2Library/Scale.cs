@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using TracerLibrary;
 using System;
 using System.Security;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -23,12 +24,12 @@ namespace HPGL2Library
             Factor = 2
         }
 
-        public Scale(HPGL2 hpgl2)
+        public Scale(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "Scale";
             _instruction = "SC";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         public Scale(double xmin, double ymin)
@@ -116,22 +117,22 @@ namespace HPGL2Library
             int read = 0;
             if (!_hpgl2.Match(';'))
             {
-                _hpgl2.getChar();
+                _hpgl2.GetChar();
                 _xmin = _hpgl2.getDouble();
                 if (_hpgl2.Match(','))
                 {
-                    _hpgl2.getChar();
+                    _hpgl2.GetChar();
                     _xmax = _hpgl2.getDouble();
                     if (_hpgl2.Match(','))
                     {
-                        _hpgl2.getChar();
+                        _hpgl2.GetChar();
                         _ymin = _hpgl2.getDouble();
                         if (_hpgl2.Match(','))
                         {
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             _ymax = _hpgl2.getDouble();
-                            _hpgl2.Logger.LogDebug(_name + " xmin=" + _xmin + " xmax=" + _xmax + " ymin=" + _ymin + " ymax=" + _ymax);
-                            _hpgl2.Logger.LogInformation(_instruction + _xmin + "," + _xmax + "," + _ymin + "," + _ymax + ";");
+                            TraceInternal.TraceVerbose(_name + " xmin=" + _xmin + " xmax=" + _xmax + " ymin=" + _ymin + " ymax=" + _ymax);
+                            Trace.TraceInformation(_instruction + _xmin + "," + _xmax + "," + _ymin + "," + _ymax + ";");
                         }
                         else
                         {
@@ -154,7 +155,7 @@ namespace HPGL2Library
             }
             if (_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();   // Consume the terminator if it exists
+                _hpgl2.GetChar();   // Consume the terminator if it exists
             }
             return (read);
         }

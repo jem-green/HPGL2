@@ -7,7 +7,7 @@ namespace HPGL2Library
 {
     public class Pen
     {
-        #region Variables
+        #region Fields
 
         int _id = 0;
         PenStatus _status = PenStatus.Up;
@@ -23,7 +23,7 @@ namespace HPGL2Library
         #endregion
         #region Constructor
 
-        public Pen(HPGL2 hpgl2)
+        public Pen(HPGL2Document hpgl2)
         {
             _penWidth = new PenWidth(hpgl2);
         }

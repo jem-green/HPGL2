@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Security;
-using Microsoft.Extensions.Logging;
+using TracerLibrary;
 
 namespace HPGL2Library
 {
@@ -41,12 +42,12 @@ namespace HPGL2Library
             None = 6
         }
 
-        public LineAttributes(HPGL2 hpgl2)
+        public LineAttributes(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "LineAttributes ";
             _instruction = "LA";
-            _hpgl2.Logger.LogInformation(_name);
+            Trace.TraceInformation(_name);
         }
 
         public AttributeType Attribute
@@ -106,7 +107,7 @@ namespace HPGL2Library
                 _hpgl2.getInt();
                 if (_hpgl2.Match(','))
                 {
-                    _hpgl2.getChar();
+                    _hpgl2.GetChar();
                     if (_lineAttribute == LineAttributes.AttributeType.LineEnd)
                     {
                         _lineEnds = (LineAttributes.LineEnds)_hpgl2.getInt();
@@ -118,12 +119,12 @@ namespace HPGL2Library
 
                     if (_hpgl2.Match(','))
                     {
-                        _hpgl2.getChar();
+                        _hpgl2.GetChar();
                         _lineAttribute = (LineAttributes.AttributeType)_hpgl2.getInt();
 
                         if (_hpgl2.Match(','))
                         {
-                            _hpgl2.getChar();
+                            _hpgl2.GetChar();
                             if (_lineAttribute == LineAttributes.AttributeType.LineEnd)
                             {
                                 _lineEnds = (LineAttributes.LineEnds)_hpgl2.getInt();
@@ -142,7 +143,7 @@ namespace HPGL2Library
             }
             if (_hpgl2.Match(';') == true)
             {
-                _hpgl2.getChar();   // Consume the terminator if it exists
+                _hpgl2.GetChar();   // Consume the terminator if it exists
             }
             return (read);
         }
