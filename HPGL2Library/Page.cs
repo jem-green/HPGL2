@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace HPGL2Library
 {
@@ -29,19 +31,19 @@ namespace HPGL2Library
 
         // The page will have a plot size
 
-        PlotSize _plotSize;
+        HPGL2PlotSize _plotSize;
 
         // The page will contain rotation information
 
-        Rotate _rotate;
+        HPGLRotate _rotate;
 
         // The page will contain scaling points
 
-        Input _input;
+        HPGL2Input _input;
 
         // The page will contain a scaling object 
 
-        Scale _scale;
+        HPL2Scale _scale;
 
         #endregion
         #region Constructor
@@ -49,34 +51,12 @@ namespace HPGL2Library
         public Page(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
-            _input = new Input(_hpgl2);
-            _rotate = new Rotate(_hpgl2);
-            _scale = new Scale(_hpgl2);
-            _name = "Page ";
+            _input = new HPGL2Input(_hpgl2);
+            _rotate = new HPGLRotate(_hpgl2);
+            _scale = new HPL2Scale(_hpgl2);
+            _name = "Page";
             _instruction = "";
-        }
-
-        public Page(int left, int bottom, int width, int length)
-        {
-            _left = left;
-            _bottom = bottom;
-            _width = width;
-            _length = length;
-
-            // Convert the physical page into plotter units
-
-            _input.P1 = new Point(0, 0);
-            _input.P2 = new Point((int)(width / _plotterUnits), (int)(length / _plotterUnits));
-        }
-
-        public Page(Point x1y1, Point x2y2)
-        {
-            _left = x1y1.X;
-            _bottom = x1y1.Y;
-            _width = (x2y2.X - x1y1.X);
-            _length = (x2y2.Y - x1y1.Y);
-            _input.P1 = new Point(0, 0);
-            _input.P2 = new Point((int)(_width / _plotterUnits), (int)(_length / _plotterUnits));
+            //Debug.WriteLine(_name);
         }
 
         #endregion
@@ -161,7 +141,7 @@ namespace HPGL2Library
             }
         }
 
-        public Input Input
+        public HPGL2Input Input
         {
             get
             {
@@ -176,7 +156,7 @@ namespace HPGL2Library
         /// <summary>
         /// Size of the page in plotter units
         /// </summary>
-        public PlotSize Size
+        public HPGL2PlotSize Size
         {
             get
             {
@@ -188,7 +168,7 @@ namespace HPGL2Library
             }
         }
 
-        public Rotate Rotation
+        public HPGLRotate Rotation
         {
             get
             {
@@ -199,7 +179,7 @@ namespace HPGL2Library
                 _rotate = value;
             }
         }
-        public Scale Scale
+        public HPL2Scale Scale
         {
             get
             {
@@ -214,6 +194,47 @@ namespace HPGL2Library
         #endregion
         #region Methods
 
+        /// <summary>
+        /// Set physical page size
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="bottom"></param>
+        /// <param name="width"></param>
+        /// <param name="length"></param>
+        public void SetPhysicalSize(int left, int bottom, int width, int length)
+        {
+            _left = left;
+            _bottom = bottom;
+            _width = width;
+            _length = length;
+
+            // Convert the physical page into plotter units
+
+            _input.P1 = new Point(0, 0);
+            _input.P2 = new Point((int)(width / _plotterUnits), (int)(length / _plotterUnits));
+        }
+
+        /// <summary>
+        /// Set physical page size
+        /// </summary>
+        /// <param name="x1y1"></param>
+        /// <param name="x2y2"></param>
+        public void SetPhysicalSize(Point x1y1, Point x2y2)
+        {
+            _left = x1y1.X;
+            _bottom = x1y1.Y;
+            _width = (x2y2.X - x1y1.X);
+            _length = (x2y2.Y - x1y1.Y);
+            _input.P1 = new Point(0, 0);
+            _input.P2 = new Point((int)(_width / _plotterUnits), (int)(_length / _plotterUnits));
+        }
+
+        /// <summary>
+        /// Convert users units to physical polooter units
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public Coord ToPhysicalUnits(double x, double y)
         {
             Point plotterUnits = ToPlotterUnits(x, y);
@@ -226,7 +247,7 @@ namespace HPGL2Library
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-            public Point ToPlotterUnits(double x, double y)
+        public Point ToPlotterUnits(double x, double y)
         {
             // Need to reference the scale, rotation and the input to determine
             // the plotter units

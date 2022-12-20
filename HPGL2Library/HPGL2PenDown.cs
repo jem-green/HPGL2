@@ -7,21 +7,21 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    internal class PenUp : Instruction
+    internal class HPGL2PenDown : Instruction
     {
-        // PU x1, y1[ ,x1, y1][;]
-        // PU[;]
+        // Pen Down
+        // PD x1, y1[ ,x1, y1][;]
+        // PD[;]
 
         List<Point> _coOrds;
 
-        public PenUp(HPGL2Document hpgl2)
+        public HPGL2PenDown(HPGL2Document hpgl2)
         {
-
             _coOrds = new List<Point>();
             _hpgl2 = hpgl2;
-            _name = "PenUp ";
-            _instruction = "PU";
-            Trace.TraceInformation(_name);
+            base._name = "PenDown";
+            _instruction = "PD";
+            TraceInternal.TraceInformation(base._name);
         }
 
         public void Add(Point coOrd)
@@ -37,8 +37,8 @@ namespace HPGL2Library
         public override int Read()
         {
             int read = 0;
-            _hpgl2.Pen.Status = Pen.PenStatus.Up;
-            TraceInternal.TraceVerbose(_name + "Pen=" + _hpgl2.Pen.Status.ToString());
+            _hpgl2.Pen.Status = Pen.PenStatus.Down;
+            TraceInternal.TraceVerbose("PD " + _hpgl2.Pen.ToString());
             Point coOrd = new Point();
             if (!_hpgl2.Match(';') == true)
             {
@@ -53,8 +53,7 @@ namespace HPGL2Library
                             _hpgl2.GetChar();
                             coOrd.Y = _hpgl2.getInt();
                             // update the current position for the next line segment
-                            TraceInternal.TraceVerbose(_name + "X=" + coOrd.X + " Y=" + coOrd.Y);
-                            Trace.TraceInformation(_instruction + coOrd.ToString() + ";");
+                            TraceInternal.TraceVerbose("PU " + coOrd.ToString());
                             _hpgl2.Current = coOrd;
                         }
                         else

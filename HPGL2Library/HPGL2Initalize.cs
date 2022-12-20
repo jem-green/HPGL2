@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    public class Initialise : Instruction
+    public class HPGL2Initialise : Instruction
     {
         #region Fields
 
@@ -24,12 +24,12 @@ namespace HPGL2Library
         #endregion
         #region Constructors
 
-        public Initialise(HPGL2Document hpgl2)
+        public HPGL2Initialise(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "Initialise ";
             _instruction = "IN";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         //public Initialise(InitialiseMode mode)
@@ -59,7 +59,7 @@ namespace HPGL2Library
             {
                 if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))
                 {
-                    _mode = (Initialise.InitialiseMode)_hpgl2.getInt();
+                    _mode = (HPGL2Initialise.InitialiseMode)_hpgl2.getInt();
                     TraceInternal.TraceVerbose(_name + "Mode="+_mode.ToString());
                 }
             }
@@ -76,7 +76,7 @@ namespace HPGL2Library
             _hpgl2.Page.Input.P1 = new Point(_hpgl2.Page.Width, _hpgl2.Page.Length);
             //_hpgl2.Pen. **PenWidth units**
 
-            Trace.TraceInformation(_instruction + (int)_mode + ";");
+            TraceInternal.TraceInformation(_instruction + (int)_mode + ";");
             if (_hpgl2.Match(';') == true)
             {
                 _hpgl2.GetChar();   // Consume the terminator if it exists

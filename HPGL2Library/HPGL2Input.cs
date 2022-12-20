@@ -5,7 +5,7 @@ using TracerLibrary;
 
 namespace HPGL2Library
 {
-    public class Input : Instruction
+    public class HPGL2Input : Instruction
     {
         // IP x1, y1[ ,x2, y2][;]
         // IP[;]
@@ -15,14 +15,14 @@ namespace HPGL2Library
         private Point _p1;
         private Point _p2;
 
-        public Input(HPGL2Document hpgl2)
+        public HPGL2Input(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _p1 = new Point();
             _p1 = new Point();
             base._name = "Input ";
             _instruction = "IP";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         public Point P1
@@ -122,7 +122,7 @@ namespace HPGL2Library
                                 _p2.Y = _hpgl2.getInt();
                                 read = 1;
                                 TraceInternal.TraceVerbose(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
-                                Trace.TraceInformation(_instruction + _p1 + "," + _p2);
+                                TraceInternal.TraceInformation(_instruction + _p1 + "," + _p2);
                                 _hpgl2.Page.Input.P2 = _p2;
                             }
                             else
@@ -135,7 +135,7 @@ namespace HPGL2Library
                     }
                     else
                     {
-                        Trace.TraceInformation(_instruction + _p1);
+                        TraceInternal.TraceInformation(_instruction + _p1);
                     }
                 }
                 else

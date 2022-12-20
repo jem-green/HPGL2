@@ -6,7 +6,7 @@ namespace HPGL2Library
     /// Points are in the user defined coordinate system
     /// and adjusted with scaling and input parameters, and
     /// need converting to plotter units and then eventually
-    /// into metic units
+    /// into metic units.
     /// </summary>
 
     public struct Point

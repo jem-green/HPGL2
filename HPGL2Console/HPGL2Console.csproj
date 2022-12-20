@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -14,6 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DXFLibrary">
+      <HintPath>..\..\DXF\DXFLibrary\bin\Debug\netcoreapp3.1\DXFLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="GcodeLibrary">
+      <HintPath>..\..\Gcode\GcodeLibrary\bin\Debug\netcoreapp3.1\GcodeLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ShapeLibrary">
+      <HintPath>..\..\Shape\ShapeLibrary\bin\Debug\netcoreapp3.1\ShapeLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="TracerLibrary">
       <HintPath>..\ThirdParty\Tracer\netcoreapp3.1\TracerLibrary.dll</HintPath>
     </Reference>
@@ -22,6 +31,18 @@
   <ItemGroup>
     <None Update="HPGL2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="test-Model.PLT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="test1-Model.plt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="test2-Model.PLT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="test3-Model.PLT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

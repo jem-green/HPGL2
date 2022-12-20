@@ -11,7 +11,7 @@ namespace HPGL2Library
 
         int _id = 0;
         PenStatus _status = PenStatus.Up;
-        PenWidth _penWidth;
+        HPGL2PenWidth _penWidth;
 
         public enum PenStatus : int
         {
@@ -25,7 +25,7 @@ namespace HPGL2Library
 
         public Pen(HPGL2Document hpgl2)
         {
-            _penWidth = new PenWidth(hpgl2);
+            _penWidth = new HPGL2PenWidth(hpgl2);
         }
 
         #endregion
@@ -55,7 +55,7 @@ namespace HPGL2Library
             }
         }
 
-        public PenWidth PenWidth
+        public HPGL2PenWidth PenWidth
         {
             get
             {

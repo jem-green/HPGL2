@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Security;
+using TracerLibrary;
 
 namespace HPGL2Library
 {
-    public class AdvanceFullPage : Instruction
+    public class HPGL2AdvanceFullPage : Instruction
     {
-        // PG pen[;]
+        // Advance Full Page
+        // PG advance[;]
         // PG [;]
+
+        #region Fields
 
         AdvanceType _advance = AdvanceType.Plotted;
         public enum AdvanceType : int
@@ -16,15 +20,19 @@ namespace HPGL2Library
             Any = 2,
         }
 
-        public AdvanceFullPage(HPGL2Document hpgl2)
+        #endregion
+        #region Constructor
+
+        public HPGL2AdvanceFullPage(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
+            _name = "AdvanceFullPage";
+            _instruction = "PG";
+            TraceInternal.TraceInformation(_name);
         }
 
-        public AdvanceFullPage(AdvanceType advance)
-        {
-            _advance = advance;
-        }
+        #endregion
+        #region Properties
 
         public AdvanceType Advance
         {
@@ -38,6 +46,9 @@ namespace HPGL2Library
             }
         }
 
+        #endregion
+        #region Methods
+
         public override int Read()
         {
             int read = 0;
@@ -46,17 +57,22 @@ namespace HPGL2Library
                 if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))
                 {
                     _advance = (AdvanceType)_hpgl2.getInt();
-                    if (_hpgl2.Match(';') == true)
-                    {
-                        _hpgl2.GetChar();   // Consume the terminator if it exists
-                    }
+                    TraceInternal.TraceVerbose(_name + " " + _advance);
+                    TraceInternal.TraceInformation(_instruction + (int)_advance + ";");
                 }
             }
             else
             {
-                _hpgl2.GetChar();
+                TraceInternal.TraceInformation(_instruction + ";");
             }
+
+            if (_hpgl2.Match(';') == true)
+            {
+                _hpgl2.GetChar();   // Consume the terminator if it exists
+            }
+
             return (read);
         }
     }
+    #endregion
 }

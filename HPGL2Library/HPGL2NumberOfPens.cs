@@ -5,20 +5,20 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    internal class NumberPens : Instruction
+    internal class HPGL2NumberOfPens : Instruction
     {
         // NP mode
         int _pens = 2; // number of pens n = x^2 so 2 4 8 16 32 64
 
-        public NumberPens(HPGL2Document hpgl2)
+        public HPGL2NumberOfPens(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "NumberPens ";
             _instruction = "NP";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
-        public NumberPens(int number)
+        public HPGL2NumberOfPens(int number)
         {
             _pens = number;
         }

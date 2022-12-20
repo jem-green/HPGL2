@@ -5,7 +5,7 @@ using TracerLibrary;
 
 namespace HPGL2Library
 {
-    internal class LineAttributes : Instruction
+    internal class HPGL2LineAttributes : Instruction
     {
         // LA kind,value[,kind,value[,kind,value]][;]
         // LA [;]
@@ -42,12 +42,12 @@ namespace HPGL2Library
             None = 6
         }
 
-        public LineAttributes(HPGL2Document hpgl2)
+        public HPGL2LineAttributes(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "LineAttributes ";
             _instruction = "LA";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         public AttributeType Attribute
@@ -103,35 +103,35 @@ namespace HPGL2Library
             int read = 0;
             if (!_hpgl2.Match(';') == true)
             {
-                _lineAttribute = (LineAttributes.AttributeType)_hpgl2.getInt();
+                _lineAttribute = (HPGL2LineAttributes.AttributeType)_hpgl2.getInt();
                 _hpgl2.getInt();
                 if (_hpgl2.Match(','))
                 {
                     _hpgl2.GetChar();
-                    if (_lineAttribute == LineAttributes.AttributeType.LineEnd)
+                    if (_lineAttribute == HPGL2LineAttributes.AttributeType.LineEnd)
                     {
-                        _lineEnds = (LineAttributes.LineEnds)_hpgl2.getInt();
+                        _lineEnds = (HPGL2LineAttributes.LineEnds)_hpgl2.getInt();
                     }
-                    else if (_lineAttribute == LineAttributes.AttributeType.LineJoins)
+                    else if (_lineAttribute == HPGL2LineAttributes.AttributeType.LineJoins)
                     {
-                        _lineJoins = (LineAttributes.LineJoins)_hpgl2.getInt();
+                        _lineJoins = (HPGL2LineAttributes.LineJoins)_hpgl2.getInt();
                     }
 
                     if (_hpgl2.Match(','))
                     {
                         _hpgl2.GetChar();
-                        _lineAttribute = (LineAttributes.AttributeType)_hpgl2.getInt();
+                        _lineAttribute = (HPGL2LineAttributes.AttributeType)_hpgl2.getInt();
 
                         if (_hpgl2.Match(','))
                         {
                             _hpgl2.GetChar();
-                            if (_lineAttribute == LineAttributes.AttributeType.LineEnd)
+                            if (_lineAttribute == HPGL2LineAttributes.AttributeType.LineEnd)
                             {
-                                _lineEnds = (LineAttributes.LineEnds)_hpgl2.getInt();
+                                _lineEnds = (HPGL2LineAttributes.LineEnds)_hpgl2.getInt();
                             }
-                            else if (_lineAttribute == LineAttributes.AttributeType.LineJoins)
+                            else if (_lineAttribute == HPGL2LineAttributes.AttributeType.LineJoins)
                             {
-                                _lineJoins = (LineAttributes.LineJoins)_hpgl2.getInt();
+                                _lineJoins = (HPGL2LineAttributes.LineJoins)_hpgl2.getInt();
                             }
                         }
                     }

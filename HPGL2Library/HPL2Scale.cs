@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    public class Scale : Instruction
+    public class HPL2Scale : Instruction
     {
         // SC xmin, xmax, ymin, ymax, [type,[left,bottom]][;]
         // SC xmin, xfactor, ymin, yfactor, type [;]
@@ -24,15 +24,15 @@ namespace HPGL2Library
             Factor = 2
         }
 
-        public Scale(HPGL2Document hpgl2)
+        public HPL2Scale(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "Scale";
             _instruction = "SC";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
-        public Scale(double xmin, double ymin)
+        public HPL2Scale(double xmin, double ymin)
         {
             _xmin = xmin;
             _ymin = ymin;
@@ -40,7 +40,7 @@ namespace HPGL2Library
             _ymax = 0;
         }
 
-        public Scale(double xmin, double ymin, double xmax, double ymax)
+        public HPL2Scale(double xmin, double ymin, double xmax, double ymax)
         {
             _xmin = xmin;
             _ymin = ymin;
@@ -132,7 +132,7 @@ namespace HPGL2Library
                             _hpgl2.GetChar();
                             _ymax = _hpgl2.getDouble();
                             TraceInternal.TraceVerbose(_name + " xmin=" + _xmin + " xmax=" + _xmax + " ymin=" + _ymin + " ymax=" + _ymax);
-                            Trace.TraceInformation(_instruction + _xmin + "," + _xmax + "," + _ymin + "," + _ymax + ";");
+                            TraceInternal.TraceInformation(_instruction + _xmin + "," + _xmax + "," + _ymin + "," + _ymax + ";");
                         }
                         else
                         {

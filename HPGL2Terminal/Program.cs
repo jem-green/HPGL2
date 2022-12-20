@@ -5,6 +5,7 @@ using System.Configuration;
 using HPGL2Library;
 using System.Diagnostics;
 using TracerLibrary;
+using GcodeLibrary;
 
 namespace HPGL2Terminal
 {
@@ -25,15 +26,15 @@ namespace HPGL2Terminal
 
             // Read in specific configuration
 
-            Parameter HPGL2Path = new Parameter("");
-            Parameter HPGL2Name = new Parameter("hpgl2.xml");
+            Parameter appPath = new Parameter("");
+            Parameter appName = new Parameter("hpgl2.xml");
 
-            HPGL2Path.Value = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            int pos = HPGL2Path.Value.ToString().LastIndexOf(Path.DirectorySeparatorChar);
+            appPath.Value = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            int pos = appPath.Value.ToString().LastIndexOf(Path.DirectorySeparatorChar);
             if (pos > 0)
             {
-                HPGL2Path.Value = HPGL2Path.Value.ToString().Substring(0, pos);
-                HPGL2Path.Source = Parameter.SourceType.App;
+                appPath.Value = appPath.Value.ToString().Substring(0, pos);
+                appPath.Source = Parameter.SourceType.App;
             }
 			
 			Parameter logPath = new Parameter("");
@@ -46,6 +47,10 @@ namespace HPGL2Terminal
                 logPath.Value = logPath.Value.ToString().Substring(0, pos);
                 logPath.Source = Parameter.SourceType.App;
             }
+
+            Parameter traceLevels = new Parameter("");
+            traceLevels.Value = "verbose";
+            traceLevels.Source = Parameter.SourceType.App;
 
             // Configure tracer options
 
@@ -64,6 +69,8 @@ namespace HPGL2Terminal
 
             // Check if the config file has been paased in and overwrite the defaults
 
+            filenamePath = "";
+            string extension = "";
             int items = args.Length;
             for (int item = 0; item < items; item++)
             {
@@ -74,143 +81,196 @@ namespace HPGL2Terminal
                 }
                 switch (lookup)
                 {
+                    case "/D":
+                    case "--debug":
+						{
+                        	traceLevels.Value = args[item + 1];
+                        	traceLevels.Value = traceLevels.Value.ToString().TrimStart('"');
+                        	traceLevels.Value = traceLevels.Value.ToString().TrimEnd('"');
+                        	traceLevels.Source = Parameter.SourceType.Command;
+                        	TraceInternal.TraceVerbose("Use command value Name=" + traceLevels);
+                        	break;
+						}
                     case "/N":
                     case "--name":
                         {
-                            HPGL2Name.Value = args[item + 1];
-                            HPGL2Name.Value = HPGL2Name.Value.TrimStart('"');
-                            HPGL2Name.Value = HPGL2Name.Value.TrimEnd('"');
-                            HPGL2Name.Source = Parameter.SourceType.Command;
-                            TraceInternal.TraceVerbose("Use command value Name=" + HPGL2Name);
+                            appName.Value = args[item + 1];
+                        	appName.Value = appName.Value.ToString().TrimStart('"');
+                        	appName.Value = appName.Value.ToString().TrimEnd('"');
+                            appName.Source = Parameter.SourceType.Command;
+                            TraceInternal.TraceVerbose("Use command value Name=" + appName);
                             break;
                         }
                     case "/P":
                     case "--path":
                         {
-                            HPGL2Path.Value = args[item + 1];
-                            HPGL2Path.Value = HPGL2Path.Value.TrimStart('"');
-                            HPGL2Path.Value = HPGL2Path.Value.TrimEnd('"');
-                            HPGL2Path.Source = Parameter.SourceType.Command;
-                            TraceInternal.TraceVerbose("Use command value Path=" + HPGL2Path);
+                            appPath.Value = args[item + 1];
+                        	appPath.Value = appPath.Value.ToString().TrimStart('"');
+                        	appPath.Value = appPath.Value.ToString().TrimEnd('"');
+                            appPath.Source = Parameter.SourceType.Command;
+                            TraceInternal.TraceVerbose("Use command value Path=" + appPath);
                             break;
-                        }
+						}
+                    case "/n":
+                    case "--logname":
+						{
+                        	logName.Value = args[item + 1];
+                        	logName.Value = logName.Value.ToString().TrimStart('"');
+                        	logName.Value = logName.Value.ToString().TrimEnd('"');
+                        	logName.Source = Parameter.SourceType.Command;
+                        	TraceInternal.TraceVerbose("Use command value logName=" + logName);
+                        	break;
+						}
+                    case "/p":
+                    case "--logpath":
+						{
+                        	logPath.Value = args[item + 1];
+                        	logPath.Value = logPath.Value.ToString().TrimStart('"');
+                        	logPath.Value = logPath.Value.ToString().TrimEnd('"');
+                        	logPath.Source = Parameter.SourceType.Command;
+                        	TraceInternal.TraceVerbose("Use command value logPath=" + logPath);
+                        	break;
+						}
                 }
             }
+			
+		    // Adjust the log location if it has been overridden in the registry
 
-            Trace.TraceInformation("Use HPGL2Name=" + HPGL2Name.Value);
-            Trace.TraceInformation("Use HPGL2Path=" + HPGL2Path.Value);
+            Trace.Listeners.Remove(listener);
+            listener.Close();
+            listener.Dispose();
+            filenamePath = logPath.Value.ToString() + Path.DirectorySeparatorChar + logName.Value.ToString() + ".log";
+            dailyRolling = new FileStreamWithRolling(filenamePath, new TimeSpan(0, 1, 0, 0), FileMode.Append);
+            listener = new TextWriterTraceListenerWithTime(dailyRolling);
+            Trace.AutoFlush = true;
+            SourceLevels sourceLevels = TraceInternal.TraceLookup(traceLevels.Value.ToString());
+            fileTraceFilter = new System.Diagnostics.EventTypeFilter(sourceLevels);
+            listener.Filter = fileTraceFilter;
+            Trace.Listeners.Add(listener);
+
+            TraceInternal.TraceInformation("Use Name=" + appName.Value);
+            TraceInternal.TraceInformation("Use Path=" + appPath.Value);
+            TraceInternal.TraceInformation("Use Log Name=" + logName.Value);
+            TraceInternal.TraceInformation("Use Log Path=" + logPath.Value); 
 
             // Read in configuration
 
-            Serialise serialise = new Serialise(HPGL2Name.Value, HPGL2Path.Value);
+            Serialise serialise = new Serialise(appName.Value, appPath.Value);
             _hpgl2 = serialise.FromXML();
             if (_hpgl2 != null)
             {
 
-            }
+                // Read in the plot specific parameters
 
-            // Read in the plot specific parameters
+                Parameter filename = new Parameter("");
+                Parameter filePath = new Parameter("");
+                Parameter outName = new Parameter("");
 
-            Parameter filename = new Parameter("");
-            Parameter filePath = new Parameter("");
-            Parameter outName = new Parameter("");
+                filePath.Value = Environment.CurrentDirectory;
+                filePath.Source = Parameter.SourceType.App;
 
-            filePath.Value = Environment.CurrentDirectory;
-            filePath.Source = Parameter.SourceType.App;
-
-            string extension;
-            items = args.Length;
-            if (items == 1)
-            {
-                int index = 0;
-                filenamePath = args[index].Trim('"');
-                pos = filenamePath.LastIndexOf('.');
-                if (pos > 0)
+                items = args.Length;
+                if (items == 1)
                 {
-                    extension = filenamePath.Substring(pos + 1, filenamePath.Length - pos - 1);
-                    filenamePath = filenamePath.Substring(0, pos);
-                }
+                    int index = 0;
+                    filenamePath = args[index].Trim('"');
+                    pos = filenamePath.LastIndexOf('.');
+                    if (pos > 0)
+                    {
+                        extension = filenamePath.Substring(pos + 1, filenamePath.Length - pos - 1);
+                        filenamePath = filenamePath.Substring(0, pos);
+                    }
 
-                pos = filenamePath.LastIndexOf('\\');
-                if (pos > 0)
-                {
-                    filePath.Value = filenamePath.Substring(0, pos);
-                    filePath.Source = Parameter.SourceType.Command;
-                    filename.Value = filenamePath.Substring(pos + 1, filenamePath.Length - pos - 1);
-                    filename.Source = Parameter.SourceType.Command;
+                    pos = filenamePath.LastIndexOf('\\');
+                    if (pos > 0)
+                    {
+                        filePath.Value = filenamePath.Substring(0, pos);
+                        filePath.Source = Parameter.SourceType.Command;
+                        filename.Value = filenamePath.Substring(pos + 1, filenamePath.Length - pos - 1);
+                        filename.Source = Parameter.SourceType.Command;
+                    }
+                    else
+                    {
+                        filename.Value = filenamePath;
+                        filename.Source = Parameter.SourceType.Command;
+                    }
+                    TraceInternal.TraceInformation("Use Filename=" + filename.Value);
+                    TraceInternal.TraceInformation("Use Filepath=" + filePath.Value);
                 }
                 else
                 {
-                    filename.Value = filenamePath;
-                    filename.Source = Parameter.SourceType.Command;
-                }
-                Trace.TraceInformation("Use Filename=" + filename.Value);
-                Trace.TraceInformation("Use Filepath=" + filePath.Value);
-            }
-            else
-            {
-                for (int item = 0; item < items; item++)
-                {
+                    for (int item = 0; item < items; item++)
                     {
-                        switch (args[item])
                         {
-                            case "/f":
-                            case "--filename":
-                                {
-                                    filename.Value = args[item + 1];
-                                    filename.Value = filename.Value.TrimStart('"');
-                                    filename.Value = filename.Value.TrimEnd('"');
-                                    filename.Source = Parameter.SourceType.Command;
-                                    pos = filename.Value.LastIndexOf('.');
-                                    if (pos > 0)
+                            switch (args[item])
+                            {
+                                case "/f":
+                                case "--filename":
                                     {
-                                        extension = filename.Value.Substring(pos + 1, filename.Value.Length - pos - 1);
-                                        filename.Value = filename.Value.Substring(0, pos);
+                                        filename.Value = args[item + 1];
+                                        filename.Value = filename.Value.TrimStart('"');
+                                        filename.Value = filename.Value.TrimEnd('"');
+                                        filename.Source = Parameter.SourceType.Command;
+                                        pos = filename.Value.LastIndexOf('.');
+                                        if (pos > 0)
+                                        {
+                                            extension = filename.Value.Substring(pos + 1, filename.Value.Length - pos - 1);
+                                            filename.Value = filename.Value.Substring(0, pos);
+                                        }
+                                        TraceInternal.TraceVerbose("Use command value Filename=" + filename);
+                                        break;
                                     }
-                                    TraceInternal.TraceVerbose("Use command value Filename=" + filename);
-                                    break;
-                                }
-                            case "/O":
-                            case "--output":
-                                {
-                                    outName.Value = args[item + 1];
-                                    outName.Value = outName.Value.TrimStart('"');
-                                    outName.Value = outName.Value.TrimEnd('"');
-                                    outName.Source = Parameter.SourceType.Command;
-                                    TraceInternal.TraceVerbose("Use command value Output=" + outName);
-                                    break;
-                                }
-                            case "/p":
-                            case "--filepath":
-                                {
-                                    filePath.Value = args[item + 1];
-                                    filePath.Value = filePath.Value.TrimStart('"');
-                                    filePath.Value = filePath.Value.TrimEnd('"');
-                                    filePath.Source = Parameter.SourceType.Command;
-                                    TraceInternal.TraceVerbose("Use command value Filename=" + filePath);
-                                    break;
-                                }
+                                case "/O":
+                                case "--output":
+                                    {
+                                        outName.Value = args[item + 1];
+                                        outName.Value = outName.Value.TrimStart('"');
+                                        outName.Value = outName.Value.TrimEnd('"');
+                                        outName.Source = Parameter.SourceType.Command;
+                                        TraceInternal.TraceVerbose("Use command value Output=" + outName);
+                                        break;
+                                    }
+                                case "/p":
+                                case "--filepath":
+                                    {
+                                        filePath.Value = args[item + 1];
+                                        filePath.Value = filePath.Value.TrimStart('"');
+                                        filePath.Value = filePath.Value.TrimEnd('"');
+                                        filePath.Source = Parameter.SourceType.Command;
+                                        TraceInternal.TraceVerbose("Use command value Filename=" + filePath);
+                                        break;
+                                    }
+                            }
                         }
                     }
+                    TraceInternal.TraceInformation("Use Filename=" + filename.Value);
+                    TraceInternal.TraceInformation("Use Filepath=" + filePath.Value);
                 }
-                Trace.TraceInformation("Use Filename=" + filename.Value);
-                Trace.TraceInformation("Use Filepath=" + filePath.Value);
-            }
 
-            if (outName.Value.Length == 0)
-            {
-                outName.Value = filename.Value;
-            }
+                if (outName.Value.Length == 0)
+                {
+                    outName.Value = filename.Value;
+                }
 
-            // Read the plot data and create the CNC file
+                // Read the plot data and create the CNC file
 
-            if (_hpgl2.Read(filePath.Value, filename.Value) == true)
-            {
-                _hpgl2.Process();
+                if (_hpgl2.Read(filePath.Value, filename.Value) == true)
+                {
+                    _hpgl2.Process();
+                }
+
+                // Export to gcode
+
+                Gcode gcode = _hpgl2.ToGCode();
+
+                ManualResetEvent manualResetEvent = new ManualResetEvent(false);
+
+                manualResetEvent.WaitOne();
             }
 
             Debug.WriteLine("Out Main()");
         }
+
         #endregion
     }
 }

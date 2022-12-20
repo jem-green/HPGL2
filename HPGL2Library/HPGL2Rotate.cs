@@ -5,19 +5,19 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    public class Rotate : Instruction
+    public class HPGLRotate : Instruction
     {
         // RO angle[;]
         // RO [;]
 
         int _angle = 0;
 
-        public Rotate(HPGL2Document hpgl2)
+        public HPGLRotate(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "Rotate ";
             _instruction = "RO";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         //public RotateCoordinateSystem(int angle)
@@ -48,7 +48,7 @@ namespace HPGL2Library
                 // Consider if this needs rounding to nearest 90 degrees
                 _angle = (int)(90 * Math.Round((double)angle / 90));
                 TraceInternal.TraceVerbose(_name + "angle=" + _angle);
-                Trace.TraceInformation(_instruction + _angle + ";");
+                TraceInternal.TraceInformation(_instruction + _angle + ";");
                 Point p1 = _hpgl2.Page.Input.P1;
                 Point p2 = _hpgl2.Page.Input.P2;
                 Point pt = new Point();

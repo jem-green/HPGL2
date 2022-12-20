@@ -5,7 +5,7 @@ using TracerLibrary;
 
 namespace HPGL2Library
 {
-    internal class InputRelative : Instruction
+    internal class HPGL2InputRelative : Instruction
     {
         // IR x1, y1[ ,x2, y2][;]
         // IR[;]
@@ -20,14 +20,14 @@ namespace HPGL2Library
         private Point _p1;
         private Point _p2;
 
-        public InputRelative(HPGL2Document hpgl2)
+        public HPGL2InputRelative(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _p1 = new Point();
             _p1 = new Point();
             _name = "InputRelative ";
             _instruction = "IR";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         public Point P1
@@ -149,7 +149,7 @@ namespace HPGL2Library
                             _p2.X = pageLeft + pageWidth * _x2 / 100;
                             _p2.Y = pageBottom + pageLength * _y2 / 100;
                             TraceInternal.TraceVerbose(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
-                            Trace.TraceInformation(_instruction + _x1 + "," + _y1 + "," + _x2 + "," + _y2 + ";");
+                            TraceInternal.TraceInformation(_instruction + _x1 + "," + _y1 + "," + _x2 + "," + _y2 + ";");
                         }
                         else
                         {
@@ -168,7 +168,7 @@ namespace HPGL2Library
                         _p2.X = _p1.X + width;
                         _p2.Y = _p1.Y + length;
                         TraceInternal.TraceVerbose(_name + "P2 X2=" + _p2.X + " Y2=" + _p2.Y);
-                        Trace.TraceInformation(_instruction + _x1 + "," + _y1 + ";");
+                        TraceInternal.TraceInformation(_instruction + _x1 + "," + _y1 + ";");
                     }
                     _hpgl2.Page.Input.P1 = _p1;
                     _hpgl2.Page.Input.P2 = _p2;

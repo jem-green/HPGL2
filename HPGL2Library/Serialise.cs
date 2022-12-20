@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Diagnostics;
+using TracerLibrary;
 
 namespace HPGL2Library
 {
@@ -124,12 +125,12 @@ namespace HPGL2Library
 
                                         if (!xmlReader.IsEmptyElement)
                                         {
-                                            Trace.TraceInformation(Level(level) + "<" + element + ">");
+                                            TraceInternal.TraceInformation(Level(level) + "<" + element + ">");
                                             level = level + 1;
                                         }
                                         else
                                         {
-                                            Trace.TraceInformation(Level(level) + "<" + element + "/>");
+                                            TraceInternal.TraceInformation(Level(level) + "<" + element + "/>");
                                         }
                                         switch (element)
                                         {
@@ -146,10 +147,7 @@ namespace HPGL2Library
                                                     stack.Push(current);
                                                     current = element;
                                                     page = new Page(hpgl2);
-
-                                                    
-
-                                                  break;
+                                                    break;
                                                 }
                                             case "pen":
                                                 {
@@ -195,7 +193,7 @@ namespace HPGL2Library
                                     {
                                         element = xmlReader.LocalName;
                                         level = level - 1;
-                                        Trace.TraceInformation(Level(level) + "</" + element + ">");
+                                        TraceInternal.TraceInformation(Level(level) + "</" + element + ">");
                                         switch (element)
                                         {
                                             case "hpgl2":
@@ -225,7 +223,7 @@ namespace HPGL2Library
                                         text = text.Replace("\t", "");
                                         text = text.Replace("\n", "");
                                         text = text.Trim();
-                                        Trace.TraceInformation(Level(level) + text);
+                                        TraceInternal.TraceInformation(Level(level) + text);
 
                                         switch (current)
                                         {
@@ -302,7 +300,7 @@ namespace HPGL2Library
                                 case XmlNodeType.Attribute:
                                     break;
                                 default:
-                                    Trace.TraceInformation(xmlReader.NodeType.ToString());
+                                    TraceInternal.TraceInformation(xmlReader.NodeType.ToString());
                                     break;
 
                             }
@@ -313,23 +311,23 @@ namespace HPGL2Library
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceWarning("XML Error " + ex.Message);
+                        TraceInternal.TraceWarning("XML Error " + ex.Message);
                     }
                     fs.Close();
                     fs.Dispose();   // Force the dispose as it was getting left open
                 }
                 catch (FileNotFoundException ex)
                 {
-                    Trace.TraceWarning("File Error " + ex.Message);
+                    TraceInternal.TraceWarning("File Error " + ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceWarning("File Error " + ex.Message);
+                    TraceInternal.TraceWarning("File Error " + ex.Message);
                 }
             }
             catch (Exception e)
             {
-                Trace.TraceError("Other Error " + e.Message);
+                TraceInternal.TraceError("Other Error " + e.Message);
             }
 
             Debug.WriteLine("Out FromXML()");

@@ -5,19 +5,19 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    internal class SelectPen : Instruction
+    internal class HPL2SelectPen : Instruction
     {
         // SP pen[;]
         // SP [;]
 
         int _pen = 0;
 
-        public SelectPen(HPGL2Document hpgl2)
+        public HPL2SelectPen(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
-            _name = "SelectPen ";
+            _name = "SelectPen";
             _instruction = "SP";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         public int Pen
@@ -41,7 +41,7 @@ namespace HPGL2Library
                 {
                     _pen = _hpgl2.getInt();
                     TraceInternal.TraceVerbose(_name + "Pen=" + _pen);
-                    Trace.TraceInformation(_instruction + _pen + ";");
+                    TraceInternal.TraceInformation(_instruction + _pen + ";");
 
                     // Select the pen or could just set and index.
 

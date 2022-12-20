@@ -7,20 +7,20 @@ using TracerLibrary;
 
 namespace HPGL2Library
 {
-    internal class PlotAbsolute : Instruction
+    internal class HPGL2PlotAbsolute : Instruction
     {
         // PA x1, y1[ ,x1, y1][;]
         // PU[;]
 
         List<Point> _coOrds;
 
-        public PlotAbsolute(HPGL2Document hpgl2)
+        public HPGL2PlotAbsolute(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "PlotAbsolute ";
             _instruction = "PA";
             _coOrds = new List<Point>();
-            TraceInternal.TraceVerbose(base._name);
+            TraceInternal.TraceInformation(_name);
         }
 
         public override int Read()
@@ -51,7 +51,7 @@ namespace HPGL2Library
                             {
                                 TraceInternal.TraceVerbose(_name + "Move " + _hpgl2.Current.ToString() + " to " + coOrd.ToString());
                             }
-                            Trace.TraceInformation(_instruction + coOrd.ToString() + ";");
+                            TraceInternal.TraceInformation(_instruction + coOrd.ToString() + ";");
 
                         }
                         else

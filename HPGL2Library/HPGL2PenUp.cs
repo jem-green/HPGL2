@@ -7,20 +7,21 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    internal class PenDown : Instruction
+    internal class HPGL2PenUp : Instruction
     {
-        // PD x1, y1[ ,x1, y1][;]
-        // PD[;]
+        // PU x1, y1[ ,x1, y1][;]
+        // PU[;]
 
         List<Point> _coOrds;
 
-        public PenDown(HPGL2Document hpgl2)
+        public HPGL2PenUp(HPGL2Document hpgl2)
         {
+
             _coOrds = new List<Point>();
             _hpgl2 = hpgl2;
-            base._name = "PenDown";
-            _instruction = "PD";
-            Trace.TraceInformation(base._name);
+            _name = "PenUp";
+            _instruction = "PU";
+            TraceInternal.TraceInformation(_name);
         }
 
         public void Add(Point coOrd)
@@ -36,8 +37,10 @@ namespace HPGL2Library
         public override int Read()
         {
             int read = 0;
-            _hpgl2.Pen.Status = Pen.PenStatus.Down;
-            TraceInternal.TraceVerbose("PD " + _hpgl2.Pen.ToString());
+
+
+            _hpgl2.Pen.Status = Pen.PenStatus.Up;
+            TraceInternal.TraceVerbose(_name + "Pen=" + _hpgl2.Pen.Status.ToString());
             Point coOrd = new Point();
             if (!_hpgl2.Match(';') == true)
             {
@@ -52,7 +55,8 @@ namespace HPGL2Library
                             _hpgl2.GetChar();
                             coOrd.Y = _hpgl2.getInt();
                             // update the current position for the next line segment
-                            TraceInternal.TraceVerbose("PU " + coOrd.ToString());
+                            TraceInternal.TraceVerbose(_name + " X=" + coOrd.X + " Y=" + coOrd.Y);
+                            TraceInternal.TraceInformation(_instruction + coOrd.ToString() + ";");
                             _hpgl2.Current = coOrd;
                         }
                         else
@@ -61,6 +65,10 @@ namespace HPGL2Library
                         }
 
                     } while (((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9')) || (_hpgl2.Char == ','));
+                }
+                else
+                {
+                    TraceInternal.TraceInformation(_instruction + ";");
                 }
             }
             return (read);

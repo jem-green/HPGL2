@@ -3,7 +3,7 @@ using System.Security;
 
 namespace HPGL2Library
 {
-    internal class Transparency : Instruction
+    internal class HPGL2TransparencyMode : Instruction
     {
         // TR mode[;]
         // TR[;]
@@ -16,14 +16,9 @@ namespace HPGL2Library
             On = 1
         }
 
-        public Transparency(HPGL2Document hpgl2)
+        public HPGL2TransparencyMode(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
-        }
-
-        public Transparency(TransparencyMode mode)
-        {
-            _mode = mode;
         }
 
         public TransparencyMode Mode
@@ -43,7 +38,7 @@ namespace HPGL2Library
             int read = 0;
             if ((_hpgl2.Char >= '0') && (_hpgl2.Char <= '9'))
             {
-                _mode = (Transparency.TransparencyMode)_hpgl2.getInt();
+                _mode = (HPGL2TransparencyMode.TransparencyMode)_hpgl2.getInt();
             }
             return (read);
         }

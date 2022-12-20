@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    internal class PenWidthUnit : Instruction
+    internal class HPGL2PenWidthUnit : Instruction
     {
         // BP Kind, Value
         WidthUnit _widthUnit = 0;   // Default to metric
@@ -17,15 +17,15 @@ namespace HPGL2Library
             Relative = 1,
         }
 
-        public PenWidthUnit(HPGL2Document hpgl2)
+        public HPGL2PenWidthUnit(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             base._name = "PenWidthUnit";
             _instruction = "PW";
-            Trace.TraceInformation(base._name);
+            //TraceInternal.TraceInformation(base._name);
         }
 
-        public PenWidthUnit(int widthUnit)
+        public HPGL2PenWidthUnit(int widthUnit)
         {
             _widthUnit = (WidthUnit)widthUnit;
         }

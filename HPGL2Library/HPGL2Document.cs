@@ -5,10 +5,13 @@ using System.IO;
 using System.Security;
 using System.Text;
 using TracerLibrary;
+using GcodeLibrary;
+using DXFLibrary;
+using ShapeLibrary;
 
 namespace HPGL2Library
 {
-    public class HPGL2Document
+    public class HPGL2Document : IDisposable
     {
         #region Fields
 
@@ -29,12 +32,13 @@ namespace HPGL2Library
         List<UserDefinedLinetype> _lineTypes;       // List of line type **check if there are standard ones**
         Dictionary<int,Pen> _pens;                  // List of pens
         Point _current = new Point(0, 0);           // Assume that this defauts to zero **check**
-        List<Line> _lines = new List<Line>();       // Initialise here
+        List<Line> _lines;                          // List of lines
         Pen _currentPen;                            // Pen status, assuming that there is only one pen
 
         // Storage
 
         List<object> _instructions = new List<object>();
+        private bool disposedValue;
 
         #endregion
         #region Constructors
@@ -45,7 +49,9 @@ namespace HPGL2Library
             _pens = new Dictionary<int, Pen>();
             _page = new Page(this);
             _currentPen = new Pen(this);
+            List<Line> _lines = new List<Line>();
         }
+
         #endregion
         #region Properties
 
@@ -119,6 +125,28 @@ namespace HPGL2Library
         #endregion
         #region Methods
 
+        public Gcode ToGCode()
+        {
+            Gcode gcode = new Gcode();
+            return (gcode);
+        }
+
+        public SHPDocument ToShape()
+        {
+            SHPDocument shape = new SHPDocument();
+            foreach(Line line in _lines)
+            {
+                SHPLine l = new SHPLine();
+                shape.AddLine(new SHPLine(line.X1, line.Y1,0,line.X2, line.Y2,0));
+            }
+            return (shape);
+        }
+
+        public void FromDXF(DXFDocument dXFDocument)
+        {
+            
+        }
+
         public void Read()
         {
             Read(_path, _filename);
@@ -155,7 +183,7 @@ namespace HPGL2Library
                 catch (Exception ex)
                 {
                     TraceInternal.TraceVerbose("Could not add file " + filename);
-                    Trace.TraceError("Exception:" + ex.ToString());
+                    TraceInternal.TraceError("Exception:" + ex.ToString());
                 }
             }
             Debug.WriteLine("Out Read()");
@@ -171,27 +199,28 @@ namespace HPGL2Library
 
             Debug.WriteLine("In Process()");
 
-            BeginPlot beginPlot;
-            Initialise initialise;
-            PenWidthUnit widthUnit;
-            NumberPens numberPens;
-            QualityLevel qualityLevel;
-            PlotSize plotSize;
-            Rotate rotate;
-            Scale scale;
-            Input input;
-            InputRelative inputRelative;
-            MergeControl mergeControl;
-            EnableCutter enableCutter;
-            LineAttributes lineAttributes;
+            HPGL2AdvanceFullPage advanceFullPage;
+            HPGL2BeginPlot beginPlot;
+            HPGL2Initialise initialise;
+            HPGL2PenWidthUnit widthUnit;
+            HPGL2NumberOfPens numberPens;
+            HPGL2QualityLevel qualityLevel;
+            HPGL2PlotSize plotSize;
+            HPGLRotate rotate;
+            HPL2Scale scale;
+            HPGL2Input input;
+            HPGL2InputRelative inputRelative;
+            HPGL2MergeControl mergeControl;
+            HPGL2EnableCutter enableCutter;
+            HPGL2LineAttributes lineAttributes;
             UserDefinedLinetype userDefinedLinetype;
-            Transparency transparency;
-            SelectPen selectPen;
-            PenUp penUp;
-            PenDown penDown;
-            PlotAbsolute plotAbsolute;
-            PenWidth penWidth;
-            PolylineEncoded polylineEncoded;
+            HPGL2TransparencyMode transparency;
+            HPL2SelectPen selectPen;
+            HPGL2PenUp penUp;
+            HPGL2PenDown penDown;
+            HPGL2PlotAbsolute plotAbsolute;
+            HPGL2PenWidth penWidth;
+            HPGL2PolylineEncoded polylineEncoded;
 
             GetChar();
             do
@@ -260,141 +289,140 @@ namespace HPGL2Library
                         }
                     case "BP": // Begin Plot
                         {
-                            beginPlot = new BeginPlot(this);
+                            beginPlot = new HPGL2BeginPlot(this);
                             beginPlot.Read();
                             _instructions.Add(beginPlot);
                             break;
                         }
                     case "EC": // Enable cutter
                         {
-                            enableCutter = new EnableCutter(this);
+                            enableCutter = new HPGL2EnableCutter(this);
                             enableCutter.Read();
                             _instructions.Add(enableCutter);
                             break;
                         }
                     case "IN": // Initialise
                         {
-                            initialise = new Initialise(this);
+                            initialise = new HPGL2Initialise(this);
                             initialise.Read();
                             _instructions.Add(initialise);
                             break;
                         }
                     case "IP": // Input P1 and P2
                         {
-                            input = new Input(this);
+                            input = new HPGL2Input(this);
                             input.Read();
                             _instructions.Add(input);
                             break;
                         }
                     case "IR": // Input relative P1 and P2
                         {
-                            inputRelative = new InputRelative(this);
+                            inputRelative = new HPGL2InputRelative(this);
                             inputRelative.Read();
                             _instructions.Add(inputRelative);
                             break;
                         }
                     case "LA": // Line Attributes
                         {
-                            lineAttributes = new LineAttributes(this);
+                            lineAttributes = new HPGL2LineAttributes(this);
                             lineAttributes.Read();
                             _instructions.Add(lineAttributes);
                             break;
                         }
                     case "MC": // Merge control
                         {
-                            mergeControl = new MergeControl(this);
+                            mergeControl = new HPGL2MergeControl(this);
                             mergeControl.Read();
                             _instructions.Add(mergeControl);
                             break;
                         }
                     case "NP": // Number of Pens
                         {
-                            numberPens = new NumberPens(this);
+                            numberPens = new HPGL2NumberOfPens(this);
                             numberPens.Read();
                             _instructions.Add(numberPens);
                             break;
                         }
                     case "PA": // Plot Absolute
                         {
-                            plotAbsolute = new PlotAbsolute(this);
+                            plotAbsolute = new HPGL2PlotAbsolute(this);
                             plotAbsolute.Read();
                             _instructions.Add(plotAbsolute);
                             break;
                         }
                     case "PD": // Pen Down
                         {
-                            penDown = new PenDown(this);
+                            penDown = new HPGL2PenDown(this);
                             penDown.Read();
                             _instructions.Add(penDown);
                             break;
                         }
                     case "PE": // Polyline Encoded
                         {
-                            polylineEncoded = new PolylineEncoded(this);
+                            polylineEncoded = new HPGL2PolylineEncoded(this);
                             polylineEncoded.Read();
                             _instructions.Add(polylineEncoded);
                             break;
                         }
-                    case "PG": // Advance Full Page
+                    case "PG":  // PG Advance Full Page
                         {
-                            polylineEncoded = new PolylineEncoded(this);
-                            polylineEncoded.Read();
-                            _instructions.Add(polylineEncoded);
+                            advanceFullPage = new HPGL2AdvanceFullPage(this);
+                            advanceFullPage.Read();
+                            _instructions.Add(advanceFullPage);
                             break;
                         }
-
                     case "PS": // Plot Size
                         {
-                            plotSize = new PlotSize(this);
+                            plotSize = new HPGL2PlotSize(this);
                             plotSize.Read();
                             _instructions.Add(plotSize);
                             break;
                         }
                     case "PU":  // Pen Up
                         {
-                            penUp = new PenUp(this);
+                            penUp = new HPGL2PenUp(this);
                             penUp.Read();
                             _instructions.Add(penUp);
                             break;
                         }
                     case "PW":  // Pen Width
                         {
-                            penWidth = new PenWidth(this);
+                            penWidth = new HPGL2PenWidth(this);
                             penWidth.Read();
                             _instructions.Add(penWidth);
                             break;
                         }
                     case "QL": // Quality Level
                         {
-                            qualityLevel = new QualityLevel();
-                            qualityLevel.Level = getInt();
+                            qualityLevel = new HPGL2QualityLevel(this);
+                            qualityLevel.Read();
                             _instructions.Add(qualityLevel);
                             break;
                         }
                     case "RO":  // Rotate
                         {
-                            rotate = new Rotate(this);
+                            rotate = new HPGLRotate(this);
                             rotate.Read();
                             _instructions.Add(rotate);
                             break;
                         }
                     case "SC":  // Scale
                         {
-                            scale = new Scale(this);
+                            scale = new HPL2Scale(this);
                             scale.Read();
                             _instructions.Add(scale);
                             break;
                         }
                     case "SP":  // Selection Pen
                         {
-                            selectPen = new SelectPen(this);
+                            selectPen = new HPL2SelectPen(this);
                             selectPen.Read();
                             _instructions.Add(selectPen);
                             break;
                         }
                     case "TR":  // Transparency Mode
                         {
-                            transparency = new Transparency(this);
+                            transparency = new HPGL2TransparencyMode(this);
                             transparency.Read();
                             _instructions.Add(transparency);
                             break;
@@ -408,9 +436,14 @@ namespace HPGL2Library
                         }
                     case "WU": // Pen Width Unit
                         {
-                            widthUnit = new PenWidthUnit(this);
+                            widthUnit = new HPGL2PenWidthUnit(this);
                             widthUnit.Read();
                             _instructions.Add(widthUnit);
+                            break;
+                        }
+                    case "":
+                        {
+                            // skip
                             break;
                         }
                     default:
@@ -423,6 +456,36 @@ namespace HPGL2Library
 
             Debug.WriteLine("Out Process()");
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~HPGL2Document()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
 
         #endregion
         #region Internal
@@ -465,9 +528,24 @@ namespace HPGL2Library
             return (data);
         }
 
+
+        internal string GetQuotedString()
+        {
+            string data = "";
+            if (_look == '"')
+            {
+                do
+                {
+                    data = data + _look.ToString();
+                    GetChar();
+                } while ((_look != '"') || (_count < _data.Length));
+            }
+            return (data);
+        }
+
         internal void GetChar()
         {
-            if (_count <= _data.Length)
+            if (_count < _data.Length)
             {
 
                 _look = Convert.ToChar(_data[_count]);
@@ -478,6 +556,8 @@ namespace HPGL2Library
                 _look = (char)0;
             }
         }
+
+
         internal bool Match(char x)
         {
             if (_look == x)

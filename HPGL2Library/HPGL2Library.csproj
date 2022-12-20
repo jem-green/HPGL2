@@ -16,8 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="LoggerLibrary">
-      <HintPath>..\ThirdParty\Logger\LoggerLibrary.dll</HintPath>
+    <Reference Include="DXFLibrary">
+      <HintPath>..\..\DXF\DXFLibrary\bin\Debug\netcoreapp3.1\DXFLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="GcodeLibrary">
+      <HintPath>..\..\Gcode\GcodeLibrary\bin\Debug\netcoreapp3.1\GcodeLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ShapeLibrary">
+      <HintPath>..\..\Shape\ShapeLibrary\bin\Debug\netcoreapp3.1\ShapeLibrary.dll</HintPath>
     </Reference>
     <Reference Include="TracerLibrary">
       <HintPath>..\ThirdParty\Tracer\netcoreapp3.1\TracerLibrary.dll</HintPath>

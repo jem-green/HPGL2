@@ -1,47 +1,54 @@
-﻿using System;
+﻿//  Copyright (c) 2017, Jeremy Green All rights reserved.
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HPGL2Library
+namespace GcodeLibrary
 {
-    public class Parameter
+    public class Parameter<T>
     {
         #region Fields
 
-        string value = "";
-        SourceType source = SourceType.None;
-        public enum SourceType
+        T _value = default(T);
+        SourceType _source = SourceType.None;
+
+        public enum SourceType: int
         {
             None = 0,
             Command = 1,
             Registry = 2,
-            File = 3,
-            App = 4
+            App = 3
         }
 
         #endregion
         #region Constructor
-        public Parameter(string value)
+        public Parameter()
         {
-            this.value = value;
-            source = SourceType.None;
+            this._value = typeof(T) == typeof(string) ? (T)(object)string.Empty : default(T);
         }
-        public Parameter(string value, SourceType source)
+
+        public Parameter(T value)
         {
-            this.value = value;
-            this.source = source;
+            this._value = value;
+            _source = SourceType.App;
+        }
+        public Parameter(T value, SourceType source)
+        {
+            _value = value;
+            this._source = source;
         }
         #endregion
         #region Parameters
-        public string Value
+        public T Value
         {
             set
             {
-                this.value = value;
+                this._value = value;
             }
             get
             {
-                return (value);
+                return (_value);
             }
         }
 
@@ -49,18 +56,18 @@ namespace HPGL2Library
         {
             set
             {
-                source = value;
+                _source = value;
             }
             get
             {
-                return (source);
+                return (_source);
             }
         }
         #endregion
         #region Methods
         public override string ToString()
         {
-            return (value);
+            return (Convert.ToString(_value));
         }
         #endregion
     }

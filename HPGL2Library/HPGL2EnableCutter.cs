@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    public class EnableCutter : Instruction
+    public class HPGL2EnableCutter : Instruction
     {
         // EC mode[;]
         // EC[;]
@@ -18,12 +18,12 @@ namespace HPGL2Library
             on = 1
         }
 
-        public EnableCutter(HPGL2Document hpgl2)
+        public HPGL2EnableCutter(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "EnableCutter ";
             _instruction = "EC";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         public CutterMode Mode
@@ -51,7 +51,7 @@ namespace HPGL2Library
                     _hpgl2.GetChar();
                 }
             }
-            Trace.TraceInformation(_instruction + (int)_mode + ";");
+            TraceInternal.TraceInformation(_instruction + (int)_mode + ";");
             if (_hpgl2.Match(';') == true)
             {
                 _hpgl2.GetChar();   // Consume the terminator if it exists

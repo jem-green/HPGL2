@@ -7,25 +7,28 @@ namespace HPGL2Library
 {
     internal class UserDefinedLinetype : Instruction
     {
+        // User Defined Line
         // UL index[,gapl...gapm][;]
         // UL;
         //
         // sequence of PD,PU...
 
+        #region Fields
 
         int _index = 1; // 1-8
         List<double> _pattern = new List<double>();
         int parts = 0;
+
+        #endregion
+        #region Constructors
 
         public UserDefinedLinetype(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
         }
 
-        public UserDefinedLinetype(int index)
-        {
-            _index = index;
-        }
+        #endregion
+        #region Properties
 
         public int Index
         {
@@ -39,12 +42,12 @@ namespace HPGL2Library
             }
         }
 
+        #endregion
         #region Methods
         public void Add(double length)
         {
             _pattern.Add(length);
         }
-        #endregion
 
         public override int Read()
         {
@@ -71,6 +74,6 @@ namespace HPGL2Library
             }
             return (read);
         }
-
+        #endregion
     }
 }

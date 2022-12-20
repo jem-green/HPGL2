@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="GcodeLibrary">
+      <HintPath>..\..\Gcode\GcodeLibrary\bin\Debug\netcoreapp3.1\GcodeLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="TracerLibrary">
       <HintPath>..\ThirdParty\Tracer\netcoreapp3.1\TracerLibrary.dll</HintPath>
     </Reference>

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace HPGL2Library
 {
-    public class PlotSize : Instruction
+    public class HPGL2PlotSize : Instruction
     {
         // PS length[,width][;]
         // pS [;]
@@ -20,12 +20,12 @@ namespace HPGL2Library
         int _width = 0;
 
 
-        public PlotSize(HPGL2Document hpgl2)
+        public HPGL2PlotSize(HPGL2Document hpgl2)
         {
             _hpgl2 = hpgl2;
             _name = "PlotSize ";
             _instruction = "PS";
-            Trace.TraceInformation(_name);
+            TraceInternal.TraceInformation(_name);
         }
 
         public int Length
@@ -63,7 +63,7 @@ namespace HPGL2Library
                     _width = _hpgl2.getInt();
                 }
                 TraceInternal.TraceVerbose(_name + "length=" + _length + " width=" + _width);
-                Trace.TraceInformation(_instruction + _length + "," + _width + ";");
+                TraceInternal.TraceInformation(_instruction + _length + "," + _width + ";");
 
                 _hpgl2.Page.Size = this;
 

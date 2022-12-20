@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Security;
+using TracerLibrary;
 
 namespace HPGL2Library
 {
-    public class QualityLevel : Instruction
+    public class HPGL2QualityLevel : Instruction
     {
+        // Quality Level
         // QL Value
+        // QL[;]
         int _qualityLevel = 0;   // 0 - 100
 
 
-        public QualityLevel()
-        { }
-
-        public QualityLevel(int level)
+        public HPGL2QualityLevel(HPGL2Document hpgl2)
         {
-            _qualityLevel = level;
+            _hpgl2= hpgl2;
+            _name = "Quality Level";
+            _instruction = "QL";
+            TraceInternal.TraceInformation(_name);
         }
 
         public int Level
