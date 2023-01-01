@@ -35,6 +35,9 @@
     <None Update="test-Model.PLT">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="test-Model2.PLT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="test1-Model.plt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
