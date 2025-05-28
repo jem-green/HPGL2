@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPGL2Library", "HPGL2Librar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdParty", "ThirdParty", "{97047BE1-9351-47AE-897A-7924E2619B83}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TracerLibrary", "TracerLibrary", "{C7079C6B-7EF0-445E-A229-3CCE88FCDA8C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tracer", "Tracer", "{C7079C6B-7EF0-445E-A229-3CCE88FCDA8C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netcoreapp3.1", "netcoreapp3.1", "{10322D0C-B92C-4F1F-B03C-6428CADCCDC8}"
 	ProjectSection(SolutionItems) = preProject
